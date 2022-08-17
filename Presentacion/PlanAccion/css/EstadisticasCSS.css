@@ -1,0 +1,44 @@
+﻿body {
+}
+
+.c-blue::before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    background: blue;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.c-orange::before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    background: orange;
+    display: inline-block;
+    margin-right: 5px;
+}
+.c-green::before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    background: green;
+    display: inline-block;
+    margin-right: 5px;
+}
+.c-yellow::before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    background: yellow;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+h6[class~="c-"]{
+    margin-bottom:5px;
+}

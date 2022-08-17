@@ -1,0 +1,354 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.Master.cs" Inherits="Presentacion.Site1" %>
+
+<% Server.ScriptTimeout = 3600; %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head runat="server">
+       
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Last-Modified" content="0"/>
+<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Last-Modified" content="0"/>
+<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <meta http-equiv="Cache-Control" content ="no-cache" />
+      <meta charset="utf-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+       <link href="build/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+      <title></title>
+       
+    
+         <link href="~/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+         <link href="~/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+         <link href="~/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet" />
+         <link href="~/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet" />
+         <link href="~/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet" />
+         <link href="~/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet" />
+         <link href="~/vendors/moment/min/moment.min.js" rel="stylesheet" />
+         <link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+       <link href="build/css/canvas.css" rel="stylesheet" />
+      
+      <asp:PlaceHolder runat="server">
+         <%: Styles.Render("~/bundles/WebformsCSS")%>
+      </asp:PlaceHolder>
+       
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js" crossorigin="anonymous"></script>
+        <script src="../build/js/scripts.js"></script>
+        <script src="../build/js/xlsx.full.min.js"></script>
+        <script src="../build/js/FileSaver.min.js"></script>
+        <script src="../build/js/tableexport.min.js"></script>
+       <script src="https://kit.fontawesome.com/aa6378f013.js" crossorigin="anonymous"></script>
+        
+       
+        <script>
+            function error(titulo, texto) {
+                new PNotify({
+                    title: titulo,
+                    text: texto,
+                    type: 'error',
+                    styling: 'bootstrap3',
+                    delay: 6000
+                });
+            }
+
+            function exito(titulo, texto) {
+                new PNotify({
+                    title: titulo,
+                    text: texto,
+                    type: 'success',
+                    styling: 'bootstrap3',
+                    delay: 6000
+                });
+            }
+        </script>
+       <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
+       <link href="build/css/styles.css" rel="stylesheet" />
+       <style>
+           .profile-name2{
+               color: #425d78;
+               background: #e6e6e69e;
+               padding: 10px;
+               text-align: center;
+               display:block;
+           }
+           .profile-name{
+               color: #fff;
+               background: #425d78;
+               padding: 10px;
+               text-align: center;
+               display:block;
+           }
+           .profile-image{
+               width:80px;
+               height:80px;
+               display: inline-block;
+               border-radius: 50%;
+               background-image: url("Images/user.png");
+               background-position: center;
+               background-size: cover;
+               box-shadow: 0px 0px 3px 3px #00000055;
+               border: solid 2px #eaeaea;
+           }
+           .content-profile-image{
+               background: #e6e6e69e;
+               padding:15px;
+               margin-bottom: 10px;
+               border-bottom: solid 3px #e9e9e9;
+               box-shadow: inset 0 0 60px 10px #e9e9e9d5;
+           }
+       </style>
+   </head>
+   <body class="nav-md">
+       <form id="form1" runat="server" target="">
+           <nav role="navigation" id="p-menu-movil" class="menu-movil-hidden">
+               <div class="row justify-content-center" >
+                   <div class="position-fixed" style="font-size: 30px; top: 10px; left:10px" id="btnCloseMenu">
+                       <i class="fa fa-close"></i>
+                   </div>
+                   <div class="col col-6 col-sm-5 m-2" style="position:fixed; top: 10px">
+                       <div class="form-control search-p d-flex justify-content-between">
+                           <input role="menuitem" placeholder="Buscar..." id="txtSearchMovil" autocomplete="off" />
+                           <i class="fa fa-search"></i>
+                       </div>
+                   </div>
+                   <div class="col col-6 col-sm-5 m-2" style="position:fixed; bottom: 1px" id="menu-bar">
+                        <a href="../Index"><i class="fa fa-home m-1 p-2"></i></a>
+                        <a href="../General/PerfilUsuario"><i class="fa fa-user m-1 p-2"></i></a>
+                        <asp:LinkButton ID="btnLogOut2" runat="server" CssClass="" OnClick="btnLogUot_Click" ><i class="fa fa-sign-out m-1 p-2"></i></asp:LinkButton>
+                   </div>
+               </div>
+               <div class="row justify-content-center" id="continer-icons">
+               </div>
+           </nav>
+           <nav role="navigation" class="p-menu menu-hidden">
+               <div class="row justify-content-between">
+                   <div class="col col-6 p-0 menu-container">
+                       <div class="p-2">
+                           <div class="form-control search-p d-flex justify-content-between">
+                               <input role="menuitem" placeholder="Buscar..." id="txtSearchMenuP" autocomplete="off" />
+                               <i class="fa fa-search p-2"></i>
+                           </div>
+                       </div>
+                       <div class="menu-left">
+                           <ul class="nav side-menu" runat="server" id="menu">
+                           </ul>
+                       </div>
+                   </div>
+                   <div class="col col-6 menu-right">
+                       <div class="text-center">
+                           <div class="content-profile-image">
+                               <div id="profileIgame" class="profile-image" runat="server"></div>
+                               <asp:Label ID="lbUserName2" CssClass="profile-name2" runat="server" Text="Nombre de Usuario" Style="font-weight: bold; font-size: 15px"></asp:Label>
+                           </div>
+                           
+                       </div>
+                       <div class="submenu">
+                           <ul>
+                               
+                           </ul>
+                       </div>
+                       <div class="submenu-footer text-center">
+                           <a href="../Index"><i class="fa fa-home m-1 p-2"></i></a>
+                           <a href="../General/PerfilUsuario"><i class="fa fa-user m-1 p-2"></i></a>
+                           <asp:LinkButton ID="btnLogout1" runat="server" CssClass="" OnClick="btnLogUot_Click" ><i class="fa fa-sign-out m-1 p-2"></i></asp:LinkButton>
+                       </div>
+                   </div>
+               </div>
+           </nav>
+           <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+           <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="mdAcercaDe">
+               <div class="modal-dialog modal-sm" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                           <div class="text-center">
+                               <img src="../Images/LogoVitraya21.png" width="200" />
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="mdChangePass">
+               <div class="modal-dialog modal-sm" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h5 class="modal-title">Cambio de contraseña</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                           <p>Por motivos de seguridad es necesario que cambie su contraseña</p>
+                           <div class="form-group">
+                               <label>Contraseña actual</label>
+                               <input id="txtpassword"  class="form-control" type="password" />
+                           </div>
+                           <div class="form-group">
+                               <label>Nueva contraseña</label>
+                               <input id="txtNewpassword"  class="form-control" type="password" />
+                           </div>
+                           <div class="form-group">
+                               <label>Repita la nueva contraseña</label>
+                               <input id="txtRepeatpassword"  class="form-control" type="password" />
+                           </div>
+                       </div>
+                       <div class="modal-footer">
+                           <button class="btn btn-success" id="btnUptPass" type="button">Actualizar</button>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="modal fade" id="menuModal" tabindex="-1" role="dialog"  aria-hidden="true">
+               <div class="modal-dialog modal-dialog-centered" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                           <ul>
+                               
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="container body">
+               <div class="main_container">
+                   <div class="col-md-3 left_col d-none">
+                       <div class="left_col scroll-view">
+                           <div class="text-center">
+                                <image src="../Images/LogoVitraya2.png" width="100" ></image>
+                           </div>
+                     <div class="clearfix"></div>
+                    
+                      <%--<h2 style="margin:0">
+                          <asp:Label ID="lbUserName" CssClass="profile-name" runat="server" Text="" Style="font-weight: bold; font-size: 15px"></asp:Label>
+                      </h2>--%>
+                      <!-- /menu profile quick info -->
+                     <br />
+                     <!-- sidebar menu -->
+                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                          
+                           <%-- <ul class="nav side-menu" runat="server" id="menu">
+                             </ul>--%>
+                        </div>
+                     </div>
+                     <!-- /sidebar menu -->
+                  </div>
+               </div>
+
+                
+
+               <!-- top navigation -->
+               <div class="top_nav">
+                   <div class="nav_menu">
+                       <div btn-menu class="nav toggle" id="btnMenu">
+                        <a btn-menu><i btn-menu class="fa fa-bars"></i></a>
+                     </div>
+                     <div class="nav toggle" id="btnMenuMovil">
+                        <a><i class="fa fa-bars"></i></a>
+                     </div>
+                       <nav class="nav navbar-nav">
+                           <div class="d-flex justify-content-around">
+                               <img src="../Images/LogoVitraya21.png" width="75" />
+                               <ul class="navbar-right w-100">
+                                   <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                       <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                           <asp:Image ID="Image2" runat="server" />
+                                           <asp:Label ID="Label6" runat="server" Text="" Style="font-weight: bold; font-size: 15px"></asp:Label>
+                                       </a>
+                                       <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                           <a class="dropdown-item" id="btnAcercade">Acerca de<i class="fa fa-info-circle pull-right"></i></a>
+                                           <asp:LinkButton ID="btnLogUot" runat="server" CssClass="dropdown-item" OnClick="btnLogUot_Click"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesión</asp:LinkButton>
+                                       </div>
+                                   </li>
+                               </ul>
+                           </div>
+                       </nav>
+                   </div>
+               </div>
+               <!-- /top navigation -->
+               <!-- page content -->   
+                <script src="../Scripts/scripts.js"></script>
+                <div  role="main" class="p-2">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+         </div>
+          <asp:Label ID="Label14" runat="server" Visible="false"></asp:Label>
+          <asp:PlaceHolder runat="server">
+            <%: Scripts.Render("~/bundles/Webformsjs") %>
+         </asp:PlaceHolder>
+
+      </form>
+       <form  method="post" id="form2" target="arch"></form>
+
+       <iframe name="arch" id="arch" style="max-height:0; border:0;margin:0"></iframe>
+       <script>
+           try {
+               const ejecutarajax = (url, datos, success) => {
+                   return $.ajax({
+                       url: url,
+                       data: JSON.stringify(datos),
+                       dataType: "json",
+                       type: "POST",
+                       contentType: "application/json; charset=utf-8",
+                       success: success,
+                       error: function (result) {
+                           alert("ERROR " + result.status + ' ' + result.statusText);
+                       }
+                   });
+               }
+           }
+           catch (e) {
+
+           }
+
+           async function ValidarDatos() {
+               if ($("#txtpassword").val().trim() == "") {
+                   error("Campo Contraseña Vacio", "Por favor ingrese  la contraseña de usuario")
+                   return false;
+               }
+               if ($("#txtNewpassword").val() != $("#txtRepeatpassword").val()) {
+                   error("Contraseñas no coinciden", "El campo nueva contraseña y repita contraseña no coinciden");
+                   return false;
+               }
+               if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$/.test($("#txtNewpassword").val())) {
+                   error("Contraseña insegura", "La contraseña debe tener mínimo ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número")
+                   return false;
+               }
+               if (!(await ejecutarajax("../Index.aspx/ValidarPass", { pass: $("#txtpassword").val() })).d) {
+                   error("Contraseña Incorrecta", "Por favor ingrese su contraseña")
+                   return false;
+               }
+               return true;
+           }
+
+           $("#btnUptPass").click(async function () {
+               if (await ValidarDatos()) {
+                   if ((await ejecutarajax("../Index.aspx/ChangePass", { pass: $("#txtNewpassword").val()})).d) {
+                       exito("Cambio de contraseña", "Su contraseña ha sido actualizada correctamente");
+                       $("#mdChangePass").modal("hide");
+                   }
+               }
+           })
+       </script>
+       
+   </body>
+</html>

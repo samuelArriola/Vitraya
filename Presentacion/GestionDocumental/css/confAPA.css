@@ -1,0 +1,105 @@
+﻿/**{
+    line-height: 200% !important;
+   font-family:Arial;
+   text-align: justify;
+   font-size: 10pt;
+}*/
+
+/*h1, h2, h3, h4 {
+    font-weight: 700 !important;
+}
+h1 {
+    text-align: center !important;
+}
+h*//*3, h4, h5, p {
+    text-indent: 1.5em !important;
+}*/
+
+
+/*h4,h5{
+    font-style: italic !important;
+}*/
+/*
+p br + * {
+    text-indent: 1.5em !important;
+}*/
+*{
+    font-family:Arial;
+}
+table{
+    width: 100%;
+}
+#tbContenido > div {
+    display:flex; 
+    justify-content:space-between; 
+    position:relative; 
+    width:100%
+}
+
+#tbContenido > div > div:nth-child(1){
+    padding-right: 4px; 
+    z-index: 4; 
+    background:#fff
+}
+
+#tbContenido > div > div:nth-child(2){
+    position:absolute; 
+    width:100%; 
+    border-bottom:dashed 1px #000; 
+    bottom:10px; z-index: 1
+}
+
+#tbContenido > div > div:nth-child(3){
+    padding-left: 4px; 
+    z-index: 4; 
+    background:#fff
+}
+
+.hoja {
+    height: 849px;
+    overflow: hidden;
+    padding: 2.54cm 0;
+    box-sizing:unset;
+}
+
+.margen{
+    width:2.54cm;
+    padding:0;
+    margin:0;
+    border:0;
+}
+
+#header, #footer{
+    height: 2.54cm;
+    font-size: 10px;
+}
+
+#header table, #footer table, #control-cambios{
+    width:100%;
+    margin: .5cm 0;
+}
+
+#header table td, #footer table td, #control-cambios td{
+    border: solid 1px #000;
+    padding: 9px;
+}
+
+#header table td p, #footer table td p, #control-cambios td p{
+    margin:0;
+}
+
+
+table {
+    width: 100% !important;
+}
+
+#tablePrincipal > thead > tr > td, #tablePrincipal > tbody > tr > td, #tablePrincipal > tfoot > tr > td {
+    border: 0;
+}
+
+
+
+td, th {
+    border: solid 1px #000;
+    padding: 9px;
+}

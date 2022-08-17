@@ -1,0 +1,6 @@
+﻿.rotateAnimation{
+   transform: rotate(180deg)
+}
+.btn  i {
+    transition: all .5s;
+}

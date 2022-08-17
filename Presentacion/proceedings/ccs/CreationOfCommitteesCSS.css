@@ -1,0 +1,39 @@
+﻿.calendar .month-container {
+    margin: 10px;
+}
+
+.calendar {
+    overflow: hidden;
+}
+
+#listaUsuarios {
+    width: 100%;
+    position: absolute;
+    z-index: 1000;
+    background: #fff;
+    border: solid 1px #808080;
+}
+
+#listaUsuarios label {
+    transition: 0.3s background;
+    padding: 3px;
+    width: 100%;
+}
+
+#listaUsuarios label:hover {
+    background: #0094ff;
+    color: #fff;
+}
+
+#listaUsuarios input {
+    display: none;
+}
+
+#txtCoordinador:focus + div {
+    display: inline-block;
+}
+
+#txtCoordinador + div {
+    display: none;
+    transition: 1s display;
+}

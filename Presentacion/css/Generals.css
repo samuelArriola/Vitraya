@@ -1,0 +1,792 @@
+﻿/*body{
+  margin: 0;
+  padding: 0;
+  background: url(img/lista.jpg) no-repeat fixed center;
+}*/
+
+* {
+    margin: 0;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.topnav {
+    background-color: #00AEFF;
+    overflow: hidden;
+}
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+        float: right;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        cursor: pointer;
+    }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav a:active {
+            background-color: #00AEFF;
+            color: white;
+        }
+
+    .topnav .a {
+        float: right;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        /* Change the color of links on hover */
+        .topnav .a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav .a.active {
+            background-color: #00AEFF;
+            color: white;
+        }
+
+.vertical-menu {
+    position: absolute;
+    top: 50px;
+    width: 300px; /* Set a width if you like */
+    text-align: center;
+}
+
+
+    .vertical-menu img {
+        width: 100%;
+        height: 100%;
+        padding-bottom: 10%;
+    }
+
+    .vertical-menu .a {
+        background-color: #eee;
+        color: black;
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+        width: 300px;
+        height: 50px;
+    }
+
+        .vertical-menu .a:hover {
+            background-color: rgba(203, 197, 197, 0.41); /* Dark grey background on mouse-over */
+        }
+
+        .vertical-menu .a.active {
+            background-color: #00AEFF; /* Add a green color to the "active/current" link */
+            color: white;
+        }
+
+    .vertical-menu .a {
+        background-color: #eee;
+        color: black;
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+        width: 300px;
+        height: 50px;
+    }
+
+        .vertical-menu .a:hover {
+            background-color: rgba(203, 197, 197, 0.41); /* Dark grey background on mouse-over */
+        }
+
+        .vertical-menu .a.active {
+            background-color: #00AEFF; /* Add a green color to the "active/current" link */
+            color: white;
+        }
+
+
+.contenedor {
+    top: 12%;
+    position: absolute;
+    right: 30px;
+    left: 25%;
+    height: 540px;
+    /*background-color: #2EFEF7;*/
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 15px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+    .contenedor .left {
+        float: left;
+        background: transparent;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        border-radius: 15px;
+        margin-left: 5px;
+        margin-top: 5px;
+        height: 95%;
+        width: 32%;
+        margin-bottom: 5px;
+        text-align: center;
+        /*
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        */
+    }
+
+        .contenedor .left .GridView {
+            margin-top: 10%;
+            margin-left: 5%;
+            margin-right: 5%;
+            overflow: scroll;
+            height: 70%;
+            text-align: left;
+        }
+
+            .contenedor .left .GridView .grid {
+                width: 100%;
+                height: 100%;
+                text-align: left;
+            }
+
+    .contenedor .center {
+        background: transparent;
+        display: inline-block;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        border-radius: 15px;
+        margin-top: 5px;
+        height: 95%;
+        width: 32%;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+        .contenedor .center .GridView {
+            margin-top: 10%;
+            margin-left: 5%;
+            margin-right: 5%;
+            overflow: scroll;
+            height: 70%;
+            text-align: left;
+        }
+
+            .contenedor .center .GridView .grid {
+                width: 100%;
+                height: 100%;
+                text-align: left;
+            }
+
+    .contenedor .rigth {
+        float: right;
+        background: transparent;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        border-radius: 15px;
+        margin-right: 5px;
+        margin-top: 5px;
+        height: 95%;
+        width: 32%;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+        .contenedor .rigth .GridView {
+            margin-top: 10%;
+            margin-left: 5%;
+            margin-right: 5%;
+            overflow: scroll;
+            height: 70%;
+            text-align: left;
+        }
+
+            .contenedor .rigth .GridView .grid {
+                width: 100%;
+                height: 100%;
+                text-align: left;
+            }
+
+
+
+
+        .contenedor .rigth .texto-cuadro {
+            border: solid;
+            border-color: #00a9ff;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .contenedor .rigth .boton {
+            border: solid;
+            border-color: #00a9ff;
+            border-radius: 5px;
+            font-size: 15px;
+            background: #00a9ff;
+            cursor: pointer;
+            color: #fff;
+        }
+
+
+    .contenedor .left .texto-cuadro {
+        border: solid;
+        border-color: #00a9ff;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+
+    .contenedor .left .boton {
+        border: solid;
+        border-color: #00a9ff;
+        border-radius: 5px;
+        font-size: 15px;
+        background: #00a9ff;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    .contenedor .center .texto-cuadro {
+        border: solid;
+        border-color: #00a9ff;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+
+    .contenedor .center .boton {
+        border: solid;
+        border-color: #00a9ff;
+        border-radius: 5px;
+        font-size: 15px;
+        background: #00a9ff;
+        cursor: pointer;
+        color: #fff
+    }
+
+    .contenedor .left .boton:hover {
+        background: aqua;
+        color: #000;
+    }
+
+    .contenedor .center .boton:hover {
+        background: aqua;
+        color: #000;
+    }
+
+    .contenedor .rigth .boton:hover {
+        background: aqua;
+        color: #000;
+    }
+
+
+
+
+
+
+
+
+
+
+/*********************horizontal*************************************************************************************************************************************/
+
+
+.container {
+    top: 12%;
+    position: absolute;
+    right: 30px;
+    left: 25%;
+    height: 540px;
+    /*background-color: #2EFEF7;*/
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 15px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 20px;
+    /*
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    */
+}
+
+    .container .arriba {
+        margin-top: 20px;
+        width: 80%;
+        height: 48%;
+        border-style: solid;
+        border-color: #00a9ff;
+        border-radius: 15px;
+        margin-left: 10%;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+
+        .container .arriba .btn-boton {
+            float: right;
+            margin-left: 5px;
+            margin-right: 5px;
+            border-style: solid;
+            border-color: #00a9ff;
+            border-radius: 15px;
+            width: 10%;
+            height: 10%;
+            cursor: pointer;
+            background: #00a9ff;
+            color: #fff;
+        }
+
+            .container .arriba .btn-boton:hover {
+                background: aqua;
+                color: #000;
+            }
+
+        .container .arriba .btn-boton-otro:hover {
+            background: aqua;
+            color: #000;
+        }
+
+        .container .arriba .btn-boton-otro {
+            float: left;
+            margin-right: 5px;
+            margin-left: 5px;
+            border-style: solid;
+            border-color: #00a9ff;
+            border-radius: 15px;
+            width: 10%;
+            height: 10%;
+            cursor: pointer;
+            background: #00a9ff;
+            color: #fff;
+        }
+
+        .container .arriba .posicion-arriba {
+            margin-top: 10%;
+            margin-left: 30px;
+            border-style: solid;
+            border-color: transparent;
+            border-radius: 15px;
+            width: 80%;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container .arriba .cuadro-texto {
+            border-style: solid;
+            border-color: #00a9ff;
+            border-radius: 15px;
+            width: 90%;
+            margin-bottom: 20px;
+            margin-top: 5px;
+            font-size: 20px;
+        }
+
+    .container .abajo {
+        width: 80%;
+        height: 48%;
+        border-style: solid;
+        border-color: #00a9ff;
+        border-radius: 15px;
+        margin-left: 10%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+        .container .abajo .btn-boton {
+            float: right;
+            margin-left: 5px;
+            margin-right: 5px;
+            border-style: solid;
+            border-color: #00a9ff;
+            border-radius: 15px;
+            width: 10%;
+            height: 10%;
+            cursor: pointer;
+            background: #00a9ff;
+            color: #fff;
+        }
+
+        .container .abajo .btn-boton-otro {
+            float: left;
+            margin-right: 5px;
+            margin-left: 5px;
+            border-style: solid;
+            border-color: #00a9ff;
+            border-radius: 15px;
+            width: 10%;
+            height: 10%;
+            cursor: pointer;
+            background: #00a9ff;
+            color: #fff;
+        }
+
+        .container .abajo .btn-boton:hover {
+            background: aqua;
+            color: #000;
+        }
+
+        .container .abajo .btn-boton-otro:hover {
+            background: aqua;
+            color: #000;
+        }
+
+        .container .abajo .posicion-abajo {
+            margin-top: 10%;
+            margin-left: 30px;
+            border-style: solid;
+            border-color: transparent;
+            border-radius: 15px;
+            width: 80%;
+            height: 100px;
+        }
+
+        .container .abajo .cuadro-texto {
+            border-style: solid;
+            border-color: #00a9ff;
+            border-radius: 15px;
+            width: 90%;
+            margin-bottom: 20px;
+            margin-top: 5px;
+            font-size: 20px;
+        }
+
+
+/*********************************************************************/
+
+.posicioon {
+    top: 12%;
+    position: absolute;
+    right: 30px;
+    left: 25%;
+    height: 540px;
+    margin: 2px 2px 2px 2px;
+    /*background-color: #2EFEF7;*/
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 15px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 20px;
+    display: none;
+}
+
+    .posicioon .posicion-arriba-abajo {
+        margin-top: 10px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        border-radius: 15px;
+        margin-bottom: 5px;
+        height: 300px;
+    }
+
+        .posicioon .posicion-arriba-abajo .dentro {
+            top: 20%;
+            position: absolute;
+            right: 30px;
+            left: 10%;
+            height: 150px;
+            width: 80%;
+            margin: 2px 2px 2px 2px;
+            /*background-color: #00a9ff;*/
+            border-width: 2px;
+            border-style: solid;
+            border-color: #00a9ff;
+            border-radius: 15px;
+            text-align: left;
+            font-family: sans-serif;
+            font-size: 20px;
+            overflow: scroll;
+        }
+
+        .posicioon .posicion-arriba-abajo .btn-div {
+            width: 90px;
+            height: 20px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: #00a9ff;
+            background: #00a9ff;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+    .posicioon .posicion-arriba-masabajo {
+        margin-top: 10px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        border-radius: 15px;
+        margin-bottom: 5px;
+        height: 300px;
+    }
+
+        .posicioon .posicion-arriba-masabajo .dentro {
+            top: 80%;
+            position: absolute;
+            right: 30px;
+            left: 10%;
+            height: 150px;
+            width: 80%;
+            margin: 2px 2px 2px 2px;
+            /*background-color: #00a9ff;*/
+            border-width: 2px;
+            border-style: solid;
+            border-color: #00a9ff;
+            border-radius: 15px;
+            text-align: left;
+            font-family: sans-serif;
+            font-size: 20px;
+            overflow: scroll;
+        }
+
+        .posicioon .posicion-arriba-masabajo .btn-div {
+            width: 90px;
+            height: 20px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: #00a9ff;
+            background: #00a9ff;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+    .posicioon .posicion-arriba-masmasabajo {
+        margin-top: 10px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        border-radius: 15px;
+        margin-bottom: 5px;
+        height: 300px;
+    }
+
+        .posicioon .posicion-arriba-masmasabajo .dentro {
+            top: 140%;
+            position: absolute;
+            right: 30px;
+            left: 10%;
+            height: 150px;
+            width: 80%;
+            margin: 2px 2px 2px 2px;
+            /*background-color: #00a9ff;*/
+            border-width: 2px;
+            border-style: solid;
+            border-color: #00a9ff;
+            border-radius: 15px;
+            font-family: sans-serif;
+            font-size: 20px;
+            overflow: auto;
+            text-align: left;
+        }
+
+        .posicioon .posicion-arriba-masmasabajo .btn-div {
+            width: 90px;
+            height: 20px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: #00a9ff;
+            background: #00a9ff;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+/*********************************************************************/
+
+header {
+    width: 100%;
+    height: 50px;
+    background: #00AEFF;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.conten {
+    width: 98%;
+    margin: auto;
+}
+
+h1 {
+    float: left;
+}
+
+header .conten {
+    display: table;
+}
+
+
+#menu-bar {
+    display: none;
+}
+
+header label {
+    float: right;
+    font-size: 25px;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+.menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 200vh;
+    background: #00AEFF;
+    transition: all 0.5s;
+    transform: translateX(-100%);
+}
+
+    .menu a {
+        display: block;
+        color: #fff;
+        height: 20px;
+        text-decoration: none;
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .menu .imagen{
+        display: block;
+    }
+
+    .menu .b {
+        display: none;
+    }
+
+    .menu a:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+#menu-bar:checked ~ .menu {
+    transform: translateX(0%);
+}
+
+.menu .b {
+    display: block;
+    color: #fff;
+    height: 20px;
+    text-decoration: none;
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.vertical-menu {
+    display: block;
+}
+
+.contenedor {
+    display: block;
+}
+
+.posicioon {
+    display: none;
+    left: 20px;
+}
+/**************************************/
+
+@media only screen and (min-width: 700px) {
+    .menu {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: translateX(0%);
+        float: right;
+        display: flex;
+    }
+
+        .menu a {
+            border: none;
+        }
+        .menu .imagen{
+            display: none;
+        }
+
+    .contenedor .b {
+        display: none;
+    }
+
+    header label {
+        display: none;
+    }
+
+    .menu .b {
+        display: none;
+    }
+
+    .vertical-menu {
+        display: none;
+    }
+
+    .posicioon {
+        display: block;
+    }
+
+    .contenedor {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .vertical-menu {
+        display: block;
+    }
+
+    .posicioon {
+        display: none;
+    }
+
+    .contenedor {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 1100px) and (min-width: 700px) {
+
+    .vertical-menu {
+        display: block;
+    }
+
+    .contenedor {
+        display: none;
+    }
+
+    .posicioon {
+        display: block;
+        margin-left: 40%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .vertical-menu {
+        display: none;
+    }
+
+    .posicioon {
+        display: block;
+    }
+
+    .contenedor {
+        display: none;
+    }
+}

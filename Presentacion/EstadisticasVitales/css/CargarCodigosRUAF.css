@@ -1,0 +1,72 @@
+﻿body {
+    margin:0;
+    padding:0;
+}
+
+.seccionFileRUAF {
+    height: 200px;
+    width: 100%;
+    border: 2px dashed #555;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 1px 6px #20212447;
+}
+
+
+#fuArchivoACodigoRUAF {
+    height: 200px;
+    width: 100%;
+    border: solid 1px #808080;
+    background: #ffffff;
+    position: absolute;
+    opacity: 0;
+    top: 20px;
+    left: 0;
+    display: inline-block;
+}
+
+/*#lbfuArchivoACodigoRUAF {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    border: solid 1px #808080;
+    background: #ffffff;
+    text-align: center;
+    font-size: 35px;
+    padding-top: 70px;
+}*/
+
+.sectionFile{
+    width: 70%;
+    display: inline-block;
+    position: relative;
+}
+
+./*TitleOpcRUAF, .OpcRUAF {
+    font-size: 14px;
+    color: #0c0c0c;
+    height: 25px;
+    padding: 0;
+}*/
+
+/*.listOpcRUAF{
+    list-style-type: none;
+}
+
+.divOpcRUAF{
+    display:inline-block;
+}
+
+.divBtnModal {
+    display: inline-block;
+}
+
+.sectionOpcBtnOpc{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.btnCargarCodigosRUAF{
+
+}*/
+

@@ -1,0 +1,222 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7034F215-DF24-4795-83C0-E7C05225898A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Entidades</RootNamespace>
+    <AssemblyName>Entidades</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44349</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auditorias\AuditoriaExterna.cs" />
+    <Compile Include="Auditorias\AuditoriaInterna.cs" />
+    <Compile Include="Auditorias\EnteAuditor.cs" />
+    <Compile Include="Auditorias\Hallazgo.cs" />
+    <Compile Include="ControlEntSal\ControlEntSalModel.cs" />
+    <Compile Include="ControlEntSal\SPacienteBBModel.cs" />
+    <Compile Include="EncuestaCovid\EEncuestaCovid.cs" />
+    <Compile Include="EncuestaCovid\EEstadisticasEC.cs" />
+    <Compile Include="EncuestaCovid\LEEncuestaCovid.cs" />
+    <Compile Include="EstadisticasVitales\CRCodRuaf.cs" />
+    <Compile Include="EstadisticasVitales\CRRegDef.cs" />
+    <Compile Include="EstadisticasVitales\CRRegNacViv.cs" />
+    <Compile Include="Facturacion\EBitacoraAutorizaciones.cs" />
+    <Compile Include="Facturacion\ECensoDiario.cs" />
+    <Compile Include="Facturacion\EConsultaAutorizaciones.cs" />
+    <Compile Include="Facturacion\EHistoricoCierres.cs" />
+    <Compile Include="Facturacion\ERegistroAutorizaciones.cs" />
+    <Compile Include="Generales\Cargo.cs" />
+    <Compile Include="Generales\GNCtrlCambioPass.cs" />
+    <Compile Include="Generales\GNDepartamento.cs" />
+    <Compile Include="Generales\GNEps.cs" />
+    <Compile Include="Generales\GNDireccion.cs" />
+    <Compile Include="Generales\GNHistorico.cs" />
+    <Compile Include="Generales\GNModulos.cs" />
+    <Compile Include="Generales\GNMunicipio.cs" />
+    <Compile Include="Generales\GNOpciones.cs" />
+    <Compile Include="Generales\GNPermisos.cs" />
+    <Compile Include="Generales\GNRoles.cs" />
+    <Compile Include="Generales\OpcionesBloqueadas.cs" />
+    <Compile Include="GestionDocumental\intOidCPCapacitacion.cs" />
+    <Compile Include="Power BI\EAdministrarReportes.cs" />
+    <Compile Include="Power BI\ELIstaReportes.cs" />
+    <Compile Include="Servicios\ECertificadoLaboral.cs" />
+    <Compile Include="Servicios\EDesprendibles.cs" />
+    <Compile Include="Vacunacion\RegistroDiarioVac.cs" />
+    <Compile Include="Generales\ScriptBloqueo.cs" />
+    <Compile Include="GestionDocumental\GDActividad.cs" />
+    <Compile Include="GestionDocumental\GDAprobacion.cs" />
+    <Compile Include="GestionDocumental\GDDivulgacion.cs" />
+    <Compile Include="GestionDocumental\GDDocIndicador.cs" />
+    <Compile Include="GestionDocumental\GdDocProcedimiento.cs" />
+    <Compile Include="GestionDocumental\GDDocumento.cs" />
+    <Compile Include="GestionDocumental\GDDominio.cs" />
+    <Compile Include="GestionDocumental\GDEvaluacion.cs" />
+    <Compile Include="GestionDocumental\GDListaIndicador.cs" />
+    <Compile Include="GestionDocumental\GDManual.cs" />
+    <Compile Include="GestionDocumental\GDPolitica.cs" />
+    <Compile Include="GestionDocumental\GDProtocolo.cs" />
+    <Compile Include="GestionDocumental\GDRevision.cs" />
+    <Compile Include="GestionDocumental\GDSolicitud.cs" />
+    <Compile Include="GestionDocumental\GDListadoMaestro.cs" />
+    <Compile Include="PlanAccion\PAUsuario.cs" />
+    <Compile Include="PlanAccion\PAAvance.cs" />
+    <Compile Include="proceedings\ARActasC.cs" />
+    <Compile Include="PlanAccion\PAPlanAccion.cs" />
+    <Compile Include="proceedings\ARActasDM.cs" />
+    <Compile Include="proceedings\ARActasTemas.cs" />
+    <Compile Include="proceedings\ARAgenda.cs" />
+    <Compile Include="proceedings\AReunionC.cs" />
+    <Compile Include="proceedings\AReunionD.cs" />
+    <Compile Include="Generales\GNArchivo.cs" />
+    <Compile Include="Generales\GNEventos.cs" />
+    <Compile Include="Generales\GNListaArchivos.cs" />
+    <Compile Include="Generales\UnidadFuncional.cs" />
+    <Compile Include="Generales\Usuario.cs" />
+    <Compile Include="proceedings\UsuariosParticipantes.cs" />
+    <Compile Include="Procesos\PCNormagrama.cs" />
+    <Compile Include="Procesos\PCProceso.cs" />
+    <Compile Include="Procesos\PCSIPOC.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="trainings\CPAgenda.cs" />
+    <Compile Include="trainings\CPASISTENCIA.cs" />
+    <Compile Include="trainings\CPCAPACITACION.cs" />
+    <Compile Include="trainings\CPEJETEMATICO.cs" />
+    <Compile Include="trainings\CPEXAMEN.cs" />
+    <Compile Include="trainings\CPEXAMENSOL.cs" />
+    <Compile Include="trainings\CPMatricula.cs" />
+    <Compile Include="trainings\CPOPCION.cs" />
+    <Compile Include="trainings\CPPREGUNTA.cs" />
+    <Compile Include="trainings\CPRESPUESTA.cs" />
+    <Compile Include="trainings\CPSolicitud.cs" />
+    <Compile Include="trainings\CPSUBTEMA.cs" />
+    <Compile Include="Vacunacion\VCDetEntLot.cs" />
+    <Compile Include="Vacunacion\VCEntradaLote.cs" />
+    <Compile Include="Vacunacion\VCHistorico.cs" />
+    <Compile Include="Vacunacion\VCInsumo.cs" />
+    <Compile Include="Vacunacion\VCLote.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63732</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44310/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

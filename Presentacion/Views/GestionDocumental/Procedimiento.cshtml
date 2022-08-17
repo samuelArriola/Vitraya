@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "Procedimiento";
+    Layout = "~/Views/Shared/_Document.cshtml";
+
+    var procedimiento = Model[0];
+    var documento = Model[1];
+    var esteado = Model[2];
+    var indicadores = Model[3];
+    var definiciones = Model[4];
+    var tbControlCam = Model[5];
+    var tbAprobacion = Model[6];
+}
+
+<style>
+    .table-border td, .table-border th{
+        border: solid 1px #000;
+    }
+
+    .tb-recursos{
+        table-layout: fixed
+    }
+
+</style>
+
+<table>
+    <tbody>
+        <tr>
+            <td colspan="20">
+                <p><strong>Alcance: </strong>@procedimiento.StrAlcance</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="20">
+                <p><strong>Objetivo: </strong>@procedimiento.StrObjetivo</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="20">
+                <p><strong>Responsable: </strong>@procedimiento.StrResponsable</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table class="table-border tb-recursos">
+    <tbody>
+        <tr>
+            <td colspan="20">
+                <p class="text-center"><strong>Recursos Necesarios</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="width: 20%;">
+                <p class="text-center"><strong>Talento Humano</strong></p>
+            </td>
+            <td colspan="4" style="width: 20%;">
+                <p class="text-center"><strong>Equipos Biomédicos</strong></p>
+            </td>
+            <td colspan="4" style="width: 20%;">
+                <p class="text-center"><strong>Medicamentos, dispositivos médicos e insumos</strong></p>
+            </td>
+            <td colspan="4" style="width: 20%;">
+                <p class="text-center"><strong>Recursos Financieros</strong></p>
+            </td>
+            <td colspan="4" style="width: 20%;">
+                <p class="text-center"><strong>Recursos Informáticos</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="width: 20%;">
+                <p>@procedimiento.StrTalentoHumano</p>
+            </td>
+            <td colspan="4" style="width: 20%;">
+                <p>@procedimiento.StrEquipos</p>
+            </td>
+            <td colspan="4" style="width: 20%;">
+                <p>@procedimiento.StrMedicamentos</p>
+            </td>
+            <td colspan="4" style="width: 20%;">
+                <p>@procedimiento.StrRecFin</p>
+            </td>
+            <td colspan="4" style="width: 20%;">
+                <p>@procedimiento.StrRecInfo</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table style="table-layout:fixed" class="table-border">
+    <tbody>
+        <tr>
+            <td colspan="10" style="width:50%">
+                <p class="text-center"><strong>ENTRADAS</strong></p>
+            </td>
+            <td colspan="10">
+                <p class="text-center"><strong>SALIDAS</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <p class="text-center"><strong>Proveedores</strong></p>
+            </td>
+            <td colspan="5">
+                <p class="text-center"><strong>Entradas</strong></p>
+            </td>
+            <td colspan="5">
+                <p class="text-center"><strong>Clientes</strong></p>
+            </td>
+            <td colspan="5">
+                <p class="text-center"><strong>Salidas</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">@procedimiento.StrProveedores</td>
+            <td colspan="5">@procedimiento.StrEntradas</td>
+            <td colspan="5">@procedimiento.StrClientes</td>
+            <td colspan="5">@procedimiento.StrSalidas</td>
+        </tr>
+    </tbody>
+</table>
+<div class="tableContainer table-border">
+    @Html.Raw(procedimiento.StrActividad)
+</div>
+
+<table>
+    <tbody>
+        @if (procedimiento.StrFlujoGrama != ""){
+            <tr>
+                <td colspan="20">
+                    <p><strong>ADJUNTO DEL FLUJOGRAMA</strong></p>
+                    <br />
+                    <div class="text-center">
+                        <img src="@procedimiento.StrFlujoGrama" alt="" style="max-width: 100%; max-height: 250px" id="imgFlujograma" runat="server" />
+                    </div>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="20">
+                <p><strong>Producto esperado: </strong>@procedimiento.StrProEsperado</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="20">
+                <p><strong>Estándar de calidad: </strong> @procedimiento.StrEstCalidad</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="tableContainer table-border">
+    @Html.Raw(procedimiento.StrIndicadores)
+    @Html.Raw(procedimiento.StrRefNormativas)
+</div>
+
+@Html.Raw(procedimiento.StrDefiniciones)
+
+@Html.Raw(procedimiento.StrAnexos)
+<table class="table-border" style="table-layout: fixed">
+    <tbody>
+        <tr>
+            <td colspan="20">
+                <p><strong>Documentos Relacionados: </strong></p>
+                @Html.Raw(procedimiento.StrDocumentosRelacionados)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+@if (esteado) { 
+    <table style="page-break-before:always; text-align: center" class="table-border">
+        <thead>
+            <tr>
+                <td colspan="5" class="text-center" style="font-weight: 900">CONTROL DE CAMBIOS</td>
+            </tr>
+            <tr>
+                <td style="width:5%"><strong>Vesion:</strong></td>
+                <td style="width:15%"><strong>Fecha:</strong></td>
+                <td colspan="2" style="width:40%"><strong>Justificación / Descripción</strong></td>
+                <td style="width:40%"><strong>Responsable</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            @Html.Raw(tbControlCam)
+        </tbody>
+    </table>
+}
+<br />
+<table class="table-border" style="table-layout:fixed">
+    <thead>
+        <tr>
+            <td colspan="3" style="text-align:center"><strong>CONTROL DE DOCUMENTOS</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center"><strong>Elaborado por</strong></td>
+            <td style="text-align:center"><strong>Revisado por</strong></td>
+            <td style="text-align:center"><strong>Aprobado por</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.Raw(tbAprobacion)
+    </tbody>
+</table>

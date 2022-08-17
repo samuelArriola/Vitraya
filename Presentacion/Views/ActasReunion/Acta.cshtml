@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Acta";
+    Layout = "~/Views/Shared/_Document.cshtml";
+
+    var acta = Model[0];
+    var usuarios = Model[1];
+    var temas = Model[2];
+    var dtParticipantes = Model[3];
+    var lstOrden = Model[4];
+    var tbCompromisos = Model[5];
+    var asistentes = Model[6];
+
+}
+<style>
+    table td, table th {
+        border: solid 1px #000;
+    }
+</style>
+<table class="table-border">
+    <tr>
+        <td>Lugar de reunión:</td>
+        <td>Fecha:</td>
+        <td>Hora de inicio</td>
+        <td>Hora de finalización</td>
+    </tr>
+    <tr>
+        <td>@acta.StrLugarReun</td>
+        <td>@acta.DtmFechEditable.ToString("dd/MM/yyyy")</td>
+        <td>@acta.DtmFecInicio.ToString("t")</td>
+        <td>@acta.DtmFecFinal.ToString("t")</td>
+    </tr>
+</table>
+
+<p>
+    EL comité: <strong><em>@acta.StrNombre</em></strong> del Centro Médico Crecer,
+    Se reúnen el día @acta.DtmFechEditable.ToString("D") a las @acta.DtmFecInicio.ToString("t")
+    en @acta.StrLugarReun, los miembors e invitados, con el fin de realizar el comité de: <strong>@acta.StrNombre<em></em></strong> del Centro médico Crecer del mes de @acta.DtmFechEditable.ToString("MMMM").
+</p>
+
+<h3 class="text-center">Orden del dia</h3>
+<ul id="ordenDia" runat="server">
+    <li>Verificación del Quorum</li>
+    @Html.Raw(lstOrden)
+</ul>
+<div class="sec">
+    <h4 class="text-center">Verificación del Quorum</h4>
+    <p>Se realiza la verificación Quorum:</p>
+    <table class="table-border">
+        <thead>
+            <tr>
+                <th>Nombre(s) y Apellidos</th>
+                <th>Cargo</th>
+                <th>Asistencia</th>
+            </tr>
+        </thead>
+        <tbody id="tableAsistencia" runat="server">
+            @Html.Raw(dtParticipantes)
+        </tbody>
+    </table>
+</div>
+
+<div class="sec">
+    <h3 class="text-center" style="break-before:always">DESARRROLLO DEL COMITÉ</h3>
+    @Html.Raw(temas)
+</div>
+
+
+<div class="sec">
+    <h4 class="text-center">Planes de acción</h4>
+    @Html.Raw(tbCompromisos)
+</div>
+
+<div class="sec">
+    <h4 class="text-center">Aprobación del acta.</h4>
+    @Html.Raw(asistentes)
+</div>
+

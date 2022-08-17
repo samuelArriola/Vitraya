@@ -1,0 +1,607 @@
+﻿* {
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+}
+
+.topnav {
+    background-color: #00AEFF;
+    overflow: hidden;
+}
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+        float: right;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        cursor: pointer;
+    }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav a:active {
+            background-color: #00AEFF;
+            color: white;
+        }
+
+    /**/
+       .topnav .a {
+        float: right;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        /* Change the color of links on hover */
+    .topnav .a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    /* Add a color to the active/current link */
+    .topnav .a:active {
+        background-color: #00AEFF;
+        color: white;
+    }
+   
+
+/**/
+
+.vertical-menu {
+    position: absolute;
+    top: 50px;
+    width: 300px; /* Set a width if you like */
+    text-align: center;
+}
+
+
+    .vertical-menu img {
+        width: 100%;
+        height: 100%;
+        padding-bottom: 10%;
+    }
+
+    .vertical-menu .a {
+        background-color: #eee;
+        color: black;
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+        width: 300px;
+        height: 50px;
+    }
+
+        .vertical-menu .a:hover {
+            background-color: #ccc; /* Dark grey background on mouse-over */
+        }
+
+        .vertical-menu .a.active {
+            background-color: #00AEFF; /* Add a green color to the "active/current" link */
+            color: white;
+        }
+
+.horizontal {
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    position: absolute;
+    left: 25%;
+    top: 15%;
+    width: 70%;
+    height: 80%;
+}
+
+    .horizontal .filtrar {
+        top: -4px;
+        position: absolute;
+        left: 70%;
+        visibility:visible;
+    }
+    .horizontal .filtrar.active {
+        opacity:0;
+    }
+
+        .horizontal .filtrar .list {
+            padding-right: 2px;
+            left: -125px;
+            z-index: 1;
+            top: 22px;
+            position: absolute;
+            border-width: 2px;
+            border-style: solid;
+            border-color: #00AEFF;
+        }
+
+        .horizontal .filtrar .texto {
+            padding-right: 2px;
+            left: 3px;
+            z-index: 1;
+            top: 20px;
+            position: absolute;
+            height: 20px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: #00AEFF;
+        }
+
+        .horizontal .filtrar .btn-abridiv {
+            position: absolute;
+            padding: 15px;
+            top: 3px;
+            left: 188px;
+            width: 100px;
+            border-radius: 20px;
+            color: #fff;
+            background: #00AEFF;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .horizontal .btn-abridiv {
+            position: absolute;
+            padding: 15px;
+            top: 2px;
+            left: 3px;
+            width: 100px;
+            border-radius: 20px;
+            color: #fff;
+            background: #00AEFF;
+            cursor: pointer;
+        }
+
+
+/*gridvie*/
+
+    .horizontal .grid {
+        position: absolute;
+        width: 99%;
+        height: 85%;
+        left: 2px;
+        top: 14%;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+        .horizontal .grid .gridview{
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /*popup*/
+        .overlay {
+            background: rgba(0,0,0,.3);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+        }
+
+    .overlay.active{
+        visibility: visible;
+    }
+
+    .popup{
+        background: #fff;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+        border-radius: 5px;
+        font-family: sans-serif;
+        padding: 10px;
+        text-align: center;
+        width: 900px;
+
+        opacity: 0;
+        transition: .3s ease all;
+        transform: scale(0.7);
+    }
+
+        .popup .btn-cerrarpopup {
+            font-size: 16px;
+            line-height: 16px;
+            display: block;
+            text-align: right;
+            color: #bbbbbb;
+            transition: .3s ease all;
+        }
+        
+        .popup h3{
+            opacity: 0;
+        }
+
+        .popup .btn-cerrarpopup:hover{
+            color: #000;
+        }
+
+
+        .popup .contenedor-texto{
+            opacity: 0;
+        }
+        .popup .contenedor-texto .input{
+            width: 30%;
+            margin-bottom: 20px;
+            margin-right: 15px;
+            height: 52px;
+            line-height: 53px;
+            font-size: 18px;
+            text-align: center;
+            border: 1px solid #bbbbbb;
+        }
+
+            .popup .contenedor-texto .input:focus {
+                box-shadow: 1px 1px 5px 1px #00AEFF;
+            }
+
+
+        .popup .btn-guardar {
+            padding: 0 20px;
+            height: 40px;
+            line-height: 40px;
+            border: none;
+            color: #fff;
+            background: #00AEFF;
+            border-radius: 3px;
+            font-family: sans-serif;
+            font-size: 16px;
+            cursor: pointer; 
+            transition: .3s ease all;
+        }
+        .popup .btn-guardar:hover{
+            background: rgba(0, 239, 255, 0.46)
+        }
+
+        /*animaciones*/
+
+        .popup.active{
+            opacity: 1;
+            transform: scale(1);
+        }
+        .popup.active h3{
+            animation: entradaTitulo .8s ease .5s forwards;
+        }
+            .popup.active .contenedor-texto {
+                animation: entradaInputs 1s ease 1s forwards;
+            }
+
+
+@keyframes entradaTitulo{
+    from{
+        transform: translateY(-25px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes entradaInputs {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+/*******************************************************************************************/
+
+
+.contenedor-imagen {
+    position: absolute;
+    top: 10%;
+    width: 400px;
+    height: 400px;
+    text-align: center;
+    left: 20%;
+}
+
+    .contenedor-imagen .btn{
+        width: 100px;
+        height: 30px;
+        background: #00AEFF;
+        cursor: pointer;
+        color: #fff;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+
+    .contenedor-imagen .imagen-circular {
+        display: inline-block;
+        position: relative;
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 50%;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00AEFF;
+    }
+
+        .contenedor-imagen .imagen-circular .imagen {
+            width: auto;
+            height: 100%;
+            margin-left: -50px;
+        }
+
+    /*.contenedor-imagen .imagen-circular:hover {
+        display: inline-block;
+        position: relative;
+        width: 400px;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 50%;
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+    }*/
+
+    .contenedor {
+        top: 12%;
+        position: absolute;
+        right: 30px;
+        left: 10%;
+        height: 680px;
+        width: 550px;
+        left: 500px;
+        /*background-color: #2EFEF7;*/
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+        border-radius: 10px;
+        font-family: sans-serif;
+        font-size: 20px;
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+    .contenedor div {
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+        width: 700px;
+        margin-bottom: 5px;
+        left: 20%;
+        margin-right: 400px;
+    }
+        .contenedor div:nth-child(3) {
+            border-width: 2px;
+            border-style: solid;
+            border-color: transparent;
+            width: 710px;
+            margin-bottom: 5px;
+            left: 20%;
+            margin-right: 400px;
+        }
+    .contenedor .input {
+        width: 50%;
+        font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
+        padding: 5px;
+        margin-bottom: 6px;
+        font-size: 0.9em;
+        border-radius: 5px;
+        background: rgba(0, 0, 0, 0.07);
+        font-size: 18px;
+    }
+
+    .contenedor .label {
+        display: inline-block;
+        width: 25%;
+        text-align: right;
+        margin: 10px;
+        font-size: 19px;
+    }
+
+    .contenedor .btn-guardar {
+        border-radius: 10px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00AEFF;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        width: 100px;
+        height: 50px;
+        cursor: pointer;
+        background: #00AEFF;
+    }
+
+    .contenedor .btn-guardar:hover{
+        background: aqua;
+    }
+
+
+    /*********************************************************************/
+
+header {
+    width: 100%;
+    height: 50px;
+    background: #00AEFF;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.conten {
+    width: 98%;
+    margin: auto;
+}
+
+h1 {
+    float: left;
+}
+
+header .conten {
+    display: table;
+}
+
+
+#menu-bar {
+    display: none;
+}
+
+header label {
+    float: right;
+    font-size: 25px;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+.menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 400vh;
+    background: #00AEFF;
+    transition: all 0.5s;
+    transform: translateX(-100%);
+}
+
+    .menu a {
+        display: block;
+        color: #fff;
+        height: 20px;
+        text-decoration: none;
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .menu .imagen{
+        display: block;
+    }
+
+    .menu .b{
+        display: none;
+    }
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+#menu-bar:checked ~ .menu {
+    transform: translateX(0%);
+}
+
+.vertical-menu {
+    display: none;
+}
+
+.menu .b {
+    display: block;
+    color: #fff;
+    height: 20px;
+    text-decoration: none;
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+
+    /**************************************/
+@media only screen and (min-width: 700px) {
+    .menu {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: translateX(0%);
+        float: right;
+        display: flex;
+    }
+
+        .menu a {
+            border: none;
+        }
+
+        .conten .b{
+            display: none;
+        }
+
+        .menu .imagen{
+            display: none;
+        }
+
+    header label {
+        display: none;
+    }
+
+    .vertical-menu{
+        display: block;
+    }
+
+    .menu .b{
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 2100px){
+    .contenedor {
+        left: 1100px;
+    }
+}
+@media only screen and (min-width: 1600px) {
+    .contenedor {
+        left: 800px;
+    }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 1500px){
+    .contenedor-imagen {
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+    .contenedor {
+        left: 150px;
+        top: 40%;
+    }
+
+    .contenedor-imagen {
+        left: 50%;
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+    }
+}
+
+
+@media only screen and (max-width: 700px){
+    .contenedor{
+        left: 10px;
+        top: 55%;
+    }
+
+    .contenedor-imagen {
+        left: 50%;
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+    }
+}

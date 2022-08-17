@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "Manual";
+    Layout = null;
+
+    var manual = Model[0];
+    var documento = Model[1];
+    var revisiones = Model[2];
+    var docsContCam = Model[3];
+    var estado = Model[4];
+
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <style>
+        h1 {
+            text-align: center;
+            font-size: 16pt;
+            color: rgb(46,116,181);
+        }
+
+        h2 {
+            font-size: 13pt;
+            color: rgb(46,116,181);
+        }
+
+        * {
+            line-height: 15pt;
+        }
+        * {
+            font-family: Arial !important;
+            font-size: 12pt;
+        }
+        h1 {
+            padding: 24px;
+        }
+        
+        p{
+            margin-bottom: 13pt;
+        }
+        td p{
+            margin: 5px 0;
+        }
+        p, li {
+            text-align: justify;
+            margin-bottom: 24pt;
+        }
+        table tr {
+            page-break-inside: avoid !important;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            height: auto !important;
+        }
+        table {
+            margin-bottom: 8px;
+        }
+        table {
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        thead {
+            display: table-header-group
+        }
+
+        tfoot {
+            display: table-row-group
+        }
+
+        td, th {
+            border: solid 1px #000;
+            padding: 3px !important;
+        }
+        @@media print{
+            #pd{
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Introducción</h1>
+    <p>@Html.Raw(manual.StrIntroduccion)</p>
+
+    <h1>Objetivos</h1>
+    @Html.Raw(manual.StrObjetivos)
+
+    <h1>Alcance</h1>
+    <p>@manual.StrAlcance</p>
+
+    @if (manual.StrMarcoLegal.Trim() != "")
+    {
+        <h1>Marco Legal</h1>
+        <p>@Html.Raw(manual.StrMarcoLegal)</p>
+    }
+
+    <h1 id="pd" style="page-break-before:always">Desarrollo</h1>
+    @Html.Raw(manual.StrDesarrollo.Replace("<span","<p").Replace("</span","</p"))
+    <br />
+
+    <h1>Recursos Necesarios</h1>
+    <h2>Financieros</h2>
+    <p>@manual.StrRecFin</p>
+
+    <h2>Talento Humano</h2>
+    <p>@manual.StrTalentoHumano</p>
+
+    <h2>Equipos Biomédicos</h2>
+    <p>@manual.StrEquipos</p>
+
+    <h2>Medicamentos, Dispositivos e Insumos</h2>
+    <p>@manual.StrMedicamentos</p>
+
+    <h2>Informáticos</h2>
+    <p>@manual.StrRecInfo</p>
+
+    <br />
+    @if (manual.StrGlosario.Trim() != "")
+    {
+        <h1>Gosario de terminos</h1>
+        <ul id="lstGlosario" runat="server">
+            @Html.Raw(manual.StrGlosario)
+        </ul>
+    }
+
+
+    @if (manual.StrAnexos.Trim() != "")
+    {
+        <h1>Anexos</h1>
+        @Html.Raw(manual.StrAnexos)
+    }
+
+    @if(manual.StrProcs != "")
+    {
+        <h1>Procedimientos y/o protocolos asociados</h1>
+        <p>@manual.StrProcs</p>   
+    }
+
+    <br />
+    @if (estado)
+    {
+        <table style="page-break-before:always">
+            <thead>
+                <tr>
+                    <td colspan="5" class="text-center" style="font-weight: 900">CONTROL DE CAMBIOS</td>
+                </tr>
+                <tr>
+                    <td><strong>Vesion:</strong></td>
+                    <td style="width:130px"><strong>Fecha:</strong></td>
+                    <td colspan="2"><strong>Justificación / Descripción</strong></td>
+                    <td><strong>Responsable</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                @Html.Raw(docsContCam)
+            </tbody>
+        </table>
+    }
+
+    <table>
+        <thead>
+            <tr>
+                <td colspan="3" style="text-align:center"><strong>CONTROL DE DOCUMENTOS</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Eleborado por</strong></td>
+                <td><strong>Revisado por</strong></td>
+                <td><strong>Aprobado por</strong></td>
+            </tr>
+        </thead>
+        <tbody runat="server" id="Participantes" style="text-align: Center">
+            @Html.Raw(revisiones)
+        </tbody>
+    </table>
+
+
+</body>
+</html>
+
+
+

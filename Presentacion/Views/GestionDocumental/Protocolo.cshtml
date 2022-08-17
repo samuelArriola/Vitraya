@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Protocolo";
+    Layout = "~/Views/Shared/_Document.cshtml";
+
+    var protocolo = Model[0];
+    var documento = Model[1];
+    var indicadores = Model[2];
+    var solicitud = Model[3];
+    var estado = Model[4];
+    var tbControlCam = Model[5];
+    var tbAprobacion = Model[6];
+}
+
+
+<table class="tableBorderer">
+    <tr>
+        <td colspan="8"class="borderer">
+            <p><strong>Nombre del protocolo: </strong>@protocolo.StrNombre</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="8" class="borderer">
+            <p><strong>Alcance: </strong>@protocolo.StrAlcance</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="8" class="borderer">
+            <p><strong>Objetivo: </strong>@protocolo.StrObjetivo</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="8" class="borderer">
+            <p><strong>Responsables: </strong>@protocolo.StrResponsable</p>
+        </td>
+    </tr>
+</table>
+<table class="tableBorderer">
+    <tr>
+        <td colspan="8" class="text-center borderer">
+            <p><strong>Recursos</strong></p>
+        </td>
+    </tr>
+    <tr>
+        <td class="borderer">
+            <p><strong>Talento humano: </strong>@protocolo.StrRecHumanos</p>
+            <p><strong>Equipos biomédicos: </strong>@protocolo.StrRecEquiposBiomedicos</p>
+            <p><strong>Medicamentos, dispositivos e insumos médicos: </strong>@protocolo.StrRecMedicamentos</p>
+            <p><strong>Informáticos: </strong>@protocolo.StrRecInformaticos</p>
+        </td>
+    </tr>
+</table>
+
+<table class="tableBorderer">
+    <thead>
+        <tr>
+            <td colspan="2" class="borderer"><h6 style="font-size: 16px; font-weight: 700" class="text-center">Definiciones</h6></td>
+        </tr>
+    </thead>
+    <tbody id="tbDefiniciones" runat="server" class="tableBorderer">
+        @Html.Raw(protocolo.StrDefiniciones)
+    </tbody>
+</table>
+<table class="tableBorderer">
+    <tr>
+        <td colspan="8">
+            <p><strong>Recomendaciones generales: </strong>@Html.Raw(protocolo.StrRecomendaciones)</p>
+        </td>
+    </tr>
+</table>
+@Html.Raw(protocolo.StrActividad)
+@Html.Raw(protocolo.StrRefNorm)
+@Html.Raw(protocolo.StrIndicadores)
+<table class="tableBorderer">
+    <tr>
+        <td colspan="8">
+            <strong>Anexos: </strong> @Html.Raw(protocolo.StrAnexos)
+        </td>
+    </tr>
+</table>
+
+<div style="page-break-before:always"></div>
+@if (estado)
+{
+    <table class="tableBorderer">
+        <thead>
+            <tr>
+                <td colspan="4" class="text-center" style="font-weight:900">CONTROL DE CAMBIOS</td>
+            </tr>
+            <tr>
+                <td><strong>Vesion:</strong></td>
+                <td><strong>Fecha:</strong></td>
+                <td><strong>Justificación / Descripción</strong></td>
+                <td><strong>Responsable</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            @Html.Raw(tbControlCam)
+        </tbody>
+    </table>
+}
+<table class="tableBorderer">
+    <thead>
+        <tr>
+            <td colspan="3" style="text-align:center"><strong>CONTROL DE DOCUMENTOS</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Elaborado por</strong></td>
+            <td><strong>Revisado por</strong></td>
+            <td><strong>Aprobado por</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.Raw(tbAprobacion)
+    </tbody>
+</table>

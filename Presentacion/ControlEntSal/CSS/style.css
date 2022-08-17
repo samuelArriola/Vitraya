@@ -1,0 +1,40 @@
+﻿html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.row {
+    height: 100%;
+}
+
+.flex-column {
+    height: 100%;
+}
+
+.p-50 {
+    height: 50%;
+}
+
+.p-2 {
+    height: 50%;
+    padding: 0px !important;
+}
+
+.card-header {
+    background-color: rgb(222, 222, 222) !important;
+    padding: .50rem 1.25rem !important;
+}
+
+
+element.style {
+}
+
+.page-title {
+    height: 0px !important;
+    padding: 1px 0 !important;
+}
+
+.x_panel { 
+    padding: 0px 17px 0px 2px;  
+}

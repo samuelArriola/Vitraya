@@ -1,0 +1,20 @@
+﻿body {
+}
+
+.estados-caps input[type="radio"]{
+    display: none;
+}
+
+.estados-caps label{
+    display: inline-block;
+    padding: 8px;
+    border: solid 1px #ccc;
+    background: #efefef;
+}
+.estados-caps label:hover{
+    background: #ddd;
+}
+
+.estados-caps input:checked + label {
+    background: #ddd;
+}

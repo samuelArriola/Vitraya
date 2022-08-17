@@ -1,0 +1,243 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3AEE21AA-2D60-47A6-ADD7-1655B995681B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Persistencia</RootNamespace>
+    <AssemblyName>Persistencia</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44360</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.6\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.2\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.2\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.2\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.2\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auditorias\DAOAuditoriaExterna.cs" />
+    <Compile Include="Auditorias\DAOAuditoriaInterna.cs" />
+    <Compile Include="Auditorias\DAOEnteAuditor.cs" />
+    <Compile Include="Auditorias\DAOHallazgo.cs" />
+    <Compile Include="CloseAllConnections.cs" />
+    <Compile Include="Conexion.cs" />
+    <Compile Include="ControlEntSal\ControlEntSalController.cs" />
+    <Compile Include="ControlEntSal\CSPacienteBBController.cs" />
+    <Compile Include="EncuestaCovid\LEEncuestaCovid.cs" />
+    <Compile Include="EncuestaCovid\LEEstadisticasEC.cs" />
+    <Compile Include="EncuestaCovid\PEncuestaCovid.cs" />
+    <Compile Include="EstadisticasVitales\DAOCRCodRuaf.cs" />
+    <Compile Include="EstadisticasVitales\DAOCRRegDef.cs" />
+    <Compile Include="EstadisticasVitales\DAOCRRegNacViv.cs" />
+    <Compile Include="Facturacion\PBitacoraAutorizaciones.cs" />
+    <Compile Include="Facturacion\PCensoDiario.cs" />
+    <Compile Include="Facturacion\PConsultaAutorizaciones.cs" />
+    <Compile Include="Facturacion\PHistoricoCierres.cs" />
+    <Compile Include="Facturacion\PRegistroAutorizaciones.cs" />
+    <Compile Include="Facturacion\PRegistroAutorizacionesManual.cs" />
+    <Compile Include="Generales\DAOCargo.cs" />
+    <Compile Include="Generales\DAOGNCtrlCambioPass.cs" />
+    <Compile Include="Generales\DAOGNDepartamento.cs" />
+    <Compile Include="Generales\DAOGNEps.cs" />
+    <Compile Include="Generales\DAOGNDireccion.cs" />
+    <Compile Include="Generales\DAOGNHistorico.cs" />
+    <Compile Include="Generales\DAOGNModulos.cs" />
+    <Compile Include="Generales\DAOGNMunicipio.cs" />
+    <Compile Include="Generales\DAOGNOpciones.cs" />
+    <Compile Include="Generales\DAOGNOpcionesBloqueadas.cs" />
+    <Compile Include="Generales\DAOGNPermisos.cs" />
+    <Compile Include="Generales\DAOGNRoles.cs" />
+    <Compile Include="Generales\DAONABloqueos.cs" />
+    <Compile Include="Power BI\PAdministrarReportes.cs" />
+    <Compile Include="Power BI\PListaReportes.cs" />
+    <Compile Include="Servicios\PCertificadoLaboral.cs" />
+    <Compile Include="Servicios\PDesprendibles.cs" />
+    <Compile Include="Vacunacion\DAORegistroDiarioVac.cs" />
+    <Compile Include="GestionDocumental\DAOGDActividad.cs" />
+    <Compile Include="GestionDocumental\DAOGDAprobacion.cs" />
+    <Compile Include="GestionDocumental\DAOGDDivulgacion.cs" />
+    <Compile Include="GestionDocumental\DAOGDDocIndicador.cs" />
+    <Compile Include="GestionDocumental\DAOGdDocProcedimiento.cs" />
+    <Compile Include="GestionDocumental\DAOGDDocumento.cs" />
+    <Compile Include="GestionDocumental\DAOGDDominio.cs" />
+    <Compile Include="GestionDocumental\DAOGDEvaluacion.cs" />
+    <Compile Include="GestionDocumental\DAOGDListaIndicador.cs" />
+    <Compile Include="GestionDocumental\DAOGDManual.cs" />
+    <Compile Include="GestionDocumental\DAOGDPolitica.cs" />
+    <Compile Include="GestionDocumental\DAOGDProtocolo.cs" />
+    <Compile Include="GestionDocumental\DAOGDRevision.cs" />
+    <Compile Include="GestionDocumental\DAOGDSolicitud.cs" />
+    <Compile Include="Mensaje.cs" />
+    <Compile Include="PlanAccion\DAOPAAvance.cs" />
+    <Compile Include="PlanAccion\DAOPAUsuario.cs" />
+    <Compile Include="proceedings\DAOARActasC.cs" />
+    <Compile Include="PlanAccion\DAOPAPlanAccion.cs" />
+    <Compile Include="proceedings\DAOARactasDM.cs" />
+    <Compile Include="proceedings\DAOARActasTemas.cs" />
+    <Compile Include="proceedings\DAOARAgenda.cs" />
+    <Compile Include="proceedings\DAOAReunionC.cs" />
+    <Compile Include="Generales\DAOGNArchivo.cs" />
+    <Compile Include="Generales\DAOGNEventos.cs" />
+    <Compile Include="Generales\DAOGNListaArchivos.cs" />
+    <Compile Include="proceedings\DAOInterfaz.cs" />
+    <Compile Include="Generales\DAOUnidadFuncional.cs" />
+    <Compile Include="Generales\DAOUsuario.cs" />
+    <Compile Include="proceedings\DAOAReunionD.cs" />
+    <Compile Include="Procesos\DAOPCNormagrama.cs" />
+    <Compile Include="Procesos\DAOProceso.cs" />
+    <Compile Include="Procesos\DAOSIPOC.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="trainings\DAOCPAgenda.cs" />
+    <Compile Include="trainings\DAOCPASISTENCIA.cs" />
+    <Compile Include="trainings\DAOCPCAPACITACION.cs" />
+    <Compile Include="trainings\DAOCPEJETEMATICO.cs" />
+    <Compile Include="trainings\DAOCPExamen.cs" />
+    <Compile Include="trainings\DAOCPEXAMENSOL.cs" />
+    <Compile Include="trainings\DAOCPMatricula.cs" />
+    <Compile Include="trainings\DAOCPOPCION.cs" />
+    <Compile Include="trainings\DAOCPREGUNTA.cs" />
+    <Compile Include="trainings\DAOCPRESPUESTA.cs" />
+    <Compile Include="trainings\DAOCPSolicitud.cs" />
+    <Compile Include="trainings\DAOCPSUBTEMA.cs" />
+    <Compile Include="trainings\InformesTrainings.cs" />
+    <Compile Include="Vacunacion\DAOVCDetEntLot.cs" />
+    <Compile Include="Vacunacion\DAOVCEntradaLote.cs" />
+    <Compile Include="Vacunacion\DAOVCHistorico.cs" />
+    <Compile Include="Vacunacion\DAOVCInsumo.cs" />
+    <Compile Include="Vacunacion\DAOVCLote.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{7034F215-DF24-4795-83C0-E7C05225898A}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63727</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44310/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

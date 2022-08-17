@@ -1,0 +1,212 @@
+﻿
+@{
+    ViewBag.Title = "Indicador";
+    Layout = "~/Views/Shared/_Document.cshtml";
+
+    var indicador = Model[0];
+    var proceso = Model[1];
+    var documento = Model[2];
+    var solicitud = Model[3];
+    var aprobaciones = Model[4];
+    var revisiones = Model[5];
+    var docsContCam = Model[6];
+    var estado = Model[7];
+}
+
+<style>
+    table, td, th{
+        border: solid 1px #000;
+    }
+</style>
+
+<table class="table-border" width="100%">
+    <tbody>
+        <tr>
+            <td colspan="12">
+                <p><strong>Proceso: </strong>@proceso.StrNomPro</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Tipo de Indicador: </strong>@indicador.StrTipo</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Nombre: </strong>@documento.StrNomDoc</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Justificación: </strong> @indicador.StrJustificacion</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Dominio: </strong>@indicador.StrDominio</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Código en el SOGC:</strong>@indicador.StrCodSOGC</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table class="table-border">
+    <thead>
+        <tr>
+            <td colspan="3">
+                <p class="text-center"><strong>DEFINICIÓN OPERACIONAL</strong></p>
+                <span id="definicion" runat="server"></span>
+            </td>
+        </tr>
+        <tr>
+            <td  ></td>
+            <td >
+                <p class="text-center"><strong>Numerador</strong></p>
+            </td>
+            <td >
+                <p class="text-center"><strong>Denominador</strong></p>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td >
+                <p><strong>Descripción</strong></p>
+            </td>
+            <td >
+                <p>@indicador.StrDescNum</p>
+            </td>
+            <td >@indicador.StrDescDen</td>
+        </tr>
+        <tr>
+            <td >
+                <p><strong>Origen de la información</strong></p>
+            </td>
+            <td >@indicador.StrOrInfoNum</td>
+            <td >@indicador.StrOrInfoDen</td>
+        </tr>
+        <tr>
+            <td >
+                <p><strong>Fuente primaria</strong></p>
+            </td>
+            <td >@indicador.StrFuentPrimNum</td>
+            <td >@indicador.StrFuentPrimDen</td>
+        </tr>
+    </tbody>
+</table>
+<table class="table-border">
+    <tbody>
+        <tr>
+            <td colspan="3" style="width: 25%;  ">
+                <p><strong>Unidad de medición</strong></p>
+            </td>
+            <td colspan="3" style="width: 25%;">
+                <p><strong>Factor </strong></p>
+            </td>
+            <td colspan="3" style="width: 25%;">
+                <p><strong>Periodicidad </strong></p>
+            </td>
+            <td colspan="3" style="width: 25%;">
+                <p><strong>Responsable</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">@indicador.StrUniMedicion</td>
+            <td colspan="3">@indicador.StrFactor</td>
+            <td colspan="3">@indicador.StrPeriodicidad</td>
+            <td colspan="3">@indicador.StrResponsable</td>
+        </tr>
+
+        <tr>
+            <td colspan="12">
+                <p><strong>Fórmula del cálculo: </strong>@indicador.StrFormulaCalc</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Estándar: </strong>@indicador.StrEstandar</p>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Tendencia ideal: </strong>@indicador.StrTendencia</p>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Tipo de gráfica: </strong>@indicador.StrTipGrafica</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Interpretación: </strong>@indicador.StrInterpretacion</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Responsable de la medición: </strong>@indicador.StrResponsableMed</p>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Responsable del análisis: </strong>@indicador.StrResponsableAna</p>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p><strong>Actores interesados en el resultado: </strong>@indicador.StrActores</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <p>
+                    <strong>Control y vigilancia: </strong>@indicador.StrVigilancia
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+@if (estado)
+{
+<table style="page-break-before:always">
+    <thead>
+        <tr>
+            <td colspan="5" class="text-center" style="font-weight: 900">CONTROL DE CAMBIOS</td>
+        </tr>
+        <tr>
+            <td><strong>Vesion:</strong></td>
+            <td style="width:130px"><strong>Fecha:</strong></td>
+            <td colspan="2"><strong>Justificación / Descripción</strong></td>
+            <td><strong>Responsable</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+       @Html.Raw(docsContCam)
+    </tbody>
+</table>
+}
+
+<table style="text-align:center">
+    <thead>
+        <tr>
+            <td colspan="3" style="text-align:center"><strong>CONTROL DE DOCUMENTOS</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Elaborado por</strong></td>
+            <td><strong>Revisado por</strong></td>
+            <td><strong>Aprobado por</strong></td>
+        </tr>
+    </thead>
+    <tbody runat="server" id="Participantes" style="text-align: Center">
+        @Html.Raw(revisiones)
+    </tbody>
+</table>
+

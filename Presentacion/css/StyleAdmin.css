@@ -1,0 +1,1611 @@
+﻿
+/*body{
+  margin: 0;
+  padding: 0;
+  background: url(img/lista.jpg) no-repeat fixed center;
+}*/
+
+* {
+    margin: 0;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.topnav {
+    background-color: #00AEFF;
+    overflow: hidden;
+}
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+        float: right;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        cursor: pointer;
+    }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav a:active {
+            background-color: #00AEFF;
+            color: white;
+        }
+
+    .topnav .a {
+        float: right;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        /* Change the color of links on hover */
+        .topnav .a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Add a color to the active/current link */
+        .topnav .a.active {
+            background-color: #00AEFF;
+            color: white;
+        }
+
+.vertical-menu {
+    position: absolute;
+    top: 50px;
+    width: 300px; /* Set a width if you like */
+    text-align: center;
+}
+
+
+    .vertical-menu img {
+        width: 100%;
+        height: 100%;
+        padding-bottom: 10%;
+    }
+
+    .vertical-menu .a {
+        background-color: #eee;
+        color: black;
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+        width: 300px;
+        height: 50px;
+    }
+
+        .vertical-menu .a:hover {
+            background-color: #ccc; /* Dark grey background on mouse-over */
+        }
+
+        .vertical-menu .a.active {
+            background-color: #00AEFF; /* Add a green color to the "active/current" link */
+            color: white;
+        }
+
+
+.horizontal {
+    top: 10%;
+    position: absolute;
+    right: 30px;
+    left: 25%;
+    height: 550px;
+    /*background-color: #2EFEF7;*/
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 15px;
+}
+
+    .horizontal .panel {
+        float: left;
+        width: 100%;
+        height: 100%;
+        /*background: #00b9ff;*/
+        text-align: center;
+        border-radius: 15px;
+    }
+
+        .horizontal .panel .label {
+            font-family: sans-serif;
+            color: #000;
+            font-size: 15px;
+            padding: 10px 0;
+            text-align: center
+        }
+
+        .horizontal .panel .area {
+            margin-top: 10px;
+            padding-top: 10px;
+            top: 50px;
+            float: left;
+            width: 35%;
+            height: 90%;
+            /* IMPORTANTE */
+            border-radius: 15px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: transparent;
+            border-radius: 15px;
+        }
+
+        .horizontal .panel .cargo {
+            margin-top: 10px;
+            padding-top: 10px;
+            float: right;
+            width: 30%;
+            height: 90%;
+            /* IMPORTANTE */
+            border-radius: 15px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: transparent;
+            border-radius: 15px;
+        }
+
+        .horizontal .panel .departamento {
+            justify-content: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            width: 30%;
+            height: 90%;
+            /* IMPORTANTE */
+            border-radius: 15px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: transparent;
+            border-radius: 15px;
+            margin-left: 38%;
+        }
+
+    /**/
+
+    .horizontal .panel2 {
+        width: 100%;
+        height: 100%;
+        /*background: #00AEFF;*/
+        border-radius: 15px;
+    }
+
+        .horizontal .panel2 .registro {
+            text-align: center;
+            justify-content: center;
+            float: left;
+            border-width: 2px;
+            border-style: solid;
+            border-color: transparent;
+            padding: 10px;
+            margin: 10px;
+            width: 45%;
+            height: 90%;
+            /* IMPORTANTE */
+            display: inline-block;
+            border-radius: 15px;
+        }
+
+            .horizontal .panel2 .registro .texto {
+                display: inline-block;
+                margin: 10px;
+                padding: 10px;
+                font-size: 15px;
+                font-family: sans-serif;
+                float: left;
+            }
+
+            .horizontal .panel2 .registro .cuadro {
+                font-family: sans-serif;
+            }
+
+            .horizontal .panel2 .registro .inputBox {
+                position: relative;
+            }
+
+                .horizontal .panel2 .registro .inputBox .input {
+                    font-family: "Roboto", sans-serif;
+                    outline: 0;
+                    background: #f2f2f2;
+                    width: 50%;
+                    border: 0;
+                    margin: 0 0 10px;
+                    padding: 5px;
+                    box-sizing: border-box;
+                    font-size: 15px;
+                    border-radius: 20px;
+                    padding-bottom: 10%;
+                    border-width: 2px;
+                    border-style: solid;
+                    border-color: #00a9ff;
+                }
+
+        .horizontal .panel2 .registro2 {
+            text-align: center;
+            justify-content: center;
+            float: right;
+            border-width: 2px;
+            border-style: solid;
+            border-color: transparent;
+            padding: 10px;
+            margin: 10px;
+            width: 45%;
+            height: 90%;
+            /* IMPORTANTE */
+            display: inline-block;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+            .horizontal .panel2 .registro2 .texto {
+                display: inline-block;
+                margin: 10px;
+                padding: 10px;
+                font-size: 15px;
+                font-family: sans-serif;
+                float: left;
+            }
+
+            .horizontal .panel2 .registro2 .cuadro {
+                font-family: sans-serif;
+            }
+
+            .horizontal .panel2 .registro2 .inputBox {
+                position: relative;
+            }
+
+                .horizontal .panel2 .registro2 .inputBox .input {
+                    font-family: "Roboto", sans-serif;
+                    outline: 0;
+                    background: #f2f2f2;
+                    width: 50%;
+                    border: 0;
+                    margin: 0 0 10px;
+                    padding: 5px;
+                    box-sizing: border-box;
+                    font-size: 15px;
+                    border-radius: 20px;
+                    padding-bottom: 10%;
+                    border-width: 2px;
+                    border-style: solid;
+                    border-color: #00a9ff;
+                }
+
+            .horizontal .panel2 .registro2 .inputBox2 {
+                position: relative;
+                top: 5%;
+            }
+
+            .horizontal .panel2 .registro2 .boton {
+                font-family: "Roboto", sans-serif;
+                text-transform: uppercase;
+                outline: 0;
+                background: #00AEFF;
+                width: 70%;
+                border: 0;
+                padding: 15px;
+                color: #FFFFFF;
+                font-size: 14px;
+                -webkit-transition: all 0.3 ease;
+                transition: all 0.3 ease;
+                cursor: pointer;
+                border-radius: 20px;
+            }
+
+                .horizontal .panel2 .registro2 .boton:hover, .form boton:active, .form .boton:focus {
+                    /*background: #004BFF;*/
+                    background: #2EFEF7;
+                    color: #000;
+                }
+
+        .horizontal .panel2 .registro3 {
+            border: 2px solid transparent;
+            width: 50%;
+            height: 9%;
+            text-align: center;
+            justify-content: center;
+            display: inline-block;
+            border-radius: 15px;
+            display: inline-block;
+            z-index: 1;
+            left: 25%;
+            top: 100%;
+            position: absolute;
+        }
+
+            .horizontal .panel2 .registro3 .input {
+                font-family: "Roboto", sans-serif;
+                outline: 0;
+                background: #f2f2f2;
+                width: 50%;
+                height: 10%;
+                border: 0;
+                margin: 0 0 10px;
+                padding: 5px;
+                box-sizing: border-box;
+                font-size: 15px;
+                border-radius: 20px;
+                padding-bottom: 10%;
+                border-width: 2px;
+                border-style: solid;
+                border-color: #00a9ff;
+                padding-left: 15%;
+            }
+
+            .horizontal .panel2 .registro3 .texto {
+                display: inline-block;
+                margin: 15px;
+                padding: 15px;
+                font-size: 15px;
+                font-family: sans-serif;
+                float: left;
+            }
+
+            .horizontal .panel2 .registro3 .boton {
+                font-family: "Roboto", sans-serif;
+                text-transform: uppercase;
+                outline: 0;
+                background: #00AEFF;
+                width: 30%;
+                height: 10%;
+                font-size: 15px;
+                color: #41ff00;
+                border: 0;
+                padding: 15px;
+                color: #FFFFFF;
+                font-size: 14px;
+                -webkit-transition: all 0.3 ease;
+                transition: all 0.3 ease;
+                cursor: pointer;
+                border-radius: 20px;
+            }
+
+
+
+
+    /*area*/
+
+    .horizontal .panel .area .input {
+        font-family: "Roboto", sans-serif;
+        box-sizing: border-box;
+        font-size: 15px;
+        border-radius: 20px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        padding-left: 5%;
+    }
+
+    .horizontal .panel .area .inputBox3 {
+        position: relative;
+        top: 5%;
+    }
+
+    .horizontal .panel .area .boton {
+        border-style: none;
+    border-color: inherit;
+    border-width: 0;
+    font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: #00AEFF;
+        font-size: 15px;
+        color: #41ff00;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+        border-radius: 20px;
+    }
+
+
+    .horizontal .panel .area .nombre .grid {
+        border: 2px solid;
+        width: 83%;
+        height: 50%;
+        border-radius: 15px;
+        border-color: transparent;
+    }
+
+    .horizontal .panel .area .nombre .grid .view {
+        width: 100%;
+        height: 50%;
+    }
+
+    /*Departamento*/
+
+    .horizontal .panel .departamento .input {
+        font-family: "Roboto", sans-serif;
+        box-sizing: border-box;
+        font-size: 15px;
+        border-radius: 20px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        padding-left: 5%;
+    }
+
+    .horizontal .panel .departamento .inputBox3 {
+        position: relative;
+        top: 5%;
+    }
+
+        .horizontal .panel .departamento .boton {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #00AEFF;
+            width: 30%;
+            height: 10%;
+            font-size: 15px;
+            color: #41ff00;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+    .horizontal .panel .departamento .nombre .grid {
+        border: 2px solid;
+        width: 83%;
+        height: 50%;
+        border-radius: 15px;
+        border-color: transparent;
+    }
+
+        .horizontal .panel .departamento .nombre .grid .view {
+            width: 100%;
+            height: 50%;
+        }
+
+    /*Cargo*/
+
+    .horizontal .panel .cargo .input {
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        box-sizing: border-box;
+        font-size: 15px;
+        border-radius: 20px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #00a9ff;
+        padding-left: 5%;
+    }
+
+    .horizontal .panel .cargo .inputBox3 {
+        position: relative;
+        top: 5%;
+    left: 0px;
+}
+
+        .horizontal .panel .cargo .boton {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #00AEFF;
+            width: 30%;
+            height: 10%;
+            font-size: 15px;
+            color: #41ff00;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+    .horizontal .panel .cargo .nombre .grid {
+        border: 2px solid;
+        width: 83%;
+        height: 50%;
+        border-radius: 15px;
+        border-color: transparent;
+    }
+
+        .horizontal .panel .cargo .nombre .grid .view {
+            width: 100%;
+            height: 50%;
+        }
+
+/*
+       .horizontal .panel .inputBox {
+        position: relative;
+        width: 50%;
+        text-align: center;
+    }
+        .horizontal .panel .inputBox .input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+    .horizontal .inputBox .input:focus {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 16px;
+        color: #fff;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+        border: none;
+        border-bottom: 1px solid #008F39;
+        outline: none;
+        background: transparent;
+        transition: 0.5s ease all;
+    }
+   */
+/* @media only screen and (max-width: 800px){
+      .horizontal{
+        top: 10%;
+        position: absolute;
+        right: 30px;
+        left: 35%;
+        height: 550px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #2EFEF7;
+      }
+      .vertical-menu {
+        width: 200px;
+      }
+  }*/
+
+
+.horizontal .grid{
+    margin-top: 5%;
+    padding-top: 5%;
+    width: 100%;
+    height: 100%;
+}
+
+
+.filter {
+    margin-top: 5%;
+    padding-top: 5%;
+    width: 450px;
+    z-index: 1;
+    left: 570px;
+    top: 436px;
+    position: absolute;
+    height: 26px;
+}
+
+    .filter .list {
+        border-width: 2px;
+        border-style: solid;
+        border-color: #2EFEF7;
+        width: 100px;
+    }
+
+    .filter .texto {
+        border-width: 2px;
+        border-style: solid;
+        border-color: #2EFEF7;
+    }
+
+    .filter .boton {
+        border-style: none;
+        border-color: inherit;
+        border-width: 0;
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: #00AEFF;
+        font-size: 15px;
+        width: 100px;
+        height: 30px;
+        color: #41ff00;
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+        border-radius: 20px;
+    }
+
+
+
+    /**********************************************************************************/
+
+
+    .horizontal .panel .area .nombre .btn-abrir {
+    position: absolute;
+    padding: 15px;
+    top: 10%;
+    margin-bottom: 10%;
+    left: 12%;
+    width: 100px;
+    border-radius: 20px;
+    color: #fff;
+    background: #00AEFF;
+    cursor: pointer;
+}
+.horizontal .panel .area .nombre .text {
+    position: absolute;
+    margin: 10px;
+    top: 20%;
+    left: 5px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #00AEFF;
+    border-radius: 10px;
+}
+.horizontal .panel .area .nombre .btn {
+    position: absolute;
+    left: 20%;
+    top: 21%;
+    width: 11%;
+    height: 25px;
+    border-radius: 15px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #00AEFF;
+    background: #00AEFF;
+    cursor: pointer;
+    color: #fff;
+}
+
+.horizontal .panel .area .gridview {
+    margin-top: 30%;
+    width: 100%;
+}
+
+    .horizontal .panel .area .gridview .view{
+        width: 100%;
+        height: 100%;
+    }
+
+
+.horizontal .panel .cargo .nombre .btn-abrir {
+    position: absolute;
+    padding: 15px;
+    top: 10%;
+    margin-bottom: 10%;
+    left: 78%;
+    width: 100px;
+    border-radius: 20px;
+    color: #fff;
+    background: #00AEFF;
+    cursor: pointer;
+}
+
+.horizontal .panel .cargo .nombre .text {
+    position: absolute;
+    margin: 10px;
+    top: 20%;
+    left: 68%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #00AEFF;
+    border-radius: 10px;
+}
+
+.horizontal .panel .cargo .nombre .btn {
+    position: absolute;
+    left: 88%;
+    top: 21%;
+    width: 11%;
+    height: 25px;
+    border-radius: 15px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #00AEFF;
+    background: #00AEFF;
+    cursor: pointer;
+    color: #fff;
+}
+
+.horizontal .panel .cargo .gridview {
+    margin-top: 30%;
+    width: 100%;
+}
+
+    .horizontal .panel .cargo .gridview .view {
+        width: 100%;
+        height: 100%;
+    }
+
+
+
+
+
+    .horizontal .panel .departamento .nombre .btn-abrir {
+        position: absolute;
+        padding: 15px;
+        top: 10%;
+        margin-bottom: 10%;
+        left: 45%;
+        width: 100px;
+        border-radius: 20px;
+        color: #fff;
+        background: #00AEFF;
+        cursor: pointer;
+    }
+
+.horizontal .panel .departamento .nombre .text {
+    position: absolute;
+    margin: 10px;
+    top: 20%;
+    left: 35%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #00AEFF;
+    border-radius: 10px;
+}
+
+.horizontal .panel .departamento .nombre .btn {
+    position: absolute;
+    left: 55%;
+    top: 21%;
+    width: 11%;
+    height: 25px;
+    border-radius: 15px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #00AEFF;
+    background: #00AEFF;
+    cursor: pointer;
+    color: #fff;
+}
+
+.horizontal .panel .departamento .gridview {
+    margin-top: 30%;
+    width: 100%;
+}
+
+    .horizontal .panel .departamento .gridview .view {
+        width: 100%;
+        height: 100%;
+    }
+
+
+
+
+
+
+    /*****************************************/
+
+
+.horizontal .panel .area .nombre .overlay {
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+    .horizontal .panel .area .nombre .overlay.active {
+        visibility: visible;
+    }
+
+.horizontal .panel .area .nombre .overlay .popup {
+    background: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 5px;
+    font-family: sans-serif;
+    padding: 10px;
+    text-align: center;
+    width: 600px;
+    opacity: 0;
+    transition: .3s ease all;
+    transform: scale(0.7);
+}
+
+    .horizontal .panel .area .nombre .overlay .popup .btn-cerrarpopup {
+        font-size: 16px;
+        line-height: 16px;
+        display: block;
+        text-align: right;
+        color: #bbbbbb;
+        transition: .3s ease all;
+    }
+
+    .horizontal .panel .area .nombre .overlay .popup h3 {
+        opacity: 0;
+    }
+
+    .horizontal .panel .area .nombre .overlay .popup .btn-cerrarpopup:hover {
+        color: #000;
+    }
+
+
+    .horizontal .panel .area .nombre .overlay .popup .contenedor-texto {
+        opacity: 0;
+    }
+
+        .horizontal .panel .area .nombre .overlay .popup .contenedor-texto .input {
+            width: 30%;
+            margin-top: 3%;
+            margin-bottom: 20px;
+            height: 52px;
+            line-height: 30px;
+            font-size: 18px;
+            text-align: center;
+            border: 1px solid #bbbbbb;
+        }
+
+            .horizontal .panel .area .nombre .overlay .popup .contenedor-texto .input:focus {
+                box-shadow: 1px 1px 5px 1px #00AEFF;
+            }
+
+
+    .horizontal .panel .area .nombre .overlay .popup .btn-guardar {
+        padding: 0 20px;
+        height: 40px;
+        line-height: 40px;
+        border: none;
+        color: #fff;
+        background: #00AEFF;
+        border-radius: 3px;
+        font-family: sans-serif;
+        font-size: 16px;
+        cursor: pointer;
+        transition: .3s ease all;
+    }
+
+        .horizontal .panel .area .nombre .overlay .popup .btn-guardar:hover {
+            background: rgba(0, 239, 255, 0.46)
+        }
+
+    /*animaciones*/
+
+    .horizontal .panel .area .nombre .overlay .popup.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+        .horizontal .panel .area .nombre .overlay .popup.active h3 {
+            animation: entradaTitulo .8s ease .5s forwards;
+        }
+
+        .horizontal .panel .area .nombre .overlay .popup.active .contenedor-texto {
+            animation: entradaInputs 1s ease 1s forwards;
+        }
+
+
+@keyframes entradaTitulo {
+    from {
+        transform: translateY(-25px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes entradaInputs {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/*****************************************/
+
+
+.horizontal .panel .cargo .nombre .overlay {
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+    .horizontal .panel .cargo .nombre .overlay.active {
+        visibility: visible;
+    }
+
+.horizontal .panel .cargo .nombre .popup {
+    background: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 5px;
+    font-family: sans-serif;
+    padding: 10px;
+    text-align: center;
+    width: 600px;
+    opacity: 0;
+    transition: .3s ease all;
+    transform: scale(0.7);
+}
+
+.horizontal .panel .cargo .nombre .overlay .popup .btn-cerrarpopup {
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+    text-align: right;
+    color: #bbbbbb;
+    transition: .3s ease all;
+}
+
+.horizontal .panel .cargo .nombre .overlay .popup h3 {
+    opacity: 0;
+}
+
+.horizontal .panel .cargo .nombre .overlay .popup .btn-cerrarpopup:hover {
+    color: #000;
+}
+
+
+.horizontal .panel .cargo .nombre .overlay .popup .contenedor-texto {
+    opacity: 0;
+}
+
+    .horizontal .panel .cargo .nombre .overlay .popup .contenedor-texto .input {
+        width: 30%;
+        margin-top: 3%;
+        margin-bottom: 20px;
+        height: 52px;
+        line-height: 30px;
+        font-size: 18px;
+        text-align: center;
+        border: 1px solid #bbbbbb;
+    }
+
+        .horizontal .panel .cargo .nombre .overlay .popup .contenedor-texto .input:focus {
+            box-shadow: 1px 1px 5px 1px #00AEFF;
+        }
+
+
+.horizontal .panel .cargo .nombre .overlay .popup .btn-guardar {
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #fff;
+    background: #00AEFF;
+    border-radius: 3px;
+    font-family: sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s ease all;
+}
+
+    .horizontal .panel .cargo .nombre .overlay .popup .btn-guardar:hover {
+        background: rgba(0, 239, 255, 0.46)
+    }
+
+    /*animaciones*/
+
+.horizontal .panel .cargo .nombre .overlay .popup.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+    .horizontal .panel .cargo .nombre .overlay .popup.active h3 {
+        animation: entradaTitulo .8s ease .5s forwards;
+    }
+
+    .horizontal .panel .cargo .nombre .overlay .popup.active .contenedor-texto {
+        animation: entradaInputs 1s ease 1s forwards;
+    }
+
+
+@keyframes entradaTitulo {
+    from {
+        transform: translateY(-25px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes entradaInputs {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/*****************************************/
+
+
+.horizontal .panel .departamento .nombre .overlay {
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+    .horizontal .panel .departamento .nombre .overlay.active {
+        visibility: visible;
+    }
+
+.horizontal .panel .departamento .nombre .popup {
+    background: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 5px;
+    font-family: sans-serif;
+    padding: 10px;
+    text-align: center;
+    width: 600px;
+    opacity: 0;
+    transition: .3s ease all;
+    transform: scale(0.7);
+}
+
+.horizontal .panel .departamento .nombre .overlay .popup .btn-cerrarpopup {
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+    text-align: right;
+    color: #bbbbbb;
+    transition: .3s ease all;
+}
+
+.horizontal .panel .departamento .nombre .overlay .popup h3 {
+    opacity: 0;
+}
+
+.horizontal .panel .departamento .nombre .overlay .popup .btn-cerrarpopup:hover {
+    color: #000;
+}
+
+
+.horizontal .panel .departamento .nombre .overlay .popup .contenedor-texto {
+    opacity: 0;
+}
+
+    .horizontal .panel .departamento .nombre .overlay .popup .contenedor-texto .input {
+        width: 30%;
+        margin-top: 3%;
+        margin-bottom: 20px;
+        height: 52px;
+        line-height: 30px;
+        font-size: 18px;
+        text-align: center;
+        border: 1px solid #bbbbbb;
+    }
+
+        .horizontal .panel .departamento .nombre .overlay .popup .contenedor-texto .input:focus {
+            box-shadow: 1px 1px 5px 1px #00AEFF;
+        }
+
+
+.horizontal .panel .departamento .nombre .overlay .popup .btn-guardar {
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #fff;
+    background: #00AEFF;
+    border-radius: 3px;
+    font-family: sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s ease all;
+}
+
+    .horizontal .panel .departamento .nombre .overlay .popup .btn-guardar:hover {
+        background: rgba(0, 239, 255, 0.46)
+    }
+
+    /*animaciones*/
+
+.horizontal .panel .departamento .nombre .overlay .popup.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+    .horizontal .panel .departamento .nombre .overlay .popup.active h3 {
+        animation: entradaTitulo .8s ease .5s forwards;
+    }
+
+    .horizontal .panel .departamento .nombre .overlay .popup.active .contenedor-texto {
+        animation: entradaInputs 1s ease 1s forwards;
+    }
+
+
+@keyframes entradaTitulo {
+    from {
+        transform: translateY(-25px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes entradaInputs {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+/**
+
+.register {
+    width: 500px;
+    margin: 10px auto;
+    padding: 10px;
+    border: 7px solid #00a9ff;
+    border-radius: 10px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #444;
+    background-color: #00a9ff;
+    box-shadow: 0 0 20px 0 #000000;
+}
+h3 {
+    margin: 0 15px 20px;
+    border-bottom: 2px solid #00a9ff;
+    padding: 5px 10px 5px 0;
+    font-size: 1.1em;
+}
+
+div {
+    margin: 0 0 15px 0;
+    border: none;
+}
+
+label {
+    display: inline-block;
+    width: 25%;
+    text-align: right;
+    margin: 10px
+}/
+
+input[type=text], input[type=password] {
+    width: 65%;
+    font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
+    padding: 5px;
+    font-size: 0.9em;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.07);
+}
+
+    input[type=text]:focus, input[type=password]:focus {
+        background: #FFFFFF;
+    }
+
+.button {
+    font-size: 1em;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #59B969;
+    box-shadow: 0 1px 0 0 #60BD49 inset;  
+}
+
+.sep {
+    border: 1px solid #00a9ff;
+    position: relative;
+    margin: 35px 20px;
+}
+
+.or {
+    position: absolute;
+    width: 50px;
+    left: 50%;
+    background: #00a9ff;
+    text-align: center;
+    margin: -10px 0 0 -25px;
+    line-height: 20px;
+}
+
+.connect {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.social-buttons {
+    display: inline-block;
+    min-width: 150px;
+    height: 50px;
+    margin: 0 5px 10px;
+    border-radius: 10px;
+    text-shadow: 1px 1px 5px #000000;
+}
+    a
+
+{
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: #FFFFFF;
+    padding: 10px 15px;
+}
+
+span {
+    font-size: 30px;
+    margin-left: 35px;
+}
+
+}*/
+
+/*********************************************************************/
+
+header {
+    width: 100%;
+    height: 50px;
+    background: #00AEFF;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.conten {
+    width: 98%;
+    margin: auto;
+}
+
+h1 {
+    float: left;
+}
+
+header .conten {
+    display: table;
+}
+
+
+#menu-bar {
+    display: none;
+}
+
+header label {
+    float: right;
+    font-size: 25px;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+.menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 200vh;
+    background: #00AEFF;
+    transition: all 0.5s;
+    transform: translateX(-100%);
+}
+
+    .menu a {
+        display: block;
+        color: #fff;
+        height: 20px;
+        text-decoration: none;
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .menu .imagen{
+        display: block;
+    }
+
+    .menu .b {
+        display: none;
+    }
+
+    .menu a:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+#menu-bar:checked ~ .menu {
+    transform: translateX(0%);
+}
+
+.vertical-menu{
+    display: none;
+}
+
+.menu .b {
+    display: block;
+    color: #fff;
+    height: 20px;
+    text-decoration: none;
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+/**************************************/
+
+@media only screen and (min-width: 700px) {
+    .menu {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: translateX(0%);
+        float: right;
+        display: flex;
+    }
+
+        .menu a {
+            border: none;
+        }
+
+        .menu .imagen{
+            display: none;
+        }
+
+    .contenedor .b {
+        display: none;
+    }
+
+    header label {
+        display: none;
+    }
+
+    .vertical-menu{
+        display: block;
+    }
+
+    .menu .b{
+        display: none;
+    }
+}
+
+
+/*******************************************************/
+/*popup*/
+.overlay {
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+    .overlay.active {
+        visibility: visible;
+    }
+
+.popup {
+    background: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 5px;
+    font-family: sans-serif;
+    padding: 10px;
+    text-align: center;
+    width: 900px;
+    opacity: 0;
+    transition: .3s ease all;
+    transform: scale(0.7);
+}
+
+    .popup .btn-cerrarpopup {
+        font-size: 16px;
+        line-height: 16px;
+        display: block;
+        text-align: right;
+        color: #bbbbbb;
+        transition: .3s ease all;
+    }
+
+    .popup h3 {
+        opacity: 0;
+    }
+
+    .popup .btn-cerrarpopup:hover {
+        color: #000;
+    }
+
+
+    .popup .contenedor-texto {
+        opacity: 0;
+    }
+
+        .popup .contenedor-texto .input {
+            width: 30%;
+            margin-bottom: 20px;
+            margin-right: 15px;
+            height: 52px;
+            line-height: 53px;
+            font-size: 18px;
+            text-align: center;
+            border: 1px solid #bbbbbb;
+        }
+
+            .popup .contenedor-texto .input:focus {
+                box-shadow: 1px 1px 5px 1px #00AEFF;
+            }
+
+
+    .popup .btn-guardar {
+        padding: 0 20px;
+        height: 40px;
+        line-height: 40px;
+        border: none;
+        color: #fff;
+        background: #00AEFF;
+        border-radius: 3px;
+        font-family: sans-serif;
+        font-size: 16px;
+        cursor: pointer;
+        transition: .3s ease all;
+    }
+
+        .popup .btn-guardar:hover {
+            background: rgba(0, 239, 255, 0.46)
+        }
+
+    /*animaciones*/
+
+    .popup.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+        .popup.active h3 {
+            animation: entradaTitulo .8s ease .5s forwards;
+        }
+
+        .popup.active .contenedor-texto {
+            animation: entradaInputs 1s ease 1s forwards;
+        }
+
+        .listboox {
+            margin-bottom: 15px;
+            float: left;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        .listbox {
+            margin-bottom: 15px;
+            float: right;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+
+#DropDownList1{
+    width: 200px;
+    height: 50px;
+    float: right;
+}
+
+#TextBox8 {
+    width: 150px;
+    height: 40px;
+    float: right;
+}
+
+@keyframes entradaTitulo {
+    from {
+        transform: translateY(-25px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes entradaInputs {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    #horizontalR {
+        margin-left: 10%;
+        height: 900px;
+    }
+        #horizontalR #horizontal-abajo {
+            visibility: hidden;
+
+        }
+        #horizontalR .marcometrop {
+            height: 500px;
+        }
+}
+
+@media only screen and (max-width: 1260px) {
+
+    .listbox {
+        float: left;
+    }
+}
+
+    @media only screen and (max-width: 900px) {
+        #horizontalR {
+            margin-left: 15%;
+        }
+
+            #horizontalR #horizontal-abajo {
+                margin-top: 20%;
+            }
+
+            #horizontalR .marcometrop {
+                height: 500px;
+            }
+
+        .listbox {
+            float: left;
+        }
+    }
+
+    @media only screen and (max-width: 890px) and (min-width: 700px){
+        #horizontalR {
+            margin-left: 50%;
+        }
+    }
+
+    @media only screen and (max-width: 900px) {
+        #horizontalR {
+            margin-left: 0px;
+            margin-right: 10px;
+            height: 80%;
+            width: 90%;
+        }
+
+        .listbox {
+            float: left;
+        }
+    }

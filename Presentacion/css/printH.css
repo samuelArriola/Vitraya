@@ -1,0 +1,64 @@
+﻿@media print {
+
+    * {
+        color: #000 !important;
+        text-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    p, h1, h2, h3, h4, h5, span {
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    .body {
+        width: auto;
+        border: 0;
+        padding: 0;
+        float: none !important;
+    }
+
+    
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+
+    a[href^=http]:after {
+        content: " <" attr(href) ">";
+    }
+
+
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid !important;
+    }
+
+    @page {
+       margin: 1cm;
+        size: legal landscape;
+
+        @top-right {
+            font-size: 12px;
+            content: "Pág. " counter(page);
+        }
+    }
+
+    
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+  
+
+    h2, h3 {
+        page-break-after: avoid;
+    }
+
+    img, tr, td, th {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+}

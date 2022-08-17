@@ -1,0 +1,54 @@
+﻿body {
+}
+
+
+#imageFlujo {
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    border: 2px grey dashed;
+    border-radius: 5px;
+}
+
+    #imageFlujo label {
+        display: inline-block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+.box-resp {
+    display: inline-block;
+    margin-left: 6px;
+}
+
+    .box-resp div {
+        display: inline-block;
+        border: solid 1px grey;
+        border-radius: 3px;
+        padding: 3px;
+    }
+
+#imageFlujo {
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    border: 2px grey dashed;
+    border-radius: 5px;
+}
+
+    #imageFlujo label {
+        display: inline-block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+#fuImageFlujo {
+}
