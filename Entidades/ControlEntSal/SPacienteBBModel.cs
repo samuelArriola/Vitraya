@@ -9,7 +9,7 @@ namespace Entidades.ControlEntSal
     {
         private int oid, adningres1, GnIdUsuSS, GnIdUsuSC, numbebe;
         private string DocPaciente, nomPaciente, docResponsable, eliminado, 
-            nomResponsable, tpResponsable, nomBB, registroBB, estado1SS, estado2SC;
+            nomResponsable, tpResponsable, nomBB, estado1SS, estado2SC;
         private DateTime fechaSS, fechaSC;
 
         public int OID { get => oid; set => oid = value; }
@@ -20,11 +20,10 @@ namespace Entidades.ControlEntSal
         public string DOCPACIENTE { get => DocPaciente; set => DocPaciente = value; }
         public string NOMPACIENTE { get => nomPaciente; set => nomPaciente = value; }
         public string DOCRESPONSABLE { get => docResponsable; set => docResponsable = value; }
-        public string ELIMINADO { get => eliminado; set => eliminado = value; }
         public string NOMRESPONSABLE { get => nomResponsable; set => nomResponsable = value; }
         public string TPRESPONSABLE { get => tpResponsable; set => tpResponsable = value; }
+        public string ELIMINADO { get => eliminado; set => eliminado = value; }
         public string NOMBB { get => nomBB; set => nomBB = value; }
-        public string REGISTROBB { get => registroBB; set => registroBB = value; }
         public string ESTADO1SS { get => estado1SS; set => estado1SS = value; }
         public string ESTADO2SC { get => estado2SC; set => estado2SC = value; }
         public DateTime FECHASS { get => fechaSS; set => fechaSS = value; }

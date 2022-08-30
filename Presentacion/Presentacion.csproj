@@ -406,7 +406,6 @@
     <Content Include="Content\dx.softblue.compact.css" />
     <Content Include="Content\dx.softblue.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="ControlEntSal\ControlSalidaPac.aspx" />
     <Content Include="ControlEntSal\CSPaciente.aspx" />
     <Content Include="ControlEntSal\CSPacienteBB.aspx" />
     <Content Include="ControlEntSal\CSS\style.css" />
@@ -4531,13 +4530,6 @@
     </Compile>
     <Compile Include="Auditorias\VerAuditoriasInternas.aspx.designer.cs">
       <DependentUpon>VerAuditoriasInternas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ControlEntSal\ControlSalidaPac.aspx.cs">
-      <DependentUpon>ControlSalidaPac.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlEntSal\ControlSalidaPac.aspx.designer.cs">
-      <DependentUpon>ControlSalidaPac.aspx</DependentUpon>
     </Compile>
     <Compile Include="ControlEntSal\CSPaciente.aspx.cs">
       <DependentUpon>CSPaciente.aspx</DependentUpon>

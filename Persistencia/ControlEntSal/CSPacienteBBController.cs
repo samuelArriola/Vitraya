@@ -51,6 +51,44 @@ namespace Persistencia.ControlEntSal
 
         }
 
+        public static List<ControlEntSalModel> GetPacienteIngreso(long Codigo)
+        {
+
+            List<ControlEntSalModel> controlEntSalModels = new List<ControlEntSalModel>();
+            SqlConnection conexion2 = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["conexion2"].ConnectionString);
+            conexion2.Open();
+            var command = new SqlCommand();
+
+
+            try
+            {
+                command.Connection = conexion2;
+                command.CommandText = "SELECT GENPACIEN.PACNUMDOC,(GENPACIEN.PACPRINOM + ' ' + GENPACIEN.PACSEGNOM + ' ' + GENPACIEN.PACPRIAPE +' ' + GENPACIEN.PACSEGAPE) AS NOMBRE,ADNINGRESO.OID AS OIDINGRESO, ADNINGRESO.AINCONSEC AS ADMISION, GENPACIEN.OID AS OIDPACIENTE FROM ADNINGRESO INNER JOIN GENPACIEN ON GENPACIEN.OID = ADNINGRESO.GENPACIEN WHERE AINCONSEC = @AINCONSEC";
+                command.Parameters.AddWithValue("@AINCONSEC", Codigo);
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    ControlEntSalModel controlEntSalModel = new ControlEntSalModel()
+                    {
+                        PACNUMDOC = reader["PACNUMDOC"].ToString(),
+                        PACPRINOM = reader["NOMBRE"].ToString()
+                    };
+                    controlEntSalModels.Add(controlEntSalModel);
+                }
+
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conexion2.Close();
+            }
+            return controlEntSalModels;
+
+        }
+
         public static List<SPacienteBBModel> SalidaBBget(string ingreso)
         {
             List<SPacienteBBModel> spacienteBBModels = new List<SPacienteBBModel>();
@@ -76,6 +114,46 @@ namespace Persistencia.ControlEntSal
                         TPRESPONSABLE = reader["TpResponsable"].ToString(),
                         NOMBB = reader["NomBB"].ToString(),
                         FECHASS = Convert.ToDateTime(reader["FECHASS"].ToString()),
+                       
+                    };
+                    spacienteBBModels.Add(sPacienteBBModel);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+
+            return spacienteBBModels; 
+
+        }   
+        
+        public static List<SPacienteBBModel> AcuBBGetUpdate(string oid)
+        {
+            List<SPacienteBBModel> spacienteBBModels = new List<SPacienteBBModel>();
+            SqlCommand command;
+            SqlDataReader reader;
+            Conexion conexion = new Conexion();
+
+            try
+            {
+                //VALIDACION INGRESO EXIXTENTE
+                command = new SqlCommand("SELECT * FROM SPacienteBB WHERE OID = @OID AND Estado2SC IS NULL AND Eliminado = 'NO'", conexion.OpenConnection());
+                command.Parameters.AddWithValue("@OID", oid);
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    SPacienteBBModel sPacienteBBModel = new SPacienteBBModel()
+                    {
+                        OID = Convert.ToInt32( reader["OID"].ToString() ),
+                        DOCRESPONSABLE = reader["DocResponsable"].ToString(),
+                        NOMRESPONSABLE = reader["NomResponsable"].ToString(),
+                        TPRESPONSABLE = reader["TpResponsable"].ToString(),
                        
                     };
                     spacienteBBModels.Add(sPacienteBBModel);
@@ -161,7 +239,7 @@ namespace Persistencia.ControlEntSal
             return num;
         }
 
-        public static void AcudienteBBSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, string CSBnumeroRBB)
+        public static void AcudienteBBSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB)
         {
             int CountNumBebe = NumBebe(CSingresoBB) + 1;
             string NomBB = "HIJO " + CountNumBebe + " DE " + CSInomsBB;
@@ -174,8 +252,8 @@ namespace Persistencia.ControlEntSal
 
             try
             {
-                command = new SqlCommand("INSERT INTO SPacienteBB (ADNINGRES1 ,DocPaiente ,NomPaciente ,DocResponsable ,NomResponsable ,TpResponsable ,NomBB ,RegistroBB ,GnIdUsuSS ,Estado1SS ,FECHASS ,NumBebe, Eliminado ) " +
-                                        "VALUES(@ADNINGRES1, @DocPaiente, @NomPaciente, @DocResponsable, @NomResponsable, @TpResponsable, @NomBB, @RegistroBB, @GnIdUsu, @Estado1SS, @FECHASS, @NumBebe, @Eliminado )", conexion.OpenConnection());
+                command = new SqlCommand("INSERT INTO SPacienteBB (ADNINGRES1 ,DocPaiente ,NomPaciente ,DocResponsable ,NomResponsable ,TpResponsable ,NomBB  ,GnIdUsuSS ,Estado1SS ,FECHASS ,NumBebe, Eliminado ) " +
+                                        "VALUES(@ADNINGRES1, @DocPaiente, @NomPaciente, @DocResponsable, @NomResponsable, @TpResponsable, @NomBB, @GnIdUsu, @Estado1SS, @FECHASS, @NumBebe, @Eliminado )", conexion.OpenConnection());
 
                 command.Parameters.AddWithValue("ADNINGRES1", CSingresoBB);
                 command.Parameters.AddWithValue("DocPaiente", CSIidenBB);
@@ -184,7 +262,6 @@ namespace Persistencia.ControlEntSal
                 command.Parameters.AddWithValue("NomResponsable", CSAnomsBB);
                 command.Parameters.AddWithValue("TpResponsable", CSAtipoBB);
                 command.Parameters.AddWithValue("NomBB", NomBB);
-                command.Parameters.AddWithValue("RegistroBB", CSBnumeroRBB);
                 command.Parameters.AddWithValue("GnIdUsu", Responsable);
                 command.Parameters.AddWithValue("Estado1SS", Estado1SS);
                 command.Parameters.AddWithValue("FECHASS", DateAndTime);
@@ -227,8 +304,34 @@ namespace Persistencia.ControlEntSal
             {
                 conexion.CloseConnection();
             }
-
-
         }
+
+         public static void AcuBBUpdate(int CSAoidEdiBB,  string CSAidenIdiBB, string CSATpResEdiCCBB, string CSACCNombreEdiBB)
+        {
+            SqlCommand command;
+            Conexion conexion = new Conexion();
+
+            try
+            {
+                command = new SqlCommand("UPDATE SPacienteBB SET DocResponsable  = @DocResponsable, NomResponsable = @NomResponsable, TpResponsable = @TpResponsable  WHERE OID = @OID", conexion.OpenConnection());
+                command.Parameters.AddWithValue("OID ", CSAoidEdiBB);
+                command.Parameters.AddWithValue("DocResponsable ", CSAidenIdiBB);
+                command.Parameters.AddWithValue("TpResponsable ", CSATpResEdiCCBB);
+                command.Parameters.AddWithValue("NomResponsable ", CSACCNombreEdiBB);
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+        }
+
+
+
     }
 }

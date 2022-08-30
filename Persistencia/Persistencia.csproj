@@ -101,6 +101,7 @@
     <Compile Include="Auditorias\DAOHallazgo.cs" />
     <Compile Include="CloseAllConnections.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="ControlEntSal\CensoController.cs" />
     <Compile Include="ControlEntSal\ControlEntSalController.cs" />
     <Compile Include="ControlEntSal\CSPacienteBBController.cs" />
     <Compile Include="EncuestaCovid\LEEncuestaCovid.cs" />

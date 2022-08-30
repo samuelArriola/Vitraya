@@ -42,5 +42,22 @@ namespace Presentacion.ControlEntSal
         }
 
 
+//--------------------------------------------  CONTROL  ENTRADA-SALIDA DE VISITANTES  -------------------------------------------------//
+
+        [WebMethod]
+        public static List<Censo> GetCenso(string Cod_Subgrupo)
+        {
+            return CensoController.CensoGet(Cod_Subgrupo);
+        }
+
+        [WebMethod]
+
+        public static List<Censo> GetCensoSubGrupos(string Cod_grupo)
+        {
+            return CensoController.CensoSubGruposGet(Cod_grupo); 
+        }
+
+
+
     }
 }

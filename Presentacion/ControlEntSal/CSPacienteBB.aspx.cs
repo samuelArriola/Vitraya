@@ -18,15 +18,22 @@ namespace Presentacion.ControlEntSal
         }
 
         [WebMethod]
-        public static void SetAcudienteBB( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, string CSBnumeroRBB)
+        public static void SetAcudienteBB( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB)
         {
-            CSPacienteBBController.AcudienteBBSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB, CSBnumeroRBB);
+            CSPacienteBBController.AcudienteBBSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB);
         }
 
         [WebMethod]
         public static List<ControlEntSalModel> GetAcudienteBB( string CSingresoBB)
         {
             return CSPacienteBBController.AcudienteBBGet(CSingresoBB);
+        }
+
+
+        [WebMethod]
+        public static List<ControlEntSalModel> GetPacientesIngreso(long Codigo)
+        {
+            return CSPacienteBBController.GetPacienteIngreso(Codigo);
         }
 
         [WebMethod]
@@ -39,6 +46,12 @@ namespace Presentacion.ControlEntSal
         public static List<SPacienteBBModel> GetsalidaBB( string ingreso)
         {
             return CSPacienteBBController.SalidaBBget(ingreso);
+        } 
+        
+        [WebMethod]
+        public static List<SPacienteBBModel> GetUpdateAcuBB( string oid)
+        {
+            return CSPacienteBBController.AcuBBGetUpdate(oid);
         }
 
          [WebMethod]
@@ -47,6 +60,12 @@ namespace Presentacion.ControlEntSal
              CSPacienteBBController.AcuBBDelete(oid);
         }
 
+        [WebMethod]
+        public static void UpdateAcuBB( int CSAoidEdiBB, string CSAidenIdiBB, string CSATpResEdiCCBB, string CSACCNombreEdiBB )
+        {
+             CSPacienteBBController.AcuBBUpdate(CSAoidEdiBB, CSAidenIdiBB, CSATpResEdiCCBB, CSACCNombreEdiBB);
+        }
+        
 
     }
 }

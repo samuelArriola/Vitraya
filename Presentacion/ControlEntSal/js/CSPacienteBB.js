@@ -29,8 +29,9 @@ $('#CSingresoBB').on("focusout", function () {
             console.log('Campo vacio');
             $('#CSInomsBB').val('');
             $('#CSIidenBB').val('');
+            ListaSalida.innerHTML = "";
         } else {
-            ejecutarajax("CSPaciente.aspx/GetPaciente", { "Codigo": CSingresoBB }, getIngreBB)
+            ejecutarajax("CSPacienteBB.aspx/GetPacientesIngreso", { "Codigo": CSingresoBB }, getIngreBB)
 
         }
     }
@@ -47,7 +48,7 @@ function getIngreBB(res) {
     }
 
     res.forEach((item) => {
-        $('#CSInomsBB').val(item.PACPRINOM + " " + item.PACSEGNOM + " " + item.PACPRIAPE + " " + item.PACSEGAPE);
+        $('#CSInomsBB').val(item.PACPRINOM);
         $('#CSIidenBB').val(item.PACNUMDOC);
     });
     tablaMostrarSalidas($('#CSingresoBB').val())
@@ -57,13 +58,14 @@ function getIngreBB(res) {
 //MOSTRAR ACUDIENTES EXISTENTES EN DINAMICA
 $('#CSAidenBB').on("focusout", function () {
     let CSingresoBB = $('#CSAidenBB').val();
-    if (CSingresoBB.length > 10) {
-        return error("Notificacion", "Ha sobrepasado el limite de  caracteres; max 10");
+    if (CSingresoBB.length > 12) {
+        return error("Notificacion", "Ha sobrepasado el limite de  caracteres; max 12");
     } else {
         if (isEmpy(CSingresoBB)) {
             console.log('Campo vacio' + CSingresoBB);
             $('#CSAtipoBB').val('');
             $('#CSAidenBB').val('');
+          
         } else {
             ejecutarajax("CSPacienteBB.aspx/GetAcudienteBB", { "CSingresoBB": CSingresoBB }, getAcudienteBB)
 
@@ -73,9 +75,14 @@ $('#CSAidenBB').on("focusout", function () {
 
 function getAcudienteBB(res) {
     res = res.d;
-    res.forEach((item) => {
-        $('#CSAnomsBB').val(item.PACPRINOM + "" + item.PACSEGNOM + "" + item.PACPRIAPE + "" + item.PACSEGAPE);
-    });
+    if (res.length < 1) {
+        $('#CSAnomsBB').val('');
+        $('#CSAtipoBB').val('');
+    } else {
+        res.forEach((item) => {
+            $('#CSAnomsBB').val(item.PACPRINOM + " " + item.PACSEGNOM + " " + item.PACPRIAPE + " " + item.PACSEGAPE);
+        });
+    }
 }
 
 
@@ -87,7 +94,7 @@ $('#btnCSregistroBB').on("click", function () {
     let CSAidenBB = $('#CSAidenBB').val()
     let CSAtipoBB = $('#CSAtipoBB').val();
     let CSAnomsBB = $('#CSAnomsBB').val();
-    let CSBnumeroRBB = $('#CSBnumeroRBB').val();
+  
    
     const data = {
         CSingresoBB,
@@ -95,8 +102,7 @@ $('#btnCSregistroBB').on("click", function () {
         CSIidenBB,
         CSAidenBB,
         CSAtipoBB,
-        CSAnomsBB,
-        CSBnumeroRBB
+        CSAnomsBB
     }
 
     if (isEmpy(CSingresoBB) || isEmpy(CSInomsBB) || isEmpy(CSIidenBB) || isEmpy(CSAidenBB) || isEmpy(CSAtipoBB) || isEmpy(CSAnomsBB) ) {
@@ -108,6 +114,9 @@ $('#btnCSregistroBB').on("click", function () {
 })
 
 function resRegistroAcu() {
+    $('#CSAidenBB').val('')
+    $('#CSAtipoBB').val('')
+    $('#CSAnomsBB').val('')
     exito("Notificacion", "Acudiente registrado")
     tablaMostrarSalidas($('#CSingresoBB').val())
 }
@@ -120,7 +129,11 @@ function isEmpy(string) {
 
 
 function tablaMostrarSalidas(ingreso) {
-    ejecutarajax("CSPacienteBB.aspx/GetsalidaBB", { ingreso }, tablaPintarSalida)
+    if (isEmpy(ingreso)) {
+        error("Notificacion", "Campo de INGRESO vácio");
+    } else {
+        ejecutarajax("CSPacienteBB.aspx/GetsalidaBB", { ingreso }, tablaPintarSalida)
+    }
 }
 
 function tablaPintarSalida(res) {
@@ -138,7 +151,7 @@ function tablaPintarSalida(res) {
        
      
         templateListaSalida.querySelector('.btn-danger').dataset.id = item.OID;
-      //  templateListaSalida.querySelector('.btn-success').dataset.id = item.OID;
+        templateListaSalida.querySelector('.btn-success').dataset.id = item.OID;
         const clone = templateListaSalida.cloneNode(true);
         fragment.appendChild(clone);
 
@@ -156,12 +169,58 @@ ListaSalida.addEventListener("click", (e) => {
     }
     if (e.target.classList.contains("btn-success")) {
         data = { oid: e.target.dataset.id }
+        ejecutarAjax("CSPacienteBB.aspx/GetUpdateAcuBB", data, GetUpdateAcuBB);
+      
     }
-
-
 })
 
 function DeleteAcuBB() {
     tablaMostrarSalidas($('#CSingresoBB').val());
     exito("Notificacion", "Eliminado exitoso")
+}
+
+function GetUpdateAcuBB(res) {
+    res = res.d;
+    res.forEach((item) => {
+        $('#CSAoidEdiBB').val(item.OID)
+        $('#CSAidenIdiBB').val(item.DOCRESPONSABLE)
+        $('#CSATpResEdiCCBB').val(item.TPRESPONSABLE)
+        $('#CSACCNombreEdiBB').val(item.NOMRESPONSABLE)
+   
+    })
+
+    $('#ModalEditaSalidaBB').modal('show')
+}
+
+//EDITAR ACUDIENTE
+$('#btnCSEditoBB').on("click", function () {
+    let CSAoidEdiBB = $('#CSAoidEdiBB').val()
+    let CSAidenIdiBB = $('#CSAidenIdiBB').val()
+    let CSATpResEdiCCBB = $('#CSATpResEdiCCBB').val()
+    let CSACCNombreEdiBB =  $('#CSACCNombreEdiBB').val()
+ 
+    const data = {
+        CSAoidEdiBB,
+        CSAidenIdiBB,
+        CSATpResEdiCCBB,
+        CSACCNombreEdiBB
+    }
+
+    if (isEmpy(CSAidenIdiBB) || isEmpy(CSATpResEdiCCBB) || isEmpy(CSACCNombreEdiBB) || isEmpy(CSAoidEdiBB) ) {
+        error("Notificacion", "Verifique que los campos con (*) estén diligenciados");
+    } else {
+        ejecutarajax("CSPacienteBB.aspx/UpdateAcuBB", data, resRegistroAcu)
+    }
+
+})
+
+function resRegistroAcu() {
+    $('#ModalEditaSalidaBB').modal('hide')
+    $('#CSAoidEdiBB').val('')
+    $('#CSAidenIdiBB').val('')
+    $('#CSATpResEdiCCBB').val('')
+    $('#CSACCNombreEdiBB').val('')
+    tablaMostrarSalidas($('#CSingresoBB').val());
+    exito("Notificacion", "Actualizado exitoso")
+
 }

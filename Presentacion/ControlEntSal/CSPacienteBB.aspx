@@ -1,12 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="CSPacienteBB.aspx.cs" Inherits="Presentacion.ControlEntSal.CSPacienteBB" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+     <link rel="stylesheet" href="CSS/CspacienteBB.css" /> 
+
       
      <div class="row">
 
         <div class="col col-12">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Control Salida De Bebés</h3>
+                    <h3>Control Salida Para Menores de Edad</h3>
                 </div>
             </div>
 
@@ -25,6 +27,7 @@
                             </div>--%>
                             <div>
                                 <div class="row">
+                              
                                     <div class="col col-2">
                                         <div class="form-group">
                                             <label>* Ingreso:</label>
@@ -68,21 +71,14 @@
                                             <input type="text" class="form-control" id="CSAnomsBB" />
                                         </div>
                                     </div>
-                                    
-                                </div>
-                                <div class="row">                               
-                                    <div class="col col-2">
-                                        <div class="form-group">
-                                            <label>Numero de Registro</label>
-                                            <input type="number" class="form-control" id="CSBnumeroRBB" />
-                                        </div>
-                                    </div>
-                                    <div class="col col-2">
+                                     <div class="col col-2">
                                         <div class="form-group">
                                             <button style="margin-top: 27px;" type="button" id="btnCSregistroBB" class="btnFiltroSolic btn  btn-outline-success">Registrar</button>
                                         </div>
                                     </div>
+                                    
                                 </div>
+                               
                             </div>
                         </div>
 
@@ -91,7 +87,7 @@
                             </div>
                         </div>
 
-                        <table class="table table-responsive" style="overflow: auto; width: 100%;" id="tableBitacora">
+                        <table class="table" style="overflow: auto; max-width: 100%;" id="tableBitacora">
                             <thead>
                                 <tr>
                                     <th>OID</th>
@@ -115,8 +111,8 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                        <%--<button  type="button" class="btnEditar btn btn-success" data-toggle="tooltip" data-placement="top" title="EDITAR"><i class="fa fa-pencil text-white"></i></button>--%>
-                                        <button  type="button" class="btnAnular btn btn-danger" data-toggle="tooltip" data-placement="top" title="ELIMINAR"><i class="fa fa-ban" ></i></button>
+                                        <button  type="button" class=" btn btn-success" title="EDITAR"><i class="hidenIcom fa fa-pencil text-white"></i></button>
+                                        <button  type="button" class=" btn btn-danger" title="ELIMINAR"><i class="hidenIcom fa fa-ban" ></i></button>
                                     </td>
                                     </tr>
                                </template>
@@ -130,6 +126,66 @@
             </div>
         </div>
     </div>
+
+
+    <!-- MODAL EDITAR SALIDA -->
+     <div class="modal fade" id="ModalEditaSalidaBB" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="max-width: 90% !important">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">EDITAR ACUDIENTE</h5>
+                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                     
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                         <div class="col col-1">
+                            <div class="form-group">
+                                <label>* OID:</label>
+                                <input type="number" class="form-control" id="CSAoidEdiBB" disabled/>
+                            </div>
+                        </div>
+                        <div class="col col-2">
+                            <div class="form-group">
+                                <label>* Identificacion:</label>
+                                <input type="text" class="form-control" id="CSAidenIdiBB" />
+                            </div>
+                        </div>     
+                        <div class="col col-2">
+                             <div class="form-group">
+                                <label>* Tipo de Acudiente:</label>
+                                <select id="CSATpResEdiCCBB" class="form-control form-select form-select-lg mb-3" aria-label=".form-select-sm example">
+                                    <option value="PADRE">Padre</option>
+                                    <option value="MADRE">Madre</option>
+                                    <option value="OTRO">Otro</option>
+                                </select>
+                            </div>
+                        </div>       
+                        <div class="col col-3">
+                            <div class="form-group">
+                                <label>* Nombre:</label>
+                                <input type="text" class="form-control" id="CSACCNombreEdiBB" />
+                            </div>
+                        </div>     
+                        <div class="col col-2">
+                            <div class="form-group">
+                                <button style="margin-top: 27px;" type="button" id="btnCSEditoBB" class="btnFiltroSolic btn  btn-outline-success">Editar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                      
+                       
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style=" margin: 0px 5px 5px 4px">Close</button>
+                </div>
+            </div>
+            </div>
+         </div>
+
    
       
 

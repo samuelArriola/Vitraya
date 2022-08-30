@@ -87,6 +87,7 @@
     <Compile Include="Auditorias\AuditoriaInterna.cs" />
     <Compile Include="Auditorias\EnteAuditor.cs" />
     <Compile Include="Auditorias\Hallazgo.cs" />
+    <Compile Include="ControlEntSal\Censo.cs" />
     <Compile Include="ControlEntSal\ControlEntSalModel.cs" />
     <Compile Include="ControlEntSal\SPacienteBBModel.cs" />
     <Compile Include="EncuestaCovid\EEncuestaCovid.cs" />

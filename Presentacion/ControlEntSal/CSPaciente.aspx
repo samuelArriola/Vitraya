@@ -7,7 +7,7 @@
         <div class="col col-5  x_panel">
             <div class="d-flex flex-column ">
                 <!-- ----------CONTROL DE SALIDA---------------- -->
-                <div class="p-2">
+                <div class="p-2 p-2-divide">
                   
                     <div class=" card-header">
                         <div class="title_center">
@@ -92,7 +92,7 @@
                       
                         <div class="d-flex justify-content-center" style="margin-top: 35px">
                             <button type="button" class="btn btn-outline-success" id="ModalSalBB" >
-                                Salida bebés
+                                Salida Menores de Edad
                             </button>
                          </div>
 
@@ -104,7 +104,7 @@
                 </div>
                       
                 <!-- ------------CONTROL DE ENTRADA #2------------------ -->
-                <div class="p-2">
+                <div class="p-2 p-2-divide">
 
                     <div class=" card-header">
                         <div class="title_center">
@@ -195,7 +195,80 @@
 
         <!-- TABLERO DE CAMAS -->
         <div class="col col-7 x_panel" > 
+          <div class="d-flex justify-content-center text-center " >
+               
+            <div class="card option" style="width: 15rem;" id="01">
+                <div class="card-body" style="top: 0%">
+                URGENCIA
+                </div>
+            </div>
+             <div class="card option" style="width: 15rem;" id="03">
+                <div class="card-body" style="top: 0%">
+                    UCI ADULTO
+                </div>
+             </div>
+             <div class="card option" style="width: 15rem;" id="04">
+                <div class="card-body" style="top: 0%">
+                    UCI NEONATAL
+                </div>
+             </div>
+             <div class="card option" style="width: 15rem;" id="05">
+                <div class="card-body" style="top: 0%">
+                    HOSPITALIZACIÓN
+                </div>
+             </div>
               
+          </div>
+
+          <div id="CspResOption">  
+
+          </div>
+
+             <template  id="CSVCensoTemplate">
+                <div class=" card-header">
+                    <div class="title_center">
+                        <h5></h5>
+                    </div>
+                </div>    
+                <div id="">
+                  
+                </div>
+              </template>
+
+                <template id="CSVcontentTemplate">
+                    <div class="row">
+                        <div class="card option col" style="width: 15rem;" id="">
+                        <div class="card-body" style="top: 0%">
+                               <span></span>
+                        </div>
+                        </div>
+                    </div>
+                </template>
+
+           <%-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
+             
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="https://cdn.pixabay.com/photo/2022/07/30/14/07/butterfly-7353884_960_720.jpg" class="d-block w-100" alt=""/>
+                </div>
+                <div class="carousel-item">
+                  <img src="https://cdn.pixabay.com/photo/2022/07/31/17/07/bird-7356346__340.jpg" class="d-block w-100" alt=""/>
+                </div>
+                <div class="carousel-item">
+                  <img src="https://cdn.pixabay.com/photo/2022/07/22/18/50/helenium-7338764__340.jpg" class="d-block w-100" alt=""/>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <h1 class="text-white" aria-hidden="true">&#10094</h1>
+               
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <h1 class="text-black" aria-hidden="true">&#10095</h1> 
+              </button>
+            </div>
+               --%>
+
+   
            
         </div>
     </div>
@@ -231,7 +304,7 @@
                 </button>
               </div>
               <div class="modal-body text-white">
-                <h4 class="modal-body-h4">La identificacion de la BOLETA no es igual al de la MANILLA</h4>
+                <h4 class="modal-body-h4" id="MCSErrorH4">La identificacion de la BOLETA no es igual al de la MANILLA</h4>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style=" margin: 0px 5px 5px 4px">Close</button>
@@ -240,12 +313,12 @@
           </div>
         </div>
      
-     <!-- CONTROL SALIDA DE BEBES -->
+     <!-- CONTROL SALIDA DE MENORES DE EDAD -->
         <div class="modal fade" id="exampleModalBB" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" style="max-width: 95% !important">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">CONTROL SALIDA DE BEBES</h5>
+                <h5 class="modal-title" id="exampleModalLabel">CONTROL SALIDA PARA MENORES DE EDAD </h5>
                 <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -261,19 +334,19 @@
                         </div>     
                         <div class="col col-2">
                             <div class="form-group">
-                                <label>* Identificacion del Acudiente:</label>
+                                <label> Identificacion del Acudiente:</label>
                                 <input type="number" class="form-control" id="CSAidenCCBB" disabled/>
                             </div>
                         </div>       
                         <div class="col col-3">
                             <div class="form-group">
-                                <label>* Identificacion del Acudiente:</label>
+                                <label> Nombre del Acudiente:</label>
                                 <input type="text" class="form-control" id="CSACCNombreBB" disabled/>
                             </div>
                         </div>                                                     
                     </div>
                       
-                       <table class="table table-responsive" style="overflow: auto; width: 100%;" id="tableBitacora">
+                       <table class="table" style="overflow: auto; width: 100%;" id="tableBitacora">
                             <thead>
                                 <tr>
                                     <th>OID</th>
@@ -287,6 +360,7 @@
                                 </tr>
                             </thead>
                             <tbody id="CStable">
+
                                 <template id="CStableTemplate">
                                     <tr >
                                         <td scope="row">234</td>

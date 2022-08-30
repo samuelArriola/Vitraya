@@ -1,8 +1,24 @@
 ﻿console.log('conetado a controlsalida.js');
 
+let Sub_Grupos = [];
+let camas = [];
 let ListaSalida = document.getElementById('CStable');
 let templateListaSalida = document.getElementById('CStableTemplate').content;
 const fragment = document.createDocumentFragment();
+const fragment2 = document.createDocumentFragment();
+
+let CsvCenso = document.getElementById('CspResOption');
+let CSVCensoTemplate = document.getElementById('CSVCensoTemplate').content;
+
+let CSVcontent;
+let CSVcontentTemplate = document.getElementById('CSVcontentTemplate').content;
+
+
+
+//let CSVcontent = document.getElementById('CSVcontent');
+//let CSVcontentTemplate = document.getElementById('CSVcontentTemplate').content;
+
+
 
 const ejecutarAjax = (url, datos, success) => {
         $.ajax({
@@ -26,14 +42,15 @@ $('#CScodigoR').on("keypress", function () {
                 "Codigo": CScodigoR
             } 
 
-            if (this.value.length >= 10) {
-                return error("Notificacion", "Ha sobrepasado el limite de  caracteres; max 10");
+            if (this.value.length >= 12) {
+                return error("Notificacion", "Ha sobrepasado el limite de  caracteres; max 12");
             } else {
                 if (isEmpy(data.Codigo)) {
                     console.log('Campo vacio');
                     $('#CSiden').val('');
                     $('#CSnombreR').val('');
                     $('#CSapell').val('');
+                    $('#CSmanilla').val('');
                 } else {
                    ejecutarajax("CSPaciente.aspx/GetPaciente", data , PacienteGet)
            
@@ -45,12 +62,14 @@ $('#CScodigoR').on("keypress", function () {
     function PacienteGet( res ) {
         var res = res.d;
         if (res.length < 1 ) {
-            console.log('No se encontraron resultados' + res.length);
             $('#CSiden').val('');
             $('#CSnombreR').val('');
             $('#CSapell').val('');
-            error("Notificacion", "Paciente no encontrado");
+            $('#CSmanilla').val('');
+            error("Notificacion", "Boleta de salida no encontrado");
+
         } else {
+            $('#CSmanilla').val('');
             res.forEach((item) => {
                 $('#CSiden').val(item.PACNUMDOC);
                 $('#CSnombreR').val(item.PACPRINOM+""+item.PACSEGNOM);
@@ -88,7 +107,7 @@ $('#CSmanilla').on("keypress", function () {
             if (CSiden == CSmanilla) {
                 ejecutarajax("CSPaciente.aspx/SalidaPaciente", data, SalidaPaciente)
             } else {
-                ejecutarajax("CSPaciente.aspx/SPnoCoincide", data, modalRes('error'))
+                ejecutarajax("CSPaciente.aspx/SPnoCoincide", data, modalRes('error','La identificacion de la BOLETA no es igual al de la MANILLA' ))
                
             }
 
@@ -105,8 +124,10 @@ function SalidaPaciente(res) {
         $('#CSapell').val('');
         $('#CSmanilla').val('');
         $('#CScodigoR').val('');
+      
     } else {
-        error("Notificacion", "Ya el paciente ha salido");
+        $('#MCSErrorH4').html("Ya el paciente ha salido");
+        $('#exampleModalCenterError').modal('show');
     }
 }
 
@@ -142,11 +163,12 @@ function MostrarAcuBB(res) {
 }
 
 
-//Modal respuesta final 
-function modalRes( tipo ) {
+//MODAL SALIDA CLINICA DEL ACUDIENTE 
+function modalRes( tipo, msm ) {
     if (tipo == "exito") {
         $('#exampleModalCenterAceptar').modal('show')
     } else if (tipo == "error") {
+        $('#MCSErrorH4').html(msm);
         $('#exampleModalCenterError').modal('show')
     } else {
         console.log("Tipo de modal no encontrado")
@@ -159,11 +181,32 @@ $('#ModalSalBB').on('click', function () {
 
 const modalSalBebe = document.getElementById('exampleModalBB');
 modalSalBebe.addEventListener('shown.bs.modal', function () {
+    $('#CSAidenBB').focus();
+})
+
+modalSalBebe.addEventListener('hidden.bs.modal', function () {
     ListaSalida.innerHTML = "";
     $('#CSAidenCCBB').val('');
     $('#CSACCNombreBB').val('');
-    $('#CSAidenBB').focus();
+    $("#CScodigoR").focus();
 })
+
+const modalSalBebeclose = document.getElementById('exampleModalCenterAceptar');
+ modalSalBebeclose.addEventListener('hidden.bs.modal', function () {
+    $("#CScodigoR").focus();
+ })
+
+const modalSalBebeErroclose = document.getElementById('exampleModalCenterError');
+modalSalBebeErroclose.addEventListener('hidden.bs.modal', function () {
+    ListaSalida.innerHTML = "";
+    $('#CSiden').val('');
+    $('#CSnombreR').val('');
+    $('#CSapell').val('');
+    $('#CSmanilla').val('');
+    $('#CScodigoR').val('');
+    $('#CScodigoR').focus();
+})
+
 
 //ESCANER CEDULA DE ACUDIENTE PARA BEBESS
 $('#CSAidenBB').on("keypress", function () {
@@ -196,7 +239,8 @@ function tablaPintarSalida(res) {
         $('#CSAidenCCBB').val('');
         $('#CSACCNombreBB').val('');
         ListaSalida.innerHTML = "";
-        return error("Notificacion", "No se encontraron Resultados");
+        return $("#CStable").html(" <tr> <td colspan = '8'> <h5> UPss!! No hay resultados</h5> </td > </tr> ");
+         
     }
 
     ListaSalida.innerHTML = "";
@@ -229,10 +273,53 @@ ListaSalida.addEventListener("click", (e) => {
 })
 
 function ResSetDarSalidaAcuBB() {
-   exito("Notificacion", "Salida exitosa")
+    exito("Notificacion", "Salida exitosa")
     tablaMostrarSalidas($('#CSAidenCCBB').val());
+    $('#CSAidenBB').focus();
 }
 
+//--------------------------------------------  CONTROL  ENTRADA-SALIDA DE VISITANTES  -------------------------------------------------//
+
+$(document).on("click", "div .option", function (e) {
+    Sub_Grupos = [];
+    CsvCenso.innerHTML = '';
+    let index = $(this).attr("id");
+    data = { Cod_grupo: index }
+    ejecutarAjax("CSPaciente.aspx/GetCensoSubGrupos", data, ResGetCensoSubGrupos);
+});
 
 
+function ResGetCensoSubGrupos (res) {
+    res = res.d;  
+    res.forEach((item) => {
 
+        Sub_Grupos[item.Cod_Subgrupo] = '1';
+        CSVCensoTemplate.querySelector('h5').textContent = item.Nom_Subgrupo;
+        CSVCensoTemplate.querySelectorAll('div')[2].classList.add('CSVcontent');
+        const clone = CSVCensoTemplate.cloneNode(true);
+        fragment.appendChild(clone);
+
+      
+        CSVcontent = document.querySelector('.CSVcontent');
+        console.log(CSVcontent);
+
+        ejecutarAjax("CSPaciente.aspx/GetCenso", { Cod_Subgrupo: item.Cod_Subgrupo }, (res2) => {
+
+            res2 = res2.d;
+            camas = [];
+
+            res2.forEach((items) => {
+
+                camas.push(items);
+                CSVcontentTemplate.querySelector('span').textContent = items.Cod_Cama;
+                const clone2 = CSVcontentTemplate.cloneNode(true);
+                fragment2.appendChild(clone2);
+            });
+            Sub_Grupos[item.Cod_Subgrupo] = camas
+            CSVcontent.appendChild(fragment2);
+        });
+        CsvCenso.appendChild(fragment);
+    });
+
+    console.log(Sub_Grupos);
+}
