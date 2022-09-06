@@ -182,7 +182,7 @@ namespace Persistencia.ControlEntSal
             try
             {
                 //VALIDACION INGRESO EXIXTENTE
-                command = new SqlCommand("SELECT * FROM SPacienteBB WHERE DocResponsable = @DocResponsable AND Estado2SC IS NULL AND Eliminado = 'NO' ", conexion.OpenConnection());
+                command = new SqlCommand("SELECT * FROM SPacienteBB WHERE DocResponsable = @DocResponsable AND Estado2SC IS NULL AND Eliminado = 'NO' ORDER BY FECHASS DESC ", conexion.OpenConnection());
                 command.Parameters.AddWithValue("@DocResponsable", doc);
                 reader = command.ExecuteReader();
                 while (reader.Read())

@@ -9,7 +9,7 @@ namespace Persistencia.ControlEntSal
 {
     public class CensoController
     {
-        public static List<Censo> CensoGet(string Cod_Subgrupo)
+        public static List<Censo> CensoGet(string buscar, string grupo, string subgrupo)
         {
 
             List<Censo> censos = new List<Censo>();
@@ -35,16 +35,21 @@ namespace Persistencia.ControlEntSal
                                       HPNSUBGRU On HPNSUBGRU.OID = HPNDEFCAM.HPNSUBGRU Full Join
                                       SLNORDSER On SLNORDSER.OID = SLNSERPRO.SLNORDSER1
                                     Where HPNESTANC.HESFECSAL Is Null And HPNDEFCAM.HCAESTADO = 2 And
-                                      ADNINGRESO.AINESTADO = 0 And  HPNSUBGRU.HSUCODIGO = @Cod_Subgrupo
+                                      ADNINGRESO.AINESTADO = 0 
+                                       AND  (  ( GENPACIEN.PACPRINOM LIKE '%' + @buscar + '%' OR  GENPACIEN.PACPRIAPE LIKE '%' + @buscar + '%' OR  GENPACIEN.PACSEGAPE LIKE '%' + @buscar + '%'  OR GENPACIEN.PACNUMDOC LIKE '%' + @buscar + '%' ) 
+                                       AND (HPNGRUPOS.HGRCODIGO LIKE '%' + @grupo + '%' AND HPNSUBGRU.HSUCODIGO LIKE '%'+ @subgrupo + '%') )
                                     Group By ADNINGRESO.AINCONSEC, HPNGRUPOS.HGRCODIGO, HPNGRUPOS.HGRNOMBRE,
                                       HPNSUBGRU.HSUCODIGO, HPNSUBGRU.HSUNOMBRE, GENPACIEN.PACNUMDOC,
                                       HPNDEFCAM.HCACODIGO, HPNDEFCAM.HCANOMBRE, GENPACIEN.PACPRINOM,
                                       GENPACIEN.PACSEGNOM, GENPACIEN.PACPRIAPE, GENPACIEN.PACSEGAPE
                                     Order By HPNGRUPOS.HGRCODIGO, HPNSUBGRU.HSUCODIGO, HPNDEFCAM.HCACODIGO";
-                command.Parameters.AddWithValue("@Cod_Subgrupo", Cod_Subgrupo);
+                command.Parameters.AddWithValue("@buscar", buscar);
+                command.Parameters.AddWithValue("@grupo", grupo);
+                command.Parameters.AddWithValue("@subgrupo", subgrupo);
                 var reader = command.ExecuteReader();
                 while (reader.Read())
                 {
+                    var visto = VerVisita(reader["Ingreso"].ToString());
                     Censo censo = new Censo()
                     {
                         Ingreso = Convert.ToInt32(reader["Ingreso"].ToString()),
@@ -56,6 +61,7 @@ namespace Persistencia.ControlEntSal
                         NOM_PAC = reader["NOM_PAC"].ToString(),
                         Cod_Cama = reader["Cod_Cama"].ToString(),
                         Nom_Cama = reader["Nom_Cama"].ToString(),
+                        VISITA = visto
                     };
                     censos.Add(censo);
                 }
@@ -96,7 +102,7 @@ namespace Persistencia.ControlEntSal
                                       HPNSUBGRU On HPNSUBGRU.OID = HPNDEFCAM.HPNSUBGRU Full Join
                                       SLNORDSER On SLNORDSER.OID = SLNSERPRO.SLNORDSER1
                                     Where HPNESTANC.HESFECSAL Is Null And HPNDEFCAM.HCAESTADO = 2 And
-                                      ADNINGRESO.AINESTADO = 0 And HPNGRUPOS.HGRCODIGO = @Cod_grupo
+                                      ADNINGRESO.AINESTADO = 0 And HPNGRUPOS.HGRCODIGO LIKE '%' + @Cod_grupo + '%'
                                     Group By ADNINGRESO.AINCONSEC, HPNGRUPOS.HGRCODIGO, HPNGRUPOS.HGRNOMBRE,
                                       HPNSUBGRU.HSUCODIGO, HPNSUBGRU.HSUNOMBRE, GENPACIEN.PACNUMDOC,
                                       HPNDEFCAM.HCACODIGO, HPNDEFCAM.HCANOMBRE, GENPACIEN.PACPRINOM,
@@ -124,8 +130,43 @@ namespace Persistencia.ControlEntSal
             }
             return censos;
 
-        } 
+        }
 
+        public static string VerVisita(string ADNINGRES1)
+        {
+
+            SqlCommand command;
+            Conexion conexion = new Conexion();
+            string resvisto = "";
+
+            try
+            {
+                command = new SqlCommand("SELECT  VISITA FROM SCvisita WHERE ADNINGRES1 = @ADNINGRES1 ", conexion.OpenConnection());
+                command.Parameters.AddWithValue("@ADNINGRES1", ADNINGRES1);
+                string visto = Convert.ToString(command.ExecuteScalar());
+                if (String.IsNullOrEmpty(visto))
+                {
+                    resvisto = "NO";
+                }
+                else
+                {
+                    resvisto = "SI";
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+
+            return resvisto;
+
+        }
 
 
     }

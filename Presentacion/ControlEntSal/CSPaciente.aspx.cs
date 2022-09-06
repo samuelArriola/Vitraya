@@ -29,6 +29,7 @@ namespace Presentacion.ControlEntSal
             return ControlEntSalController.InserPciente(CScodigoR, CSiden);
         }
 
+
         [WebMethod]
         public static void SPnoCoincide(string CScodigoR, string CSmanilla)
         {
@@ -45,9 +46,9 @@ namespace Presentacion.ControlEntSal
 //--------------------------------------------  CONTROL  ENTRADA-SALIDA DE VISITANTES  -------------------------------------------------//
 
         [WebMethod]
-        public static List<Censo> GetCenso(string Cod_Subgrupo)
+        public static List<Censo> GetCenso(string buscar, string grupo, string subgrupo)
         {
-            return CensoController.CensoGet(Cod_Subgrupo);
+            return CensoController.CensoGet(buscar, grupo, subgrupo);
         }
 
         [WebMethod]
@@ -56,6 +57,14 @@ namespace Presentacion.ControlEntSal
         {
             return CensoController.CensoSubGruposGet(Cod_grupo); 
         }
+
+    
+        [WebMethod]
+        public static int SetInserVisita(string ADNINGRES1, string Cod_cama, string DocPaciente, string NomPaciente, string DocResponsable, string NombreRes)
+        {
+            return ControlEntSalController.InserVisita(ADNINGRES1, Cod_cama, DocPaciente, NomPaciente, DocResponsable, NombreRes);
+        }
+
 
 
 

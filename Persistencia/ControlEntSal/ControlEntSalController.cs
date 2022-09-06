@@ -22,7 +22,7 @@ namespace Persistencia.ControlEntSal
             try
             {
                 command.Connection = conexion2;
-                command.CommandText = "SELECT OID, PACNUMDOC, PACPRINOM,PACSEGNOM, PACPRIAPE, PACSEGAPE FROM GENPACIEN " +
+                command.CommandText = "SELECT OID, PACNUMDOC, PACPRINOM,PACSEGNOM, PACPRIAPE, PACSEGAPE, DATEDIFF( YEAR, GPAFECNAC ,SYSDATETIME() ) AS PACEDAD FROM GENPACIEN " +
                                        "WHERE OID = (SELECT GENPACIEN FROM ADNINGRESO WHERE OID = (SELECT ADNINGRES1 FROM SLNORDSAL WHERE SRACONSEC = @SRACONSEC))";
                 command.Parameters.AddWithValue("@SRACONSEC", Codigo);
                 var reader = command.ExecuteReader();
@@ -35,6 +35,7 @@ namespace Persistencia.ControlEntSal
                         PACSEGNOM = reader["PACSEGNOM"].ToString(),
                         PACPRIAPE = reader["PACPRIAPE"].ToString(),
                         PACSEGAPE = reader["PACSEGAPE"].ToString(),
+                        PACEDAD = reader["PACEDAD"].ToString(),
                     };
                     controlEntSalModels.Add(controlEntSalModel);
                 }
@@ -90,15 +91,17 @@ namespace Persistencia.ControlEntSal
             SqlCommand command;
             Conexion conexion = new Conexion();
             var DateAndTime = DateTime.Now;
+            var Responsable = Convert.ToInt32(HttpContext.Current.Session["Admin"]);
             if (count < 1 ) { 
             
                 try
                 {
-                    command = new SqlCommand("INSERT INTO SPacienteReal  (DOCUMENTO ,ORDENSALIDA ,FECSALIDA)" +
-                                             "VALUES(@DOCUMENTO, @ORDENSALIDA, @FECSALIDA) select scope_identity()", conexion.OpenConnection());
+                    command = new SqlCommand("INSERT INTO SPacienteReal  (DOCUMENTO ,ORDENSALIDA ,FECSALIDA, GnIdUsu)" +
+                                             "VALUES(@DOCUMENTO, @ORDENSALIDA, @FECSALIDA, @GnIdUsuSC) select scope_identity()", conexion.OpenConnection());
                     command.Parameters.AddWithValue("@DOCUMENTO", CSiden);
                     command.Parameters.AddWithValue("@ORDENSALIDA", CScodigoR);
                     command.Parameters.AddWithValue("@FECSALIDA", DateAndTime);
+                    command.Parameters.AddWithValue("@GnIdUsuSC", Responsable);
                     int OidInstancia = Convert.ToInt32(command.ExecuteScalar());
 
                     DAOGNHistorico.SetHistorico(new GNHistorico
@@ -178,7 +181,90 @@ namespace Persistencia.ControlEntSal
 
 
         }
-   
-  
+
+        public static int InserVisita(string ADNINGRES1, string Cod_cama  , string DocPaciente, string NomPaciente, string DocResponsable, string NombreRes)
+        {
+
+            var count = ValidarVisita(ADNINGRES1);
+            SqlCommand command;
+            Conexion conexion = new Conexion();
+            var VISITA = "SI";
+            var DateAndTime = DateTime.Now;
+            var Responsable = Convert.ToInt32(HttpContext.Current.Session["Admin"]);
+            if (count < 1)
+            {
+
+                try
+                {
+                    command = new SqlCommand("INSERT INTO SCvisita  (ADNINGRES1 ,Cod_cama  ,DocPaciente ,NomPaciente ,DocResponsable ,NombreRes ,FECHAR ,GnIdUsuSC ,VISITA )" +
+                                                             "VALUES(@ADNINGRES1, @Cod_cama, @DocPaciente, @NomPaciente, @DocResponsable ,@NombreRes ,@FECHAR, @GnIdUsuSC, @VISITA) select scope_identity()", conexion.OpenConnection());
+                    command.Parameters.AddWithValue("@ADNINGRES1", ADNINGRES1);
+                    command.Parameters.AddWithValue("@Cod_cama", Cod_cama);
+                    command.Parameters.AddWithValue("@DocPaciente", DocPaciente);
+                    command.Parameters.AddWithValue("@NomPaciente", NomPaciente);
+                    command.Parameters.AddWithValue("@DocResponsable", DocResponsable);
+                    command.Parameters.AddWithValue("@NombreRes", NombreRes);
+                    command.Parameters.AddWithValue("@VISITA", VISITA);
+                    command.Parameters.AddWithValue("@FECHAR", DateAndTime);
+                    command.Parameters.AddWithValue("@GnIdUsuSC", Responsable);
+                    int OidInstancia = Convert.ToInt32(command.ExecuteScalar());
+
+                    DAOGNHistorico.SetHistorico(new GNHistorico
+                    {
+                        dtmFecha = DateTime.Now,
+                        intGNCodUsu = Convert.ToInt32(HttpContext.Current.Session["Admin"]),
+                        intInstancia = OidInstancia,
+                        strAccion = "Crear",
+                        strDetalle = $"se ha insertado la visita de la cama {Cod_cama} ",
+                        strEntidad = "SCvisita"
+                    });
+
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    conexion.CloseConnection();
+                }
+            }
+
+            return count;
+
+        }
+
+        public static int ValidarVisita(string ADNINGRES1)
+        {
+
+            int respos = 0;
+            SqlCommand command;
+            SqlDataReader reader;
+            Conexion conexion = new Conexion();
+
+            try
+            {
+                //VALIDACION INGRESO EXIXTENTE
+                command = new SqlCommand("SELECT * FROM SCvisita WHERE ADNINGRES1 = @ADNINGRES1 ", conexion.OpenConnection());
+                command.Parameters.AddWithValue("@ADNINGRES1", ADNINGRES1);
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    respos++;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+
+            return respos;
+        }
+
     }
 }

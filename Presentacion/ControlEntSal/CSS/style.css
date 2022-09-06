@@ -48,3 +48,8 @@ carousel-inner {
 .x_panel { 
     padding: 0px 17px 0px 2px;  
 }
+
+
+.table td {
+    border-right: 0px #2a3f54 solid;
+}
