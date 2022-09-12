@@ -63,7 +63,7 @@ namespace Persistencia.ControlEntSal
             try
             {
                 command.Connection = conexion2;
-                command.CommandText = "SELECT GENPACIEN.PACNUMDOC,(GENPACIEN.PACPRINOM + ' ' + GENPACIEN.PACSEGNOM + ' ' + GENPACIEN.PACPRIAPE +' ' + GENPACIEN.PACSEGAPE) AS NOMBRE,ADNINGRESO.OID AS OIDINGRESO, ADNINGRESO.AINCONSEC AS ADMISION, GENPACIEN.OID AS OIDPACIENTE FROM ADNINGRESO INNER JOIN GENPACIEN ON GENPACIEN.OID = ADNINGRESO.GENPACIEN WHERE AINCONSEC = @AINCONSEC";
+                command.CommandText = "SELECT GENPACIEN.PACNUMDOC,(GENPACIEN.PACPRINOM + ' ' + GENPACIEN.PACSEGNOM + ' ' + GENPACIEN.PACPRIAPE +' ' + GENPACIEN.PACSEGAPE) AS NOMBRE,ADNINGRESO.OID AS OIDINGRESO, ADNINGRESO.AINCONSEC AS ADMISION, GENPACIEN.OID AS OIDPACIENTE, DATEDIFF( YEAR, GPAFECNAC ,SYSDATETIME() ) AS EDAD FROM ADNINGRESO INNER JOIN GENPACIEN ON GENPACIEN.OID = ADNINGRESO.GENPACIEN WHERE AINCONSEC = @AINCONSEC";
                 command.Parameters.AddWithValue("@AINCONSEC", Codigo);
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -71,7 +71,8 @@ namespace Persistencia.ControlEntSal
                     ControlEntSalModel controlEntSalModel = new ControlEntSalModel()
                     {
                         PACNUMDOC = reader["PACNUMDOC"].ToString(),
-                        PACPRINOM = reader["NOMBRE"].ToString()
+                        PACPRINOM = reader["NOMBRE"].ToString(),
+                        EDAD = reader["EDAD"].ToString()
                     };
                     controlEntSalModels.Add(controlEntSalModel);
                 }
@@ -223,7 +224,7 @@ namespace Persistencia.ControlEntSal
 
             try
             {
-                command = new SqlCommand("SELECT count(*) AS NumBB FROM SPacienteBB where ADNINGRES1 = @ADNINGRES1", conexion.OpenConnection());
+                command = new SqlCommand("SELECT count(*) AS NumBB FROM SPacienteBB where ADNINGRES1 = @ADNINGRES1 And Estado2SC is null and Eliminado = 'NO'", conexion.OpenConnection());
                 command.Parameters.AddWithValue("@ADNINGRES1", ingreso);
                 num = Convert.ToInt32(command.ExecuteScalar());
             }
@@ -239,16 +240,25 @@ namespace Persistencia.ControlEntSal
             return num;
         }
 
-        public static void AcudienteBBSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB)
+        public static void AcudienteBBSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
         {
             int CountNumBebe = NumBebe(CSingresoBB) + 1;
-            string NomBB = "HIJO " + CountNumBebe + " DE " + CSInomsBB;
+            string NomBB;
             string Estado1SS = "SalServicio";
             string Eliminado = "NO";
             SqlCommand command;
             Conexion conexion = new Conexion(); 
             var DateAndTime = DateTime.Now;
             var Responsable = Convert.ToInt32(HttpContext.Current.Session["Admin"]);
+
+            if (CSedadBB < 18)
+            {
+                NomBB = CSInomsBB;
+                CSInomsBB = "";
+            }
+            else {
+                NomBB = "HIJO " + CountNumBebe + " DE " + CSInomsBB;
+            }
 
             try
             {

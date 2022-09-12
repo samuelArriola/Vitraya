@@ -29,6 +29,7 @@ $('#CSingresoBB').on("focusout", function () {
             console.log('Campo vacio');
             $('#CSInomsBB').val('');
             $('#CSIidenBB').val('');
+            $('#CSIedadBB').val('');
             ListaSalida.innerHTML = "";
         } else {
             ejecutarajax("CSPacienteBB.aspx/GetPacientesIngreso", { "Codigo": CSingresoBB }, getIngreBB)
@@ -43,6 +44,7 @@ function getIngreBB(res) {
     if (res.length < 1) {
         $('#CSInomsBB').val('');
         $('#CSIidenBB').val('');
+        $('#CSIedadBB').val('');
         ListaSalida.innerHTML = "";
         return error("Notificacion", "Paciente no encontrado");
     }
@@ -50,6 +52,7 @@ function getIngreBB(res) {
     res.forEach((item) => {
         $('#CSInomsBB').val(item.PACPRINOM);
         $('#CSIidenBB').val(item.PACNUMDOC);
+        $('#CSIedadBB').val(item.EDAD);
     });
     tablaMostrarSalidas($('#CSingresoBB').val())
    
@@ -94,6 +97,7 @@ $('#btnCSregistroBB').on("click", function () {
     let CSAidenBB = $('#CSAidenBB').val()
     let CSAtipoBB = $('#CSAtipoBB').val();
     let CSAnomsBB = $('#CSAnomsBB').val();
+    let CSedadBB = $('#CSIedadBB').val();
   
    
     const data = {
@@ -102,10 +106,11 @@ $('#btnCSregistroBB').on("click", function () {
         CSIidenBB,
         CSAidenBB,
         CSAtipoBB,
-        CSAnomsBB
+        CSAnomsBB,
+        CSedadBB
     }
 
-    if (isEmpy(CSingresoBB) || isEmpy(CSInomsBB) || isEmpy(CSIidenBB) || isEmpy(CSAidenBB) || isEmpy(CSAtipoBB) || isEmpy(CSAnomsBB) ) {
+    if (isEmpy(CSingresoBB) || isEmpy(CSInomsBB) || isEmpy(CSIidenBB) || isEmpy(CSAidenBB) || isEmpy(CSAtipoBB) || isEmpy(CSAnomsBB) || isEmpy(CSedadBB) ) {
         error("Notificacion", "Verifique que los campos con (*) estén diligenciados");
     } else {
         ejecutarajax("CSPacienteBB.aspx/SetAcudienteBB", data, resRegistroAcu )
@@ -114,9 +119,11 @@ $('#btnCSregistroBB').on("click", function () {
 })
 
 function resRegistroAcu() {
-    $('#CSAidenBB').val('')
-    $('#CSAtipoBB').val('')
-    $('#CSAnomsBB').val('')
+
+    $('#CSAidenBB').val('');
+    $('#CSAtipoBB').val('');
+    $('#CSAnomsBB').val('');
+    console.log('limpiar campos')
     exito("Notificacion", "Acudiente registrado")
     tablaMostrarSalidas($('#CSingresoBB').val())
 }
@@ -164,8 +171,9 @@ function tablaPintarSalida(res) {
 ListaSalida.addEventListener("click", (e) => {
      
     if (e.target.classList.contains("btn-danger")) {
-        data = { oid: e.target.dataset.id }
-        ejecutarAjax("CSPacienteBB.aspx/DeleteAcuBB", data, DeleteAcuBB);
+        $('#MCSErrorBB').modal('show');
+        $('#MCSIdenBB').val(e.target.dataset.id);
+        
     }
     if (e.target.classList.contains("btn-success")) {
         data = { oid: e.target.dataset.id }
@@ -173,9 +181,17 @@ ListaSalida.addEventListener("click", (e) => {
       
     }
 })
+//ElIMINAR ACUDIENTE
+$('#btnMCSEliminarEBB').on("click", function () {
+    var oid = $('#MCSIdenBB').val();
+    data = { oid: oid }
+    ejecutarAjax("CSPacienteBB.aspx/DeleteAcuBB", data, DeleteAcuBB);
+
+})
 
 function DeleteAcuBB() {
     tablaMostrarSalidas($('#CSingresoBB').val());
+    $('#MCSErrorBB').modal('hide');
     exito("Notificacion", "Eliminado exitoso")
 }
 
@@ -209,12 +225,12 @@ $('#btnCSEditoBB').on("click", function () {
     if (isEmpy(CSAidenIdiBB) || isEmpy(CSATpResEdiCCBB) || isEmpy(CSACCNombreEdiBB) || isEmpy(CSAoidEdiBB) ) {
         error("Notificacion", "Verifique que los campos con (*) estén diligenciados");
     } else {
-        ejecutarajax("CSPacienteBB.aspx/UpdateAcuBB", data, resRegistroAcu)
+        ejecutarajax("CSPacienteBB.aspx/UpdateAcuBB", data, resEditarAcu)
     }
 
 })
 
-function resRegistroAcu() {
+function resEditarAcu() {
     $('#ModalEditaSalidaBB').modal('hide')
     $('#CSAoidEdiBB').val('')
     $('#CSAidenIdiBB').val('')

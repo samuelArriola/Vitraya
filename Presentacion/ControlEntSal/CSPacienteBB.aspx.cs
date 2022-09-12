@@ -18,9 +18,9 @@ namespace Presentacion.ControlEntSal
         }
 
         [WebMethod]
-        public static void SetAcudienteBB( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB)
+        public static void SetAcudienteBB( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
         {
-            CSPacienteBBController.AcudienteBBSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB);
+            CSPacienteBBController.AcudienteBBSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB, CSedadBB);
         }
 
         [WebMethod]

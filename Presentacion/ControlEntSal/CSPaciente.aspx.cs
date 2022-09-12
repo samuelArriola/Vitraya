@@ -66,6 +66,12 @@ namespace Presentacion.ControlEntSal
         }
 
 
+        [WebMethod]
+        public static void SetSalidaVisita(string ADNINGRES1)
+        {
+            ControlEntSalController.SalidaVisitaSet(ADNINGRES1);
+        }
+
 
 
     }

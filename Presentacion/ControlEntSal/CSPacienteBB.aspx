@@ -45,6 +45,12 @@
                                             <label>* Nombre y Apellido:</label>
                                             <input type="text" class="form-control" id="CSInomsBB" disabled/>
                                         </div>
+                                    </div> 
+                                    <div class="col col-1" >
+                                        <div class="form-group">
+                                            <label>* Edad:</label>
+                                            <input type="text" class="form-control" id="CSIedadBB" disabled/>
+                                        </div>
                                     </div>
                                     <div class="w-100 divider"></div>
 
@@ -186,7 +192,28 @@
             </div>
          </div>
 
-   
+     <%--MODAL RESPUESTA ERROR DE VISITA--%> 
+        <div class="modal fade " id="MCSErrorBB" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content" >
+              <div class="modal-header bg-danger">
+                     <input type="number" class="form-control" id="MCSIdenBB" disabled  style="display:none"/>
+                <h3 class="modal-title " id=""></h3>
+                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h4 class="modal-body-h4" id="">¿Estás seguro que desea eliminar este registro?</h4>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="">Close</button>
+                  <button style="margin-top: 5px;" type="button" id="btnMCSEliminarEBB" class=" btn  btn-danger">Eliminar</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
       
 
 

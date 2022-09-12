@@ -191,13 +191,14 @@ namespace Persistencia.ControlEntSal
             var VISITA = "SI";
             var DateAndTime = DateTime.Now;
             var Responsable = Convert.ToInt32(HttpContext.Current.Session["Admin"]);
+            var ESTADO = "ACTIVO";
             if (count < 1)
             {
 
                 try
                 {
-                    command = new SqlCommand("INSERT INTO SCvisita  (ADNINGRES1 ,Cod_cama  ,DocPaciente ,NomPaciente ,DocResponsable ,NombreRes ,FECHAR ,GnIdUsuSC ,VISITA )" +
-                                                             "VALUES(@ADNINGRES1, @Cod_cama, @DocPaciente, @NomPaciente, @DocResponsable ,@NombreRes ,@FECHAR, @GnIdUsuSC, @VISITA) select scope_identity()", conexion.OpenConnection());
+                    command = new SqlCommand("INSERT INTO SCvisita  (ADNINGRES1 ,Cod_cama  ,DocPaciente ,NomPaciente ,DocResponsable ,NombreRes ,FECHAR ,GnIdUsuSC ,VISITA, ESTADO )" +
+                                                             "VALUES(@ADNINGRES1, @Cod_cama, @DocPaciente, @NomPaciente, @DocResponsable ,@NombreRes ,@FECHAR, @GnIdUsuSC, @VISITA, @ESTADO) select scope_identity()", conexion.OpenConnection());
                     command.Parameters.AddWithValue("@ADNINGRES1", ADNINGRES1);
                     command.Parameters.AddWithValue("@Cod_cama", Cod_cama);
                     command.Parameters.AddWithValue("@DocPaciente", DocPaciente);
@@ -207,6 +208,7 @@ namespace Persistencia.ControlEntSal
                     command.Parameters.AddWithValue("@VISITA", VISITA);
                     command.Parameters.AddWithValue("@FECHAR", DateAndTime);
                     command.Parameters.AddWithValue("@GnIdUsuSC", Responsable);
+                    command.Parameters.AddWithValue("@ESTADO", ESTADO);
                     int OidInstancia = Convert.ToInt32(command.ExecuteScalar());
 
                     DAOGNHistorico.SetHistorico(new GNHistorico
@@ -242,12 +244,14 @@ namespace Persistencia.ControlEntSal
             SqlCommand command;
             SqlDataReader reader;
             Conexion conexion = new Conexion();
+            var ESTADO = "ACTIVO";
 
             try
             {
                 //VALIDACION INGRESO EXIXTENTE
-                command = new SqlCommand("SELECT * FROM SCvisita WHERE ADNINGRES1 = @ADNINGRES1 ", conexion.OpenConnection());
+                command = new SqlCommand("SELECT * FROM SCvisita WHERE ADNINGRES1 = @ADNINGRES1 AND ESTADO = @ESTADO  ", conexion.OpenConnection());
                 command.Parameters.AddWithValue("@ADNINGRES1", ADNINGRES1);
+                command.Parameters.AddWithValue("@ESTADO", ESTADO);
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -266,5 +270,30 @@ namespace Persistencia.ControlEntSal
             return respos;
         }
 
+        public static void SalidaVisitaSet(string ADNINGRES1)
+        {
+            string Estado = "INACTIVO";
+            SqlCommand command;
+            Conexion conexion = new Conexion();
+
+            try
+            {
+                command = new SqlCommand("UPDATE SCvisita SET ESTADO = @ESTADO WHERE ADNINGRES1 = @ADNINGRES1", conexion.OpenConnection());
+                command.Parameters.AddWithValue("ESTADO", Estado);
+                command.Parameters.AddWithValue("ADNINGRES1", ADNINGRES1);
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+
+
+        }
     }
 }

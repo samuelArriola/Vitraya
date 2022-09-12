@@ -138,19 +138,21 @@ namespace Persistencia.ControlEntSal
             SqlCommand command;
             Conexion conexion = new Conexion();
             string resvisto = "";
+            var ESTADO = "ACTIVO";
 
             try
             {
-                command = new SqlCommand("SELECT  VISITA FROM SCvisita WHERE ADNINGRES1 = @ADNINGRES1 ", conexion.OpenConnection());
+                command = new SqlCommand("SELECT  NombreRes FROM SCvisita WHERE ADNINGRES1 = @ADNINGRES1 AND ESTADO = @ESTADO ", conexion.OpenConnection());
                 command.Parameters.AddWithValue("@ADNINGRES1", ADNINGRES1);
-                string visto = Convert.ToString(command.ExecuteScalar());
-                if (String.IsNullOrEmpty(visto))
+                command.Parameters.AddWithValue("@ESTADO", ESTADO);
+                string NombreRes = Convert.ToString(command.ExecuteScalar());
+                if (String.IsNullOrEmpty(NombreRes))
                 {
-                    resvisto = "NO";
+                    resvisto = "SIN VISITA";
                 }
                 else
                 {
-                    resvisto = "SI";
+                    resvisto = NombreRes;
                 }
 
 

@@ -1,6 +1,4 @@
 ﻿console.log('conetado a controlsalida.js');
-
-
 let ListaSalida = document.getElementById('CStable');
 let templateListaSalida = document.getElementById('CStableTemplate').content;
 const fragment = document.createDocumentFragment();
@@ -246,7 +244,7 @@ function tablaPintarSalida(res) {
         templateListaSalida.querySelectorAll('td')[6].textContent = moment(item.FECHASS).format("DD/MM/YYYY HH:mm");
 
 
-        templateListaSalida.querySelector('.btn-outline-success').dataset.id = item.OID;
+        templateListaSalida.querySelector('.btn-danger').dataset.id = item.OID;
         const clone = templateListaSalida.cloneNode(true);
         fragment.appendChild(clone);
 
@@ -257,7 +255,7 @@ function tablaPintarSalida(res) {
 
 //BTN DAR SALIDA A ACUDIENTE BEBE
 ListaSalida.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn-outline-success")) {
+    if (e.target.classList.contains("btn-danger")) {
         data = { oid: e.target.dataset.id }
         ejecutarAjax("CSPaciente.aspx/SetDarSalidaAcuBB", data, ResSetDarSalidaAcuBB);
     }
@@ -301,7 +299,8 @@ $('#CSVFbuscar').on("keyup", function () {
 })
 
 
-$("#CSVFGrupo").change( function () {
+$("#CSVFGrupo").change(function () {
+    $('.spinner-border').show();
     let CSVFbuscar = $('#CSVFbuscar').val();
     let CSVFGrupo = $('#CSVFGrupo').val();
     let CSVFSubGrupo = $('#CSVFSubGrupo').val();
@@ -326,6 +325,7 @@ $('#CSVFSubGrupo').on("click", function () {
 })
 
 $("#CSVFSubGrupo").change(function () {
+    $('.spinner-border').show();
     let CSVFbuscar = $('#CSVFbuscar').val();
     let CSVFGrupo = $('#CSVFGrupo').val();
     let CSVFSubGrupo = $('#CSVFSubGrupo').val();
@@ -334,10 +334,15 @@ $("#CSVFSubGrupo").change(function () {
 });
 
 $('#CSVFlimpiar').on("click", function () {
-    $('#CSVFbuscar').val('');
-    $('#CSVFGrupo').val('');
-    $('#CSVFSubGrupo').val('');
-    CSVmostrarCenso($('#CSVFbuscar').val(), $('#CSVFGrupo').val(), $('#CSVFSubGrupo').val());
+    if (isEmpy($('#CSVFbuscar').val()) && isEmpy($('#CSVFGrupo').val()) && isEmpy($('#CSVFSubGrupo').val())) {
+        return
+    } else {
+        $('.spinner-border').show();
+        $('#CSVFbuscar').val('');
+        $('#CSVFGrupo').val('');
+        $('#CSVFSubGrupo').val('');
+        CSVmostrarCenso($('#CSVFbuscar').val(), $('#CSVFGrupo').val(), $('#CSVFSubGrupo').val());
+    }
 })
 
 
@@ -380,8 +385,26 @@ $('#CSVFlimpiar').on("click", function () {
 
         CSVtableCensoBody.appendChild(fragment2);
         DataTable("#CSVtableCenso", 10);
+        colores();
 
-    }
+}
+
+function colores() {
+    var celdas = document.querySelectorAll('.tdFocus');
+    celdas.forEach(res => {
+
+        if (res.textContent == "SIN VISITA") {
+            //res.classList.add('bg-success')
+            res.classList.add('text-success')
+
+        } else {
+            //res.classList.add('bg-danger')
+            res.classList.add('text-danger')
+
+        }
+    })
+
+};
 
 
 //REGISTRAR DATOS DEL PACIENTE         
@@ -394,19 +417,34 @@ $(document).on("click", ".CStableItem", function () {
     let ingreso = fila.find('td:eq(5)').text();
     let cod_cama = fila.find('td:eq(6)').text();
 
-    if (visita == 'NO') {
+    if (visita == "SIN VISITA") {
         $('#CSVPingreso').val(ingreso);
         $('#CSVPiden').val(iden);
         $('#CSVPnom').val(nombre);
         $('#CSVPcodCama').val(cod_cama);
         $("#CSVViden").focus();
     } else { 
+
+        $('#MCVing').val(ingreso);
+        $('#MCVResponsable').html(visita);
         $('#MCVCambioVisita').modal('show');
     }
  
 });
 
-//ESCANER CEDULA DE ACUDIENTE PARA BEBESS
+//BTN DAR SALIDA VISITA 
+$(document).on("click", "#MCVbtnDarSalida", function () {
+    $('.spinner-border').show();
+    let ingreso = $('#MCVing').val();
+    ejecutarajax("CSPaciente.aspx/SetSalidaVisita", { ADNINGRES1: ingreso }, res => {
+        CSVmostrarCenso($('#CSVFbuscar').val(), $('#CSVFGrupo').val(), $('#CSVFSubGrupo').val());
+        $('#MCVCambioVisita').modal('hide');
+    })
+ 
+
+});
+
+//ESCANER CEDULA DE ACUDIENTE 
 $('#CSVViden').on("keypress", function () {
 
     if (event.which === 13) {
@@ -417,15 +455,17 @@ $('#CSVViden').on("keypress", function () {
         $('#CSVViden').val(cc);
         $('#CSVVnom').val(credenciales[3] + " " + credenciales[1] + " " + credenciales[2]);
 
-
-
         var ADNINGRES1 =  $('#CSVPingreso').val();
         var DocPaciente = $('#CSVPiden').val();
         var NomPaciente =  $('#CSVPnom').val();
         var Cod_cama = $('#CSVPcodCama').val();
         var DocResponsable = $('#CSVViden').val();
         var NombreRes = $('#CSVVnom').val();
-     
+
+        if (NombreRes.includes('undefined')) {
+            error("Notificacion", "Asegurese de escanera la cédula")
+            return
+        }
         if (isEmpy(ADNINGRES1) || isEmpy(DocPaciente) || isEmpy(Cod_cama) || isEmpy(DocResponsable) || isEmpy(NombreRes)  ) {
             error("Notificacion", "Verifique que los campos con (*) estén diligenciados");
         } else {
@@ -438,11 +478,7 @@ $('#CSVViden').on("keypress", function () {
                 NombreRes
             }
             ejecutarajax("CSPaciente.aspx/SetInserVisita", data, ResSetInserVisita)
-           
-
         }
-
-        
 
     }
 })
@@ -484,9 +520,4 @@ function SCVlimpiar() {
     $('#CSVVnom').val('');
 } 
 
-function visto(ADNINGRES1) {
-    ejecutarajax("CSPaciente.aspx/getVerVisita", { ADNINGRES1 } , res => {
-        console.log(res.d)
-    })
 
-}
