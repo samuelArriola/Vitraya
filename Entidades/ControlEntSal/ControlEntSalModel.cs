@@ -14,6 +14,7 @@ namespace Entidades.ControlEntSal
         private string pacsegape;
         private string pacedad;
         private string edad;
+        private string ainconsec;
      
  
         public string PACNUMDOC { get => pacnumdoc; set => pacnumdoc = value; }
@@ -23,6 +24,7 @@ namespace Entidades.ControlEntSal
         public string PACSEGAPE { get => pacsegape; set => pacsegape = value; }
         public string PACEDAD { get => pacedad; set => pacedad = value; }
         public string EDAD { get => edad; set => edad = value; }
+        public string AINCONSEC { get => ainconsec; set => ainconsec = value; }
 
     }
 }

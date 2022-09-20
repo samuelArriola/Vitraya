@@ -22,8 +22,10 @@ namespace Persistencia.ControlEntSal
             try
             {
                 command.Connection = conexion2;
-                command.CommandText = "SELECT OID, PACNUMDOC, PACPRINOM,PACSEGNOM, PACPRIAPE, PACSEGAPE, DATEDIFF( YEAR, GPAFECNAC ,SYSDATETIME() ) AS PACEDAD FROM GENPACIEN " +
-                                       "WHERE OID = (SELECT GENPACIEN FROM ADNINGRESO WHERE OID = (SELECT ADNINGRES1 FROM SLNORDSAL WHERE SRACONSEC = @SRACONSEC))";
+                command.CommandText = @"SELECT A.AINCONSEC as AINCONSEC, PACNUMDOC, PACPRINOM,PACSEGNOM, PACPRIAPE, PACSEGAPE, DATEDIFF( YEAR, G.GPAFECNAC ,SYSDATETIME() ) AS PACEDAD
+                                        FROM SLNORDSAL S INNER JOIN ADNINGRESO  A ON s.ADNINGRES1 = a.OID
+                                                        INNER JOIN GENPACIEN G ON A.GENPACIEN = G.OID
+                                        WHERE SRACONSEC = @SRACONSEC ";
                 command.Parameters.AddWithValue("@SRACONSEC", Codigo);
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -36,6 +38,7 @@ namespace Persistencia.ControlEntSal
                         PACPRIAPE = reader["PACPRIAPE"].ToString(),
                         PACSEGAPE = reader["PACSEGAPE"].ToString(),
                         PACEDAD = reader["PACEDAD"].ToString(),
+                        AINCONSEC = reader["AINCONSEC"].ToString(),
                     };
                     controlEntSalModels.Add(controlEntSalModel);
                 }
@@ -152,6 +155,7 @@ namespace Persistencia.ControlEntSal
             }
 
         }
+
         public static void DarSalidaAcuBBSet(string oid)
         {
             string Estado2SC = "SalClinica";
@@ -182,6 +186,64 @@ namespace Persistencia.ControlEntSal
 
         }
 
+        public static int CountDarSalidaAcuBBConBoletaSet(string ADNINGRES1, string DocResponsable)
+        {
+            int num = 0;
+            SqlCommand command;
+            Conexion conexion = new Conexion();
+
+            try
+            {
+                command = new SqlCommand("SELECT count(*) AS NumBB FROM SPacienteBB WHERE DocResponsable = @DocResponsable AND ADNINGRES1 = @ADNINGRES1 AND  Estado2SC IS NULL AND Eliminado = 'NO' ", conexion.OpenConnection());
+                command.Parameters.AddWithValue("ADNINGRES1", ADNINGRES1);
+                command.Parameters.AddWithValue("DocResponsable", DocResponsable);
+                num = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+
+            return num;
+        }
+        public static int DarSalidaAcuBBConBoletaSet(string ADNINGRES1, string DocResponsable)
+        {
+            var num = CountDarSalidaAcuBBConBoletaSet( ADNINGRES1, DocResponsable);
+            string Estado2SC = "SalClinica";
+            SqlCommand command;
+            Conexion conexion = new Conexion();
+            var DateAndTime = DateTime.Now;
+            var Responsable = Convert.ToInt32(HttpContext.Current.Session["Admin"]);
+
+            if (num > 0)
+            {
+                try
+                {
+                    command = new SqlCommand("UPDATE SPacienteBB SET Estado2SC = @Estado2SC, FECHASC = @FECHASC, GnIdUsuSC = @GnIdUsuSC WHERE DocResponsable = @DocResponsable AND ADNINGRES1 = @ADNINGRES1 AND  Estado2SC IS NULL AND Eliminado = 'NO' ", conexion.OpenConnection());
+                    command.Parameters.AddWithValue("FECHASC", DateAndTime);
+                    command.Parameters.AddWithValue("Estado2SC", Estado2SC);
+                    command.Parameters.AddWithValue("GnIdUsuSC", Responsable);
+                    command.Parameters.AddWithValue("ADNINGRES1", ADNINGRES1);
+                    command.Parameters.AddWithValue("DocResponsable", DocResponsable);
+                    command.ExecuteNonQuery();
+
+                }
+                catch (Exception e)
+                {
+                    System.Windows.Forms.MessageBox.Show(e.Message);
+                }
+                finally
+                {
+                    conexion.CloseConnection();
+                }
+            }
+            return num;
+
+        }
         public static int InserVisita(string ADNINGRES1, string Cod_cama  , string DocPaciente, string NomPaciente, string DocResponsable, string NombreRes)
         {
 
@@ -294,6 +356,30 @@ namespace Persistencia.ControlEntSal
             }
 
 
+        }
+
+        public static int CountPacienteSalida(int ingreso)
+        {
+            int num = 0;
+            SqlCommand command;
+            Conexion conexion = new Conexion();
+
+            try
+            {
+                command = new SqlCommand("SELECT count(*) AS NumBB FROM SPacienteBB where ADNINGRES1 = @ADNINGRES1 And Estado2SC is not null and Eliminado = 'NO'", conexion.OpenConnection());
+                command.Parameters.AddWithValue("@ADNINGRES1", ingreso);
+                num = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+
+            return num;
         }
     }
 }

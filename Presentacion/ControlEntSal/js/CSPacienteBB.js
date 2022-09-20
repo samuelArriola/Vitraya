@@ -32,12 +32,32 @@ $('#CSingresoBB').on("focusout", function () {
             $('#CSIedadBB').val('');
             ListaSalida.innerHTML = "";
         } else {
-            ejecutarajax("CSPacienteBB.aspx/GetPacientesIngreso", { "Codigo": CSingresoBB }, getIngreBB)
+            ejecutarajax("CSPacienteBB.aspx/GetCountPacienteSalida", { ingreso: CSingresoBB }, ResGetCountPacienteSalida)
 
         }
     }
     
 })
+
+function ResGetCountPacienteSalida(res) {
+    let CSingresoBB = $('#CSingresoBB').val();
+    var res2 = res.d;
+    console.log(res2)
+
+    if (res2 < 1) {
+        ejecutarajax("CSPacienteBB.aspx/GetPacientesIngreso", { "Codigo": CSingresoBB }, getIngreBB)
+    } else {
+        $('#CSInomsBB').val('');
+        $('#CSIidenBB').val('');
+        $('#CSIedadBB').val('');
+        ListaSalida.innerHTML = "";
+        error('Notificacion','Ya el paciente ha salido')
+    }
+
+}
+
+
+
 
 function getIngreBB(res) {
     res = res.d;
@@ -113,7 +133,12 @@ $('#btnCSregistroBB').on("click", function () {
     if (isEmpy(CSingresoBB) || isEmpy(CSInomsBB) || isEmpy(CSIidenBB) || isEmpy(CSAidenBB) || isEmpy(CSAtipoBB) || isEmpy(CSAnomsBB) || isEmpy(CSedadBB) ) {
         error("Notificacion", "Verifique que los campos con (*) estén diligenciados");
     } else {
-        ejecutarajax("CSPacienteBB.aspx/SetAcudienteBB", data, resRegistroAcu )
+
+        if (CSedadBB > 18 ) {
+            ejecutarajax("CSPacienteBB.aspx/SetAcudienteBB", data, resRegistroAcu )
+        } else {
+            ejecutarajax("CSPacienteBB.aspx/SetAcudienteBBMenor", data, ResSetAcudienteBBMenor )
+        }
     } 
     
 })
@@ -126,6 +151,19 @@ function resRegistroAcu() {
     console.log('limpiar campos')
     exito("Notificacion", "Acudiente registrado")
     tablaMostrarSalidas($('#CSingresoBB').val())
+}
+
+function ResSetAcudienteBBMenor( res ) {
+
+    $('#CSAidenBB').val('');
+    $('#CSAtipoBB').val('');
+    $('#CSAnomsBB').val('');
+    tablaMostrarSalidas($('#CSingresoBB').val())
+    if (res.d == 0) {
+        exito("Notificacion", 'Registro Exitoso')
+    } else {
+        error("Notificacion", 'Acudiente ya Registrado')
+    }
 }
 
 function isEmpy(string) {
@@ -166,6 +204,7 @@ function tablaPintarSalida(res) {
 
     ListaSalida.appendChild(fragment);
 }
+
 
 //BTN ELIMINAR Y ACTUALIZAR ACUDIENTE
 ListaSalida.addEventListener("click", (e) => {

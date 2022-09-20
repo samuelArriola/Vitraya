@@ -20,7 +20,13 @@ namespace Presentacion.ControlEntSal
         [WebMethod]
         public static void SetAcudienteBB( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
         {
-            CSPacienteBBController.AcudienteBBSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB, CSedadBB);
+                CSPacienteBBController.AcudienteBBSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB, CSedadBB);
+        }
+
+        [WebMethod]
+        public static int SetAcudienteBBMenor( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
+        {
+             return CSPacienteBBController.AcudienteBBMenorSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB, CSedadBB);
         }
 
         [WebMethod]
@@ -65,7 +71,12 @@ namespace Presentacion.ControlEntSal
         {
              CSPacienteBBController.AcuBBUpdate(CSAoidEdiBB, CSAidenIdiBB, CSATpResEdiCCBB, CSACCNombreEdiBB);
         }
-        
+
+        [WebMethod]
+        public static int GetCountPacienteSalida(int ingreso)
+        {
+            return CSPacienteBBController.CountPacienteSalida(ingreso);
+        }
 
     }
 }

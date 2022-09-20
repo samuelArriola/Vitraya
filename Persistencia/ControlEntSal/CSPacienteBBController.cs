@@ -182,8 +182,8 @@ namespace Persistencia.ControlEntSal
 
             try
             {
-                //VALIDACION INGRESO EXIXTENTE
-                command = new SqlCommand("SELECT * FROM SPacienteBB WHERE DocResponsable = @DocResponsable AND Estado2SC IS NULL AND Eliminado = 'NO' ORDER BY FECHASS DESC ", conexion.OpenConnection());
+                //VALIDACION INGRESO EXISTENTE
+                command = new SqlCommand("SELECT * FROM SPacienteBB WHERE DocResponsable = @DocResponsable AND Estado2SC IS NULL AND Edad > 17 AND Eliminado = 'NO' ORDER BY FECHASS DESC ", conexion.OpenConnection());
                 command.Parameters.AddWithValue("@DocResponsable", doc);
                 reader = command.ExecuteReader();
                 while (reader.Read())
@@ -240,30 +240,95 @@ namespace Persistencia.ControlEntSal
             return num;
         }
 
-        public static void AcudienteBBSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
+        public static int NumDeAcuBB(int ingreso)
         {
-            int CountNumBebe = NumBebe(CSingresoBB) + 1;
-            string NomBB;
+            int num = 0;
+            SqlCommand command;
+            Conexion conexion = new Conexion();
+
+            try
+            {
+                command = new SqlCommand("SELECT COUNT(*) FROM SPacienteBB WHERE ADNINGRES1 = @ADNINGRES1 AND Estado2SC IS NULL AND Edad < 19 AND Eliminado = 'NO'", conexion.OpenConnection());
+                command.Parameters.AddWithValue("@ADNINGRES1", ingreso);
+                num = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+
+            return num;
+        }
+        public static int AcudienteBBMenorSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
+        {
+            int NumDeAcu =  NumDeAcuBB(CSingresoBB);
             string Estado1SS = "SalServicio";
             string Eliminado = "NO";
             SqlCommand command;
             Conexion conexion = new Conexion(); 
             var DateAndTime = DateTime.Now;
             var Responsable = Convert.ToInt32(HttpContext.Current.Session["Admin"]);
+            string NomBB = CSInomsBB;
+            CSInomsBB = "";
 
-            if (CSedadBB < 18)
-            {
-                NomBB = CSInomsBB;
-                CSInomsBB = "";
-            }
-            else {
-                NomBB = "HIJO " + CountNumBebe + " DE " + CSInomsBB;
-            }
+            if (NumDeAcu == 0) { 
+        
+                try
+                {
+                    command = new SqlCommand("INSERT INTO SPacienteBB (ADNINGRES1 ,DocPaiente ,NomPaciente ,DocResponsable ,NomResponsable ,TpResponsable ,NomBB  ,GnIdUsuSS ,Estado1SS ,FECHASS , Edad, Eliminado ) " +
+                                            "VALUES(@ADNINGRES1, @DocPaiente, @NomPaciente, @DocResponsable, @NomResponsable, @TpResponsable, @NomBB, @GnIdUsu, @Estado1SS, @FECHASS, @Edad, @Eliminado )", conexion.OpenConnection());
+
+                    command.Parameters.AddWithValue("ADNINGRES1", CSingresoBB);
+                    command.Parameters.AddWithValue("DocPaiente", CSIidenBB);
+                    command.Parameters.AddWithValue("NomPaciente", CSInomsBB);
+                    command.Parameters.AddWithValue("DocResponsable", CSAidenBB);
+                    command.Parameters.AddWithValue("NomResponsable", CSAnomsBB);
+                    command.Parameters.AddWithValue("TpResponsable", CSAtipoBB);
+                    command.Parameters.AddWithValue("NomBB", NomBB);
+                    command.Parameters.AddWithValue("GnIdUsu", Responsable);
+                    command.Parameters.AddWithValue("Estado1SS", Estado1SS);
+                    command.Parameters.AddWithValue("FECHASS", DateAndTime);
+                    command.Parameters.AddWithValue("Edad", CSedadBB);
+                    command.Parameters.AddWithValue("Eliminado ", Eliminado);
+
+
+                    command.ExecuteNonQuery();
+
+                }
+                catch (Exception e)
+                {
+                    System.Windows.Forms.MessageBox.Show(e.Message);
+                }
+                finally
+                {
+                    conexion.CloseConnection();
+                }
+        
+                }
+
+            return NumDeAcu;
+
+        }
+        public static void AcudienteBBSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
+        {
+            int CountNumBebe = NumBebe(CSingresoBB) + 1;
+            string Estado1SS = "SalServicio";
+            string Eliminado = "NO";
+            SqlCommand command;
+            Conexion conexion = new Conexion(); 
+            var DateAndTime = DateTime.Now;
+            var Responsable = Convert.ToInt32(HttpContext.Current.Session["Admin"]);
+            string NomBB = "HIJO " + CountNumBebe + " DE " + CSInomsBB;
+          
 
             try
             {
-                command = new SqlCommand("INSERT INTO SPacienteBB (ADNINGRES1 ,DocPaiente ,NomPaciente ,DocResponsable ,NomResponsable ,TpResponsable ,NomBB  ,GnIdUsuSS ,Estado1SS ,FECHASS ,NumBebe, Eliminado ) " +
-                                        "VALUES(@ADNINGRES1, @DocPaiente, @NomPaciente, @DocResponsable, @NomResponsable, @TpResponsable, @NomBB, @GnIdUsu, @Estado1SS, @FECHASS, @NumBebe, @Eliminado )", conexion.OpenConnection());
+                command = new SqlCommand("INSERT INTO SPacienteBB (ADNINGRES1 ,DocPaiente ,NomPaciente ,DocResponsable ,NomResponsable ,TpResponsable ,NomBB  ,GnIdUsuSS ,Estado1SS ,FECHASS ,NumBebe, Edad, Eliminado ) " +
+                                        "VALUES(@ADNINGRES1, @DocPaiente, @NomPaciente, @DocResponsable, @NomResponsable, @TpResponsable, @NomBB, @GnIdUsu, @Estado1SS, @FECHASS, @NumBebe, @Edad, @Eliminado )", conexion.OpenConnection());
 
                 command.Parameters.AddWithValue("ADNINGRES1", CSingresoBB);
                 command.Parameters.AddWithValue("DocPaiente", CSIidenBB);
@@ -276,6 +341,7 @@ namespace Persistencia.ControlEntSal
                 command.Parameters.AddWithValue("Estado1SS", Estado1SS);
                 command.Parameters.AddWithValue("FECHASS", DateAndTime);
                 command.Parameters.AddWithValue("NumBebe", CountNumBebe);
+                command.Parameters.AddWithValue("Edad", CSedadBB);
                 command.Parameters.AddWithValue("Eliminado ", Eliminado);
 
 
@@ -341,7 +407,29 @@ namespace Persistencia.ControlEntSal
             }
         }
 
+        public static int CountPacienteSalida(int ingreso)
+        {
+            int num = 0;
+            SqlCommand command;
+            Conexion conexion = new Conexion();
 
+            try
+            {
+                command = new SqlCommand("SELECT count(*) AS NumBB FROM SPacienteBB where ADNINGRES1 = @ADNINGRES1 And Edad < 18 And Estado2SC is not null and Eliminado = 'NO'", conexion.OpenConnection());
+                command.Parameters.AddWithValue("@ADNINGRES1", ingreso);
+                num = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+
+            return num;
+        }
 
     }
 }

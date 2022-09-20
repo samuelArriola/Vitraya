@@ -52,6 +52,7 @@ $('#CScodigoR').on("keypress", function () {
                 $('#CSnombreR').val(item.PACPRINOM+" "+item.PACSEGNOM);
                 $('#CSapell').val(item.PACPRIAPE+" "+item.PACSEGAPE);
                 $('#CSedad').val(item.PACEDAD);
+                $('#CSiNGRESO').val(item.AINCONSEC);
             });
             $("#CSmanilla").focus();
         }
@@ -70,22 +71,25 @@ $('#CSmanilla').on("keypress", function () {
     let CSiden = $('#CSiden').val();
     let CSmanilla = $('#CSmanilla').val();
     let CSedad = $('#CSedad').val();
+    let CSingreso = $('#CSiNGRESO').val()
 
     if (event.which === 13) {
         const data = {
             "CScodigoR": $('#CScodigoR').val(),
             "CSiden": $('#CSiden').val(),
-            "CSmanilla": CSmanilla
+            "CSmanilla": CSmanilla,
+            "CSingreso": CSingreso
         }
  
-        if ( isEmpy(CSiden) || isEmpy(CSmanilla) || isEmpy(CSedad) ) {
+        if (isEmpy(CSiden) || isEmpy(CSmanilla) || isEmpy(CSedad) || isEmpy(CSingreso) ) {
             error("Notificacion", "Verifique que los campos con (*) estén diligenciados");
         } else
         {
             if (CSiden == CSmanilla) {
 
                 if (CSedad < 18) {
-                    $('#exampleModalBB').modal('show');
+                    ejecutarajax("CSPaciente.aspx/GetCountPacienteSalida", { ingreso: CSingreso }, ResGetCountPacienteSalida)
+
                 } else {
                     console.log(CSedad)
                     ejecutarajax("CSPaciente.aspx/SalidaPaciente", data, SalidaPaciente)
@@ -100,6 +104,37 @@ $('#CSmanilla').on("keypress", function () {
     }
 })
 
+
+function ResGetCountPacienteSalida(res) {
+    let CSingreso = $('#CSiNGRESO').val()
+    var res2 = res.d;
+
+    console.log(res.d);
+    console.log(CSingreso);
+
+    if (res2 < 1) {
+        ejecutarajax("CSPacienteBB.aspx/GetsalidaBB", { ingreso: CSingreso }, ResGetsalidaBB)
+
+    } else {
+        $('#MCSErrorH4').html("Ya el paciente ha salido");
+        $('#exampleModalCenterError').modal('show');
+    }
+   
+}
+
+function ResGetsalidaBB(res) {
+    let CSingreso = $('#CSiNGRESO').val()
+    res = res.d;
+    if (res.length < 1) {
+        $('#MCSErrorH4').html("Paciente sin acudiente registrado");
+        $('#exampleModalCenterError').modal('show');
+    } else {
+        $('#MCSPIngreso').val(CSingreso)
+        $('#MCSPDarSalida').modal('show');
+    }
+
+}
+
 function SalidaPaciente(res) {
     var res2 = res.d;
     if (res2 < 1) {
@@ -111,6 +146,58 @@ function SalidaPaciente(res) {
         $('#exampleModalCenterError').modal('show');
     }
 }
+
+
+//ESCANER CEDULA DE SALIDA DE MENORES DE EDAD CUADO TIENE BOLETA Y MANILLA-->
+$('#MCSPEscanIden').on("keypress", function () {
+
+    if (event.which === 13) {
+        let MCSPEscanIden = $('#MCSPEscanIden').val();
+        const credenciales = MCSPEscanIden.split(',');
+        const cc = credenciales[0].replace(/^(0+)/g, '');
+
+        $('#MCSPidenCC').val(cc);
+        const MCSPidenCC = $('#MCSPidenCC').val();
+        $('#MCSPEscanIden').val('');
+
+        if (isEmpy(MCSPidenCC)) {
+            console.log('Campo vacio');
+        } else {
+            // hacer la accion, obtener datos, etc
+            const data = {
+                'DocResponsable': cc,
+                'ADNINGRES1': $('#MCSPIngreso').val()
+            }
+            ejecutarajax("CSPaciente.aspx/SetDarSalidaAcuBBConBoleta", data, ResSetDarSalidaAcuBBConBoleta )
+            console.log(data)
+        }
+
+    }
+})
+
+function ResSetDarSalidaAcuBBConBoleta(res) {
+    res = res.d;
+    console.log(res);
+    if (res == 0) {
+        $('#MCSPDarSalida').modal('hide');
+        modalRes('error', 'Este acudiente no tiene permiso para sacar al menor de edad');
+    } else {
+        $('#MCSPDarSalida').modal('hide');
+        modalRes('exito', 'Salida Exitosa');
+    }
+}
+
+const modalSalBebeConBoleta = document.getElementById('MCSPDarSalida');
+modalSalBebeConBoleta.addEventListener('shown.bs.modal', function () {
+    $('#MCSPEscanIden').focus();
+})
+
+modalSalBebeConBoleta.addEventListener('hidden.bs.modal', function () {
+    $('#MCSPEscanIden').val('');
+    $('#MCSPidenCC').val('');
+    CSPlimiar();
+    $("#CScodigoR").focus();
+})
 
 
 //ESCANER CEDULA DE ACUDIENTE
@@ -164,6 +251,7 @@ function CSPlimiar() {
     $('#CSedad').val('');
     $('#CSmanilla').val('');
     $('#CScodigoR').val('');
+    $('#CSiNGRESO').val('');
 }
 
 $('#ModalSalBB').on('click', function () {

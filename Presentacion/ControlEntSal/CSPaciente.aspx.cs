@@ -42,6 +42,18 @@ namespace Presentacion.ControlEntSal
             ControlEntSalController.DarSalidaAcuBBSet( oid );
         }
 
+         [WebMethod]
+        public static int SetDarSalidaAcuBBConBoleta(string ADNINGRES1, string DocResponsable)
+        {
+            return ControlEntSalController.DarSalidaAcuBBConBoletaSet(ADNINGRES1, DocResponsable);
+        }
+
+         [WebMethod]
+        public static int GetCountPacienteSalida(int ingreso)
+        {
+            return ControlEntSalController.CountPacienteSalida( ingreso);
+        }
+
 
 //--------------------------------------------  CONTROL  ENTRADA-SALIDA DE VISITANTES  -------------------------------------------------//
 
