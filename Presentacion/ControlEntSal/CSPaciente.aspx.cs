@@ -24,9 +24,9 @@ namespace Presentacion.ControlEntSal
         }
 
         [WebMethod]
-        public static int SalidaPaciente(string CScodigoR, string CSiden)
+        public static int SalidaPaciente(string CScodigoR, string CSiden, string NOMBRE_COMPLETO)
         {
-            return ControlEntSalController.InserPciente(CScodigoR, CSiden);
+            return ControlEntSalController.InserPciente(CScodigoR, CSiden, NOMBRE_COMPLETO);
         }
 
 
@@ -52,6 +52,12 @@ namespace Presentacion.ControlEntSal
         public static int GetCountPacienteSalida(int ingreso)
         {
             return ControlEntSalController.CountPacienteSalida( ingreso);
+        }
+
+        [WebMethod]
+        public static List<SPacienteReal> GetSPacientesReal(string buscar)
+        {
+            return ControlEntSalController.GetSPacienteReal(buscar);
         }
 
 

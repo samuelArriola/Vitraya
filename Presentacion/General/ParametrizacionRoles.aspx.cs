@@ -61,7 +61,7 @@ namespace Presentacion.General
             //se muestra el primer modulo
             string contenido = "<div class=\"tModulo\">" + flag + "</div>";
 
-            //se cargan las opciones en el panel ordenada por el modulo al cual correposponden 
+            //se cargan las opciones en el panel ordenada por el modulo al cual corresponden 
             for (int i = 0; i < opciones.Count; i++)
             {
                 if (opciones[i].StrNombreModulo != flag)
@@ -118,7 +118,7 @@ namespace Presentacion.General
             }
             else
             {
-                //sen caso de que los permisos existan se modifican de acuerdo a lo indicado
+                //en caso de que los permisos existan se modifican de acuerdo a lo indicado
                 permisos.BlnConfirmar = confirmar;
                 permisos.BlnEliminar = eliminar;
                 permisos.BlnCrear = crear;
@@ -130,7 +130,7 @@ namespace Presentacion.General
             return "";
         }
 
-        //metodo web que roetorna un listado de los permisos filtrados por el id del rol y el id de la opcion
+        //metodo web que retorna un listado de los permisos filtrados por el id del rol y el id de la opcion
         [WebMethod]
         public static string GetPermisos(int idRol, int idOpcion)
         {

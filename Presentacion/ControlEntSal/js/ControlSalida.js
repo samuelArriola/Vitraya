@@ -72,16 +72,20 @@ $('#CSmanilla').on("keypress", function () {
     let CSmanilla = $('#CSmanilla').val();
     let CSedad = $('#CSedad').val();
     let CSingreso = $('#CSiNGRESO').val()
+    let nombre = $('#CSnombreR').val();
+    let apellido = $('#CSapell').val();
+    let nombre_completo = `${nombre} ${apellido}`;
 
     if (event.which === 13) {
         const data = {
             "CScodigoR": $('#CScodigoR').val(),
             "CSiden": $('#CSiden').val(),
             "CSmanilla": CSmanilla,
-            "CSingreso": CSingreso
+            "CSingreso": CSingreso,
+            "NOMBRE_COMPLETO": nombre_completo
         }
  
-        if (isEmpy(CSiden) || isEmpy(CSmanilla) || isEmpy(CSedad) || isEmpy(CSingreso) ) {
+        if (isEmpy(CSiden) || isEmpy(CSmanilla) || isEmpy(CSedad) || isEmpy(CSingreso) || isEmpy(nombre) || isEmpy(apellido) ) {
             error("Notificacion", "Verifique que los campos con (*) estén diligenciados");
         } else
         {
@@ -186,6 +190,9 @@ function ResSetDarSalidaAcuBBConBoleta(res) {
         modalRes('exito', 'Salida Exitosa');
     }
 }
+
+
+
 
 const modalSalBebeConBoleta = document.getElementById('MCSPDarSalida');
 modalSalBebeConBoleta.addEventListener('shown.bs.modal', function () {
@@ -355,6 +362,71 @@ function ResSetDarSalidaAcuBB() {
     $('#CSAidenBB').focus();
 }
 
+
+//PINTAR TABLA DE EGRESOS 
+let LCStableCensoBody = document.getElementById('LCStableEgresoBody');
+let LCStableCensoBodyTemplate = document.getElementById('LCStableEgresoBodyTemplate').content;
+
+$('#ModalSalListaBB').on('click', function () {
+    $('#LCSbuscar').val('');
+    $('#LCSEgreso').modal('show');
+    buscarEgreso($('#LCSbuscar').val());
+})
+
+$('#LCSlimpiar').on("click", function () {
+    if ( isEmpy( $('#LCSbuscar').val() ) ) {
+        return
+    } else {
+        $('.spinner-border-egreso').show();
+        $('#LCSbuscar').val('');
+        buscarEgreso($('#LCSbuscar').val() );
+    }
+})
+
+$('#LCSbuscar').on("keyup", function () {
+    $('.spinner-border-egreso').show();
+    let LCSbuscar = $('#LCSbuscar').val();
+    buscarEgreso(LCSbuscar)
+})
+
+function buscarEgreso(buscar) {
+    const data = {
+        buscar
+    }
+
+    ejecutarajax("CSPaciente.aspx/GetSPacientesReal", data, pintaEgredo)
+}
+
+function  pintaEgredo(res) {
+    res = res.d;
+
+    if (res.length < 1) {
+        LCStableCensoBody.innerHTML = "";
+        $('.spinner-border-egreso').hide();
+        return $("#LCStableEgresoBody").html(" <tr> <td colspan = '5'> <h5> UPss!! No hay resultados</h5> </td > </tr> ");
+
+    }
+
+    LCStableCensoBody.innerHTML = "";
+    $('.spinner-border-egreso').hide();
+
+    res.forEach((item) => {
+
+        LCStableCensoBodyTemplate.querySelectorAll('td')[0].textContent = item.OID;
+        LCStableCensoBodyTemplate.querySelectorAll('td')[1].textContent = item.ORDENSALIDA;
+        LCStableCensoBodyTemplate.querySelectorAll('td')[2].textContent = item.DOCUMENTO;
+        LCStableCensoBodyTemplate.querySelectorAll('td')[3].textContent = item.NOMBRE_COMPLETO;
+        LCStableCensoBodyTemplate.querySelectorAll('td')[4].textContent = moment(item.FECSALIDA).format("DD/MM/YYYY HH:mm");
+
+        const clone = LCStableCensoBodyTemplate.cloneNode(true);
+        fragment.appendChild(clone);
+
+    });
+
+    LCStableCensoBody.appendChild(fragment);
+    DataTable("#LCStableEgreso", 10);
+}
+
 //--------------------------------------------  CONTROL  ENTRADA-SALIDA DE VISITANTES  -------------------------------------------------//
 
 let CSVtableCensoBody = document.getElementById('CSVtableCensoBody');
@@ -380,6 +452,7 @@ function modalResVisita(tipo, msm) {
 
 
 $('#CSVFbuscar').on("keyup", function () {
+    $('.spinner-border').show();
     let CSVFbuscar = $('#CSVFbuscar').val();
     let CSVFGrupo = $('#CSVFGrupo').val();
     let CSVFSubGrupo = $('#CSVFSubGrupo').val();
@@ -447,6 +520,7 @@ $('#CSVFlimpiar').on("click", function () {
     function ResCSVmostrarCenso(res) {
         res = res.d;
         if (res.length < 1) {
+            $('.spinner-border').hide();
             return $("#CSVtableCensoBody").html(" <tr> <td colspan = '8'> <h5> UPss!! No hay resultados</h5> </td > </tr> ");
 
         }

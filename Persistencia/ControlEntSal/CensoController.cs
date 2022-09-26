@@ -36,7 +36,7 @@ namespace Persistencia.ControlEntSal
                                       SLNORDSER On SLNORDSER.OID = SLNSERPRO.SLNORDSER1
                                     Where HPNESTANC.HESFECSAL Is Null And HPNDEFCAM.HCAESTADO = 2 And
                                       ADNINGRESO.AINESTADO = 0 
-                                       AND  (  ( GENPACIEN.PACPRINOM LIKE '%' + @buscar + '%' OR  GENPACIEN.PACPRIAPE LIKE '%' + @buscar + '%' OR  GENPACIEN.PACSEGAPE LIKE '%' + @buscar + '%'  OR GENPACIEN.PACNUMDOC LIKE '%' + @buscar + '%' ) 
+                                       AND  (  ( GENPACIEN.PACPRINOM LIKE '%' + @buscar + '%' OR  GENPACIEN.PACSEGNOM LIKE '%' + @buscar + '%' OR  GENPACIEN.PACPRIAPE LIKE '%' + @buscar + '%' OR  GENPACIEN.PACSEGAPE LIKE '%' + @buscar + '%'  OR GENPACIEN.PACNUMDOC LIKE '%' + @buscar + '%' OR HPNDEFCAM.HCACODIGO LIKE '%' + @buscar + '%' ) 
                                        AND (HPNGRUPOS.HGRCODIGO LIKE '%' + @grupo + '%' AND HPNSUBGRU.HSUCODIGO LIKE '%'+ @subgrupo + '%') )
                                     Group By ADNINGRESO.AINCONSEC, HPNGRUPOS.HGRCODIGO, HPNGRUPOS.HGRNOMBRE,
                                       HPNSUBGRU.HSUCODIGO, HPNSUBGRU.HSUNOMBRE, GENPACIEN.PACNUMDOC,

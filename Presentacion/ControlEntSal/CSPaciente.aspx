@@ -11,8 +11,8 @@
                 <div class="p-2 p-2-divide">
                   
                     <div class=" card-header">
-                        <div class="title_center">
-                            <h5>CONTROL SALIDA DE PACIENTES</h5>
+                        <div class="title_center  ">
+                            <h5>CONTROL SALIDA DE PACIENTES</h5>  
                         </div>
                     </div>
                 
@@ -50,14 +50,14 @@
                             <div class="row">
                                 <div class="col col-12">
                                     <div class="form-group">
-                                        <input placeholder="Nombres:" type="text" class="form-control form-control-sm" id="CSnombreR" readonly/>
+                                        <input placeholder="* Nombres:" type="text" class="form-control form-control-sm" id="CSnombreR" readonly/>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-12">
                                     <div class="form-group">
-                                        <input placeholder="Apellidos" class="form-control form-control-sm" id="CSapell" readonly/>
+                                        <input placeholder="* Apellidos" class="form-control form-control-sm" id="CSapell" readonly/>
                                     </div>
                                 </div>
                             </div>
@@ -107,13 +107,17 @@
                             </div>                       
                         </div>
                       
-                        <div class="d-flex justify-content-center" style="margin-top: 35px">
+                        <div class="d-flex flex-column" style="margin-top: 35px">
                             <button type="button" class="btn btn-outline-success" id="ModalSalBB" >
                                 Salida Menores de Edad
+                            </button> 
+                            <br />
+                            <button type="button" class="btn btn-outline-secondary" id="ModalSalListaBB" >
+                               Listado de Egresos
                             </button>
                         </div>
 
-                         
+           
 
                       </div>
                     </div>
@@ -238,6 +242,7 @@
                                     <h6 style = "float: left;" >Filtro de busquedas</h6>
                                 </div>
                             </div>
+
                                  <div>
                                     <div class="row">                                    
                                         <div class="col col-2">
@@ -274,6 +279,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            
                             </div>
                                 <table class="table" style="overflow:auto; width:98%; min-height:440px" id="CSVtableCenso">
                                     <thead>
@@ -480,6 +486,72 @@
                                </template>
                             </tbody>
                         </table>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style=" margin: 0px 5px 5px 4px">Close</button>
+                </div>
+            </div>
+            </div>
+         </div>
+
+
+      <!-- LISTADO DE EGRESO CONTROL SALIDA DE MENORES DE EDAD  BTN-->
+        <div class="modal fade" id="LCSEgreso" tabindex="-1" aria-labelledby="LCSEgreso" aria-hidden="true">
+            <div class="modal-dialog" style="max-width: 95% !important">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="">LISTADO DE EGRESO </h5>
+                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                     
+                </div>
+                <div class="modal-body">
+                 
+                    <div>
+                        <div class="row">                                    
+                            <div class="col col-2">
+                                <div class="form-group">
+                                    <label>Buscador</label>
+                                    <input type="text" class="form-control" id="LCSbuscar" placeholder="Documento o Nombre"/>
+                                </div>
+                            </div> 
+                           
+                            <div class="col col-1">
+                                <div class="form-group">
+                                    <button style="margin-top: 27px;" id="LCSlimpiar" type="button" class=" btn btn-primary">LIMPIAR</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <table class="table" style="overflow:auto; width:98%; min-height:440px" id="LCStableEgreso">
+                        <thead>
+                            <tr>
+                                <th>OID</th>
+                                <th>ORDENSALIDA</th>
+                                <th>DOCUMENTO</th>
+                                <th>NOMBRE COMPLETO</th>
+                                <th>FECHA DE SALIDA</th>
+                            </tr>  
+                        </thead>
+                        <tbody id="LCStableEgresoBody">
+                            <div class="spinner-border text-success spinner-border spinner-border-egreso  " role="status" style="position: absolute; top: 320px; width: 4rem; height: 4rem; right: 50%; ">
+                                <span class="visually-hidden"></span>
+                            </div>
+                                <template id="LCStableEgresoBodyTemplate">
+                                    <tr >
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>       
+                                    </tr>
+                                </template>
+                        </tbody>   
+                    </table>
+                      
+                      
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style=" margin: 0px 5px 5px 4px">Close</button>

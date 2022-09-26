@@ -90,6 +90,7 @@
     <Compile Include="ControlEntSal\Censo.cs" />
     <Compile Include="ControlEntSal\ControlEntSalModel.cs" />
     <Compile Include="ControlEntSal\SPacienteBBModel.cs" />
+    <Compile Include="ControlEntSal\SPacienteReal.cs" />
     <Compile Include="EncuestaCovid\EEncuestaCovid.cs" />
     <Compile Include="EncuestaCovid\EEstadisticasEC.cs" />
     <Compile Include="EncuestaCovid\LEEncuestaCovid.cs" />

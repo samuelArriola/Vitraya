@@ -55,6 +55,53 @@ namespace Persistencia.ControlEntSal
             return controlEntSalModels;
 
         }
+         public static List<SPacienteReal> GetSPacienteReal(string buscar )
+        {
+
+            List<SPacienteReal> sPacienteReallist = new List<SPacienteReal>();
+            Conexion conexion = new Conexion();
+            SqlCommand command;
+            SqlDataReader reader;
+            var FECSALIDA = DateTime.Now;
+
+
+            try
+            {
+              
+                command = new SqlCommand(@"SELECT  * FROM SPacienteReal  
+                                           WHERE  FECSALIDA > DateAdd(DAY, -2,  SYSDATETIME()) AND
+                                               (DOCUMENTO LIKE '%' + @buscar + '%' 
+                                               OR NOMBRE_COMPLETO LIKE '%' + @buscar + '%' ) 
+                                           ORDER BY FECSALIDA desc ", conexion.OpenConnection());
+                command.Parameters.AddWithValue("@FECSALIDA", FECSALIDA);
+                command.Parameters.AddWithValue("@buscar", buscar);
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    SPacienteReal spacienteReal = new SPacienteReal()
+                    {
+                        OID = Convert.ToInt32( reader["OID"].ToString() ),
+                        DOCUMENTO = reader["DOCUMENTO"].ToString(),
+                        ORDENSALIDA = reader["ORDENSALIDA"].ToString(),
+                        GnIdUsu = reader["GnIdUsu"].ToString(),
+                        NOMBRE_COMPLETO = reader["NOMBRE_COMPLETO"].ToString(),
+                        FECSALIDA =  Convert.ToDateTime(reader["FECSALIDA"].ToString() )
+                    };
+                    sPacienteReallist.Add(spacienteReal);
+                }
+
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+            return sPacienteReallist;
+
+        }
 
         public static int PacienteSalida(string CScodigoR)
         {
@@ -87,7 +134,7 @@ namespace Persistencia.ControlEntSal
             return respos;
         }
 
-        public static int InserPciente(string CScodigoR, string CSiden)
+        public static int InserPciente(string CScodigoR, string CSiden , string NOMBRE_COMPLETO)
         {
 
             var count = PacienteSalida(CScodigoR);
@@ -99,10 +146,11 @@ namespace Persistencia.ControlEntSal
             
                 try
                 {
-                    command = new SqlCommand("INSERT INTO SPacienteReal  (DOCUMENTO ,ORDENSALIDA ,FECSALIDA, GnIdUsu)" +
-                                             "VALUES(@DOCUMENTO, @ORDENSALIDA, @FECSALIDA, @GnIdUsuSC) select scope_identity()", conexion.OpenConnection());
+                    command = new SqlCommand("INSERT INTO SPacienteReal  (DOCUMENTO ,ORDENSALIDA ,FECSALIDA, GnIdUsu, NOMBRE_COMPLETO)" +
+                                             "VALUES(@DOCUMENTO, @ORDENSALIDA, @FECSALIDA, @GnIdUsuSC, @NOMBRE_COMPLETO) select scope_identity()", conexion.OpenConnection());
                     command.Parameters.AddWithValue("@DOCUMENTO", CSiden);
                     command.Parameters.AddWithValue("@ORDENSALIDA", CScodigoR);
+                    command.Parameters.AddWithValue("@NOMBRE_COMPLETO", NOMBRE_COMPLETO);
                     command.Parameters.AddWithValue("@FECSALIDA", DateAndTime);
                     command.Parameters.AddWithValue("@GnIdUsuSC", Responsable);
                     int OidInstancia = Convert.ToInt32(command.ExecuteScalar());
