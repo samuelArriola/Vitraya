@@ -15,6 +15,7 @@ namespace Entidades.ControlEntSal
         private string pacedad;
         private string edad;
         private string ainconsec;
+        private string ordenSal;
      
  
         public string PACNUMDOC { get => pacnumdoc; set => pacnumdoc = value; }
@@ -25,6 +26,8 @@ namespace Entidades.ControlEntSal
         public string PACEDAD { get => pacedad; set => pacedad = value; }
         public string EDAD { get => edad; set => edad = value; }
         public string AINCONSEC { get => ainconsec; set => ainconsec = value; }
+
+        public string ORDENSALIDA { get => ordenSal; set => ordenSal = value; }
 
     }
 }

@@ -22,7 +22,7 @@ namespace Comunes
             {
                 MailMessage m = new MailMessage();
                 SmtpClient SmtP = new SmtpClient();
-                m.From = new MailAddress("notificaciones@vitrayaclinicacrecer.com");
+                m.From = new MailAddress("analista.implementacionti@clinicacrecer.com");
 
                 foreach(var correo in correos)
                 {
@@ -38,10 +38,10 @@ namespace Comunes
                 m.Subject = subject;
                 m.Body = mensaje;
                 m.IsBodyHtml = true;
-                SmtP.Host = "190.8.177.123";
+                SmtP.Host = "smtp.office365.com";
                 SmtP.Port = 587;
                 //SmtP.Port = 465;
-                SmtP.Credentials = new NetworkCredential("notificaciones@vitrayaclinicacrecer.com", "1MAO@tVw?Y=^");
+                SmtP.Credentials = new NetworkCredential("analista.implementacionti@clinicacrecer.com", "Crecer2021#");
                 SmtP.EnableSsl = true;
                 ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
                 SmtP.Send(m);
@@ -61,7 +61,7 @@ namespace Comunes
             {
                 MailMessage m = new MailMessage();
                 SmtpClient SmtP = new SmtpClient();
-                m.From = new MailAddress("notificaciones@vitrayaclinicacrecer.com");
+                m.From = new MailAddress("analista.implementacionti@clinicacrecer.com");
 
                 foreach (var correo in correos)
                 {
@@ -77,9 +77,9 @@ namespace Comunes
                 m.Subject = subject;
                 m.Body = CrearMensaje(titulo,mensaje);
                 m.IsBodyHtml = true;
-                SmtP.Host = "190.8.177.123";
+                SmtP.Host = "smtp.office365.com";
                 SmtP.Port = 587;
-                SmtP.Credentials = new NetworkCredential("notificaciones@vitrayaclinicacrecer.com", "1MAO@tVw?Y=^");
+                SmtP.Credentials = new NetworkCredential("analista.implementacionti@clinicacrecer.com", "Crecer2021#");
                 SmtP.EnableSsl = true;
                 ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
                 SmtP.Send(m);

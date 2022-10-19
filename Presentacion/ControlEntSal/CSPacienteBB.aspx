@@ -46,6 +46,12 @@
                                             <input type="text" class="form-control" id="CSInomsBB" disabled/>
                                         </div>
                                     </div> 
+                                    <div class="col col-2">
+                                        <div class="form-group">
+                                            <label>* Orden de salida:</label>
+                                            <input type="text" class="form-control" id="CSIordenBB" disabled/>
+                                        </div>
+                                    </div>  
                                     <div class="col col-1" >
                                         <div class="form-group">
                                             <label>* Edad:</label>

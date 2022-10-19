@@ -63,7 +63,11 @@ namespace Persistencia.ControlEntSal
             try
             {
                 command.Connection = conexion2;
-                command.CommandText = "SELECT GENPACIEN.PACNUMDOC,(GENPACIEN.PACPRINOM + ' ' + GENPACIEN.PACSEGNOM + ' ' + GENPACIEN.PACPRIAPE +' ' + GENPACIEN.PACSEGAPE) AS NOMBRE,ADNINGRESO.OID AS OIDINGRESO, ADNINGRESO.AINCONSEC AS ADMISION, GENPACIEN.OID AS OIDPACIENTE, DATEDIFF( YEAR, GPAFECNAC ,SYSDATETIME() ) AS EDAD FROM ADNINGRESO INNER JOIN GENPACIEN ON GENPACIEN.OID = ADNINGRESO.GENPACIEN WHERE AINCONSEC = @AINCONSEC";
+                command.CommandText = @"SELECT GENPACIEN.PACNUMDOC,(GENPACIEN.PACPRINOM + ' ' + GENPACIEN.PACSEGNOM + ' ' + GENPACIEN.PACPRIAPE +' ' + GENPACIEN.PACSEGAPE) AS NOMBRE,ADNINGRESO.OID AS OIDINGRESO, ADNINGRESO.AINCONSEC AS ADMISION, GENPACIEN.OID AS OIDPACIENTE, DATEDIFF( YEAR, GPAFECNAC ,SYSDATETIME() ) AS EDAD, SRACONSEC 
+                                        FROM ADNINGRESO 
+                                            INNER JOIN GENPACIEN ON GENPACIEN.OID = ADNINGRESO.GENPACIEN 
+                                            LEFT JOIN SLNORDSAL ON ADNINGRESO.OID = SLNORDSAL.ADNINGRES1
+                                            WHERE AINCONSEC = @AINCONSEC";
                 command.Parameters.AddWithValue("@AINCONSEC", Codigo);
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -72,6 +76,7 @@ namespace Persistencia.ControlEntSal
                     {
                         PACNUMDOC = reader["PACNUMDOC"].ToString(),
                         PACPRINOM = reader["NOMBRE"].ToString(),
+                        ORDENSALIDA = reader["SRACONSEC"].ToString(),
                         EDAD = reader["EDAD"].ToString()
                     };
                     controlEntSalModels.Add(controlEntSalModel);
@@ -263,7 +268,7 @@ namespace Persistencia.ControlEntSal
 
             return num;
         }
-        public static int AcudienteBBMenorSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
+        public static int AcudienteBBMenorSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB, string ORDENSALIDA)
         {
             int NumDeAcu =  NumDeAcuBB(CSingresoBB);
             string Estado1SS = "SalServicio";
@@ -279,10 +284,11 @@ namespace Persistencia.ControlEntSal
         
                 try
                 {
-                    command = new SqlCommand("INSERT INTO SPacienteBB (ADNINGRES1 ,DocPaiente ,NomPaciente ,DocResponsable ,NomResponsable ,TpResponsable ,NomBB  ,GnIdUsuSS ,Estado1SS ,FECHASS , Edad, Eliminado ) " +
-                                            "VALUES(@ADNINGRES1, @DocPaiente, @NomPaciente, @DocResponsable, @NomResponsable, @TpResponsable, @NomBB, @GnIdUsu, @Estado1SS, @FECHASS, @Edad, @Eliminado )", conexion.OpenConnection());
+                    command = new SqlCommand("INSERT INTO SPacienteBB (ADNINGRES1 ,DocPaiente ,NomPaciente ,DocResponsable ,NomResponsable ,TpResponsable ,NomBB  ,GnIdUsuSS ,Estado1SS ,FECHASS , Edad, Eliminado, ORDENSALIDA ) " +
+                                            "VALUES(@ADNINGRES1, @DocPaiente, @NomPaciente, @DocResponsable, @NomResponsable, @TpResponsable, @NomBB, @GnIdUsu, @Estado1SS, @FECHASS, @Edad, @Eliminado, @ORDENSALIDA )", conexion.OpenConnection());
 
                     command.Parameters.AddWithValue("ADNINGRES1", CSingresoBB);
+                    command.Parameters.AddWithValue("ORDENSALIDA", CSingresoBB);
                     command.Parameters.AddWithValue("DocPaiente", CSIidenBB);
                     command.Parameters.AddWithValue("NomPaciente", CSInomsBB);
                     command.Parameters.AddWithValue("DocResponsable", CSAidenBB);
@@ -313,7 +319,7 @@ namespace Persistencia.ControlEntSal
             return NumDeAcu;
 
         }
-        public static void AcudienteBBSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
+        public static void AcudienteBBSet(int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB, string ORDENSALIDA)
         {
             int CountNumBebe = NumBebe(CSingresoBB) + 1;
             string Estado1SS = "SalServicio";
@@ -327,10 +333,11 @@ namespace Persistencia.ControlEntSal
 
             try
             {
-                command = new SqlCommand("INSERT INTO SPacienteBB (ADNINGRES1 ,DocPaiente ,NomPaciente ,DocResponsable ,NomResponsable ,TpResponsable ,NomBB  ,GnIdUsuSS ,Estado1SS ,FECHASS ,NumBebe, Edad, Eliminado ) " +
-                                        "VALUES(@ADNINGRES1, @DocPaiente, @NomPaciente, @DocResponsable, @NomResponsable, @TpResponsable, @NomBB, @GnIdUsu, @Estado1SS, @FECHASS, @NumBebe, @Edad, @Eliminado )", conexion.OpenConnection());
+                command = new SqlCommand("INSERT INTO SPacienteBB (ADNINGRES1 ,DocPaiente ,NomPaciente ,DocResponsable ,NomResponsable ,TpResponsable ,NomBB  ,GnIdUsuSS ,Estado1SS ,FECHASS ,NumBebe, Edad, Eliminado, ORDENSALIDA ) " +
+                                        "VALUES(@ADNINGRES1, @DocPaiente, @NomPaciente, @DocResponsable, @NomResponsable, @TpResponsable, @NomBB, @GnIdUsu, @Estado1SS, @FECHASS, @NumBebe, @Edad, @Eliminado, @ORDENSALIDA )", conexion.OpenConnection());
 
                 command.Parameters.AddWithValue("ADNINGRES1", CSingresoBB);
+                command.Parameters.AddWithValue("ORDENSALIDA", ORDENSALIDA);
                 command.Parameters.AddWithValue("DocPaiente", CSIidenBB);
                 command.Parameters.AddWithValue("NomPaciente", CSInomsBB);
                 command.Parameters.AddWithValue("DocResponsable", CSAidenBB);

@@ -18,15 +18,15 @@ namespace Presentacion.ControlEntSal
         }
 
         [WebMethod]
-        public static void SetAcudienteBB( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
+        public static void SetAcudienteBB( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB, string ORDENSALIDA)
         {
-                CSPacienteBBController.AcudienteBBSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB, CSedadBB);
+                CSPacienteBBController.AcudienteBBSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB, CSedadBB,  ORDENSALIDA);
         }
 
         [WebMethod]
-        public static int SetAcudienteBBMenor( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB)
+        public static int SetAcudienteBBMenor( int CSingresoBB, string CSInomsBB, string CSIidenBB, string CSAidenBB, string CSAtipoBB, string CSAnomsBB, int CSedadBB, string ORDENSALIDA)
         {
-             return CSPacienteBBController.AcudienteBBMenorSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB, CSedadBB);
+             return CSPacienteBBController.AcudienteBBMenorSet(CSingresoBB, CSInomsBB, CSIidenBB, CSAidenBB, CSAtipoBB, CSAnomsBB, CSedadBB, ORDENSALIDA);
         }
 
         [WebMethod]

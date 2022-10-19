@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Presentacion.Servicios
+namespace Presentacion.ControlEntSal
 {
 
 
-    public partial class desprendible
+    public partial class Informes
     {
     }
 }

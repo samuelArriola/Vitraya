@@ -115,9 +115,7 @@
                             <button type="button" class="btn btn-outline-secondary" id="ModalSalListaBB" >
                                Listado de Egresos
                             </button>
-                        </div>
-
-           
+                        </div>           
 
                       </div>
                     </div>
@@ -230,7 +228,6 @@
 
            <div class="col col-8 x_panel" style="height: 100%"> 
                    
-
                  <div class="x_content">
 
                     <div class="row d-flex justify-content-center">
@@ -272,6 +269,12 @@
                                                 </select>
                                             </div>
                                         </div>
+                                         <div class="col col-2">
+                                            <div class="form-group">
+                                                <label>Visita</label>
+                                                <input type="text" class="form-control" id="searchTerm" placeholder="Nombre" onkeyup="doSearch()"/>
+                                            </div>
+                                        </div> 
                                         <div class="col col-1">
                                             <div class="form-group">
                                                 <button style="margin-top: 27px;" id="CSVFlimpiar" type="button" class=" btn btn-primary">LIMPIAR</button>
@@ -281,7 +284,8 @@
                                 </div>
                             
                             </div>
-                                <table class="table" style="overflow:auto; width:98%; min-height:440px" id="CSVtableCenso">
+                            <div class="tableFixHead " style=" width: 98%; height: 470px; overflow-y: scroll;">
+                                <table class="table" style="" id="CSVtableCenso">
                                     <thead>
                                         <tr>
                                            <th>Grupo</th>
@@ -294,7 +298,7 @@
                                         </tr>  
                                     </thead>
                                     <tbody id="CSVtableCensoBody">
-                                        <div class="spinner-border text-success" role="status" style="position: absolute; top: 320px; width: 4rem; height: 4rem">
+                                        <div class="spinner-border text-success" role="status" style="position: absolute; top: 320px; right:50%; width: 4rem; height: 4rem">
                                           <span class="visually-hidden"></span>
                                         </div>
                                           <template id="CSVtableCensoBodyTemplate">
@@ -308,26 +312,17 @@
                                                     <td></td>       
                                                 </tr>
                                            </template>
+                                         
                                     </tbody>   
-                                </table>
-
-                                <div>
-                                   
-                                </div>
-    
+                                </table>                       
+                            
+                            </div>
                         </div>
 
                     </div>
                 </div>
 
-             </div>
-
-
-
-
-           
-
-           </div>
+            
          
            <%-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
              
@@ -351,10 +346,7 @@
               </button>
             </div>
                --%>
-
-   
-           
-        </div>
+        
     </div>
 
     

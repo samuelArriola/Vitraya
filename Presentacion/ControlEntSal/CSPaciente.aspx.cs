@@ -24,9 +24,9 @@ namespace Presentacion.ControlEntSal
         }
 
         [WebMethod]
-        public static int SalidaPaciente(string CScodigoR, string CSiden, string NOMBRE_COMPLETO)
+        public static int SalidaPaciente(string CScodigoR, string CSiden, string NOMBRE_COMPLETO, long CSingreso)
         {
-            return ControlEntSalController.InserPciente(CScodigoR, CSiden, NOMBRE_COMPLETO);
+            return ControlEntSalController.InserPciente(CScodigoR, CSiden, NOMBRE_COMPLETO, CSingreso);
         }
 
 

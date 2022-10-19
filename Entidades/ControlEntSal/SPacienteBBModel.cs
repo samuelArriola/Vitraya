@@ -8,7 +8,7 @@ namespace Entidades.ControlEntSal
     public class SPacienteBBModel
     {
         private int oid, adningres1, GnIdUsuSS, GnIdUsuSC, numbebe;
-        private string DocPaciente, nomPaciente, docResponsable, eliminado, 
+        private string ordenSal, DocPaciente, nomPaciente, docResponsable, eliminado, 
             nomResponsable, tpResponsable, nomBB, estado1SS, estado2SC;
         private DateTime fechaSS, fechaSC;
 
@@ -17,6 +17,7 @@ namespace Entidades.ControlEntSal
         public int GNINUSUSS { get => GnIdUsuSS; set => GnIdUsuSS = value; }
         public int GNINUSUSC { get => GnIdUsuSC; set => GnIdUsuSC = value; }
         public int NUMBEBE { get => numbebe; set => numbebe = value; }
+        public string ORDENSALIDA { get => ordenSal; set => ordenSal = value; }
         public string DOCPACIENTE { get => DocPaciente; set => DocPaciente = value; }
         public string NOMPACIENTE { get => nomPaciente; set => nomPaciente = value; }
         public string DOCRESPONSABLE { get => docResponsable; set => docResponsable = value; }

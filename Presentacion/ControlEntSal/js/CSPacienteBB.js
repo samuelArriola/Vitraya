@@ -30,6 +30,7 @@ $('#CSingresoBB').on("focusout", function () {
             $('#CSInomsBB').val('');
             $('#CSIidenBB').val('');
             $('#CSIedadBB').val('');
+            $('#CSIordenBB').val('');
             ListaSalida.innerHTML = "";
         } else {
             ejecutarajax("CSPacienteBB.aspx/GetCountPacienteSalida", { ingreso: CSingresoBB }, ResGetCountPacienteSalida)
@@ -50,6 +51,7 @@ function ResGetCountPacienteSalida(res) {
         $('#CSInomsBB').val('');
         $('#CSIidenBB').val('');
         $('#CSIedadBB').val('');
+        $('#CSIordenBB').val('');
         ListaSalida.innerHTML = "";
         error('Notificacion','Ya el paciente ha salido')
     }
@@ -65,6 +67,7 @@ function getIngreBB(res) {
         $('#CSInomsBB').val('');
         $('#CSIidenBB').val('');
         $('#CSIedadBB').val('');
+        $('#CSIordenBB').val('');
         ListaSalida.innerHTML = "";
         return error("Notificacion", "Paciente no encontrado");
     }
@@ -73,6 +76,7 @@ function getIngreBB(res) {
         $('#CSInomsBB').val(item.PACPRINOM);
         $('#CSIidenBB').val(item.PACNUMDOC);
         $('#CSIedadBB').val(item.EDAD);
+        $('#CSIordenBB').val(item.ORDENSALIDA);
     });
     tablaMostrarSalidas($('#CSingresoBB').val())
    
@@ -112,16 +116,17 @@ function getAcudienteBB(res) {
 //REGISTRAR ACUDIENTE
 $('#btnCSregistroBB').on("click", function () {
     let CSingresoBB = $('#CSingresoBB').val();
+    let ORDENSALIDA = $('#CSIordenBB').val();
     let CSInomsBB = $('#CSInomsBB').val();
     let CSIidenBB = $('#CSIidenBB').val();
     let CSAidenBB = $('#CSAidenBB').val()
     let CSAtipoBB = $('#CSAtipoBB').val();
     let CSAnomsBB = $('#CSAnomsBB').val();
     let CSedadBB = $('#CSIedadBB').val();
-  
    
     const data = {
         CSingresoBB,
+        ORDENSALIDA,
         CSInomsBB,
         CSIidenBB,
         CSAidenBB,
@@ -129,7 +134,7 @@ $('#btnCSregistroBB').on("click", function () {
         CSAnomsBB,
         CSedadBB
     }
-
+    console.log(data.ORDENSALIDA)
     if (isEmpy(CSingresoBB) || isEmpy(CSInomsBB) || isEmpy(CSIidenBB) || isEmpy(CSAidenBB) || isEmpy(CSAtipoBB) || isEmpy(CSAnomsBB) || isEmpy(CSedadBB) ) {
         error("Notificacion", "Verifique que los campos con (*) estén diligenciados");
     } else {

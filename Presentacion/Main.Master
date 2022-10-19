@@ -31,6 +31,8 @@
          <link href="~/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet" />
          <link href="~/vendors/moment/min/moment.min.js" rel="stylesheet" />
          <link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"  />
+         <link rel="stylesheet"  href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css"  />
        <link href="build/css/canvas.css" rel="stylesheet" />
       
       <asp:PlaceHolder runat="server">

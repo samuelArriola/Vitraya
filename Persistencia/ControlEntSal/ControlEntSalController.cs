@@ -102,7 +102,6 @@ namespace Persistencia.ControlEntSal
             return sPacienteReallist;
 
         }
-
         public static int PacienteSalida(string CScodigoR)
         {
 
@@ -134,7 +133,7 @@ namespace Persistencia.ControlEntSal
             return respos;
         }
 
-        public static int InserPciente(string CScodigoR, string CSiden , string NOMBRE_COMPLETO)
+        public static int InserPciente(string CScodigoR, string CSiden , string NOMBRE_COMPLETO, long CSingreso)
         {
 
             var count = PacienteSalida(CScodigoR);
@@ -146,13 +145,14 @@ namespace Persistencia.ControlEntSal
             
                 try
                 {
-                    command = new SqlCommand("INSERT INTO SPacienteReal  (DOCUMENTO ,ORDENSALIDA ,FECSALIDA, GnIdUsu, NOMBRE_COMPLETO)" +
-                                             "VALUES(@DOCUMENTO, @ORDENSALIDA, @FECSALIDA, @GnIdUsuSC, @NOMBRE_COMPLETO) select scope_identity()", conexion.OpenConnection());
+                    command = new SqlCommand("INSERT INTO SPacienteReal  (DOCUMENTO ,ORDENSALIDA ,FECSALIDA, GnIdUsu, NOMBRE_COMPLETO, ADNINGRES1)" +
+                                             "VALUES(@DOCUMENTO, @ORDENSALIDA, @FECSALIDA, @GnIdUsuSC, @NOMBRE_COMPLETO, @CSingreso) select scope_identity()", conexion.OpenConnection());
                     command.Parameters.AddWithValue("@DOCUMENTO", CSiden);
                     command.Parameters.AddWithValue("@ORDENSALIDA", CScodigoR);
                     command.Parameters.AddWithValue("@NOMBRE_COMPLETO", NOMBRE_COMPLETO);
                     command.Parameters.AddWithValue("@FECSALIDA", DateAndTime);
                     command.Parameters.AddWithValue("@GnIdUsuSC", Responsable);
+                    command.Parameters.AddWithValue("@CSingreso", CSingreso);
                     int OidInstancia = Convert.ToInt32(command.ExecuteScalar());
 
                     DAOGNHistorico.SetHistorico(new GNHistorico

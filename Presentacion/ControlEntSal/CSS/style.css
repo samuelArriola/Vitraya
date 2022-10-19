@@ -53,3 +53,9 @@ carousel-inner {
 .table td {
     border-right: 0px #2a3f54 solid;
 }
+
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
