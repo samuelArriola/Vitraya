@@ -37,7 +37,7 @@
                                     <div class="col col-2">
                                         <div class="form-group">
                                             <label>* Identificación:</label>
-                                            <input type="number" class="form-control" id="CSIidenBB" disabled />
+                                            <input type="text" class="form-control" id="CSIidenBB" disabled />
                                         </div>
                                     </div>
                                     <div class="col col-3">
