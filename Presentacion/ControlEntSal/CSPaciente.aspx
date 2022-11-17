@@ -213,7 +213,7 @@
                             </div>
                         </div>
                          <div class="d-flex justify-content-center" style="margin-top: 15px">
-                            <button type="button" class="btn btn-primary" id="CSVbtnLimpiar" >
+                            <button type="button" class="btn btn-success" id="CSVbtnLimpiar" >
                                 Limpiar
                             </button>
                         </div>
@@ -277,7 +277,7 @@
                                         </div> 
                                         <div class="col col-1">
                                             <div class="form-group">
-                                                <button style="margin-top: 27px;" id="CSVFlimpiar" type="button" class=" btn btn-primary">LIMPIAR</button>
+                                                <button style="margin-top: 27px;" id="CSVFlimpiar" type="button" class=" btn btn-success">LIMPIAR</button>
                                             </div>
                                         </div>
                                     </div>
@@ -491,57 +491,117 @@
         <div class="modal fade" id="LCSEgreso" tabindex="-1" aria-labelledby="LCSEgreso" aria-hidden="true">
             <div class="modal-dialog" style="max-width: 95% !important">
             <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="">LISTADO DE EGRESO </h5>
-                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                     
-                </div>
+               
                 <div class="modal-body">
-                 
-                    <div>
-                        <div class="row">                                    
-                            <div class="col col-2">
-                                <div class="form-group">
-                                    <label>Buscador</label>
-                                    <input type="text" class="form-control" id="LCSbuscar" placeholder="Documento o Nombre"/>
-                                </div>
-                            </div> 
-                           
-                            <div class="col col-1">
-                                <div class="form-group">
-                                    <button style="margin-top: 27px;" id="LCSlimpiar" type="button" class=" btn btn-primary">LIMPIAR</button>
-                                </div>
-                            </div>
+                    
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                          <button class="nav-link active" id="nav-mayorE-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Menor de Edad</button>
+                          <button class="nav-link" id="nav-menorE-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Mayor de edad</button>
                         </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        
+                        <%--MAYORES DE EDAD--%>
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-mayorE-tab">
+                            
+                             <div> <br />
+                                <div class="row ">                                    
+                                    <div class="col col-2">
+                                        <div class="form-group">
+                                            <label>Buscador</label>
+                                            <input type="text" class="form-control" id="LCSbuscar" placeholder="Documento o Nombre"/>
+                                        </div>
+                                    </div> 
+                           
+                                    <div class="col col-1">
+                                        <div class="form-group">
+                                            <button style="margin-top: 27px;" id="LCSlimpiar" type="button" class=" btn btn-success">LIMPIAR
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br />
+                             <table class="table" style="overflow:auto; width:98%; min-height:440px" id="LCStableEgreso">
+                                <thead>
+                                    <tr>
+                                        <th>OID</th>
+                                        <th>ORDENSALIDA</th>
+                                        <th>DOCUMENTO</th>
+                                        <th>NOMBRE COMPLETO</th>
+                                        <th>FECHA DE SALIDA</th>
+                                    </tr>  
+                                </thead>
+                                <tbody id="LCStableEgresoBody">
+                                    <div class="spinner-border text-success spinner-border spinner-border-egreso  " role="status" style="position: absolute; top: 320px; width: 4rem; height: 4rem; right: 50%; ">
+                                        <span class="visually-hidden"></span>
+                                    </div>
+                                        <template id="LCStableEgresoBodyTemplate">
+                                            <tr >
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>       
+                                            </tr>
+                                        </template>
+                                </tbody>   
+                            </table>
+
+                        </div>
+
+                        <%--MENORES DE EDAD--%>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-menorE-tab">
+                              <div> <br />
+                                <div class="row ">                                    
+                                    <div class="col col-2">
+                                        <div class="form-group">
+                                            <label>Buscador</label>
+                                            <input type="text" class="form-control" id="LCSbuscarME" placeholder="Documento o Nombre"/>
+                                        </div>
+                                    </div> 
+                           
+                                    <div class="col col-1">
+                                        <div class="form-group">
+                                            <button style="margin-top: 27px;" id="LCSlimpiarME" type="button" class=" btn btn-success">LIMPIAR
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br />
+                             <table class="table" style="overflow:auto; width:98%; min-height:440px" id="LCStableEgresoME">
+                                <thead>
+                                    <tr>
+                                        <th>OID</th>
+                                        <th>ORDENSALIDA</th>
+                                        <th>DOCUMENTO</th>
+                                        <th>NOMBRE COMPLETO</th>
+                                        <th>RESPONSABLE</th>
+                                        <th>FECHA DE SALIDA</th>
+                                    </tr>  
+                                </thead>
+                                <tbody id="LCStableEgresoBodyME">
+                                    <div class="spinner-border text-success spinner-border spinner-border-egreso  " role="status" style="position: absolute; top: 320px; width: 4rem; height: 4rem; right: 50%; ">
+                                        <span class="visually-hidden"></span>
+                                    </div>
+                                        <template id="LCStableEgresoBodyTemplateME">
+                                            <tr >
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>       
+                                                <td></td>       
+                                            </tr>
+                                        </template>
+                                 </tbody>   
+                              </table>
+                            
+                        </div>
+
                     </div>
 
-                     <table class="table" style="overflow:auto; width:98%; min-height:440px" id="LCStableEgreso">
-                        <thead>
-                            <tr>
-                                <th>OID</th>
-                                <th>ORDENSALIDA</th>
-                                <th>DOCUMENTO</th>
-                                <th>NOMBRE COMPLETO</th>
-                                <th>FECHA DE SALIDA</th>
-                            </tr>  
-                        </thead>
-                        <tbody id="LCStableEgresoBody">
-                            <div class="spinner-border text-success spinner-border spinner-border-egreso  " role="status" style="position: absolute; top: 320px; width: 4rem; height: 4rem; right: 50%; ">
-                                <span class="visually-hidden"></span>
-                            </div>
-                                <template id="LCStableEgresoBodyTemplate">
-                                    <tr >
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>       
-                                    </tr>
-                                </template>
-                        </tbody>   
-                    </table>
+
                       
                       
                 </div>

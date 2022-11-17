@@ -116,7 +116,7 @@
                      <div class="x_panel" style="height: 100%;">
                         <div class="x_title">
                             <div class="clearfix">
-                                <h6>SALIDA DE MENORES DE EDAD</h6>
+                                <h6>NO REPORTADOS</h6>
                             </div>
                         </div>
                         <div class="x_content">

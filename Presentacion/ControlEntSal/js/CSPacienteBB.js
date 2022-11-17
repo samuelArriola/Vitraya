@@ -225,6 +225,7 @@ ListaSalida.addEventListener("click", (e) => {
       
     }
 })
+
 //ElIMINAR ACUDIENTE
 $('#btnMCSEliminarEBB').on("click", function () {
     var oid = $('#MCSIdenBB').val();

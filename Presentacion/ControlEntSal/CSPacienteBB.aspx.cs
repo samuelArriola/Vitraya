@@ -61,6 +61,12 @@ namespace Presentacion.ControlEntSal
         }
 
          [WebMethod]
+        public static List<SPacienteBBModel> BuscarEgresoGet(string buscar)
+        {
+            return CSPacienteBBController.GetBuscarEgreso(buscar);
+        }
+
+         [WebMethod]
         public static void DeleteAcuBB( string oid)
         {
              CSPacienteBBController.AcuBBDelete(oid);

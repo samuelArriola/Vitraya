@@ -104,7 +104,7 @@ namespace Persistencia.ControlEntSal
 
             try
             {
-                //VALIDACION INGRESO EXIXTENTE
+                //VALIDACION INGRESO EXISTENTE
                 command = new SqlCommand("SELECT * FROM SPacienteBB WHERE ADNINGRES1 = @ADNINGRES1 AND Estado2SC IS NULL AND Eliminado = 'NO'", conexion.OpenConnection());
                 command.Parameters.AddWithValue("@ADNINGRES1", ingreso);
                 reader = command.ExecuteReader();
@@ -137,8 +137,60 @@ namespace Persistencia.ControlEntSal
 
             return spacienteBBModels; 
 
-        }   
-        
+        }
+
+        public static List<SPacienteBBModel> GetBuscarEgreso(string buscar)
+        {
+
+            List<SPacienteBBModel> sPacientelist = new List<SPacienteBBModel>();
+            Conexion conexion = new Conexion();
+            SqlCommand command;
+            SqlDataReader reader;
+
+            try
+            {
+
+                command = new SqlCommand(@"SELECT * FROM SPacienteBB 
+                                            WHERE  Estado2SC IS not NULL AND Eliminado = 'NO' AND
+	                                            FECHASC > DateAdd(DAY, -2,  SYSDATETIME()) AND
+                                                (DocPaiente LIKE '%' + @buscar + '%' 
+                                                OR NomPaciente LIKE '%' + @buscar + '%' 
+	                                            OR NomResponsable LIKE '%' + @buscar + '%'
+                                                OR NomBB LIKE '%' + @buscar + '%'    ) 
+                                            ORDER BY FECHASC desc", conexion.OpenConnection());
+              
+                command.Parameters.AddWithValue("@buscar", buscar);
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    SPacienteBBModel spacienteBB = new SPacienteBBModel()
+                    {
+                        OID = Convert.ToInt32(reader["OID"].ToString()),
+                        ORDENSALIDA = reader["ORDENSALIDA"].ToString(),
+                        DOCPACIENTE = reader["DocPaiente"].ToString(),
+                        NOMPACIENTE = reader["NomBB"].ToString(),
+                        DOCRESPONSABLE = reader["DocResponsable"].ToString(),
+                        NOMRESPONSABLE = reader["NomResponsable"].ToString(),
+                        TPRESPONSABLE = reader["TpResponsable"].ToString(),
+                        NOMBB = reader["NomBB"].ToString(),
+                        FECHASC = Convert.ToDateTime(reader["FECHASC"].ToString()),
+                    };
+                    sPacientelist.Add(spacienteBB);
+                }
+
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conexion.CloseConnection();
+            }
+            return sPacientelist;
+
+        }
+
         public static List<SPacienteBBModel> AcuBBGetUpdate(string oid)
         {
             List<SPacienteBBModel> spacienteBBModels = new List<SPacienteBBModel>();

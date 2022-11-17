@@ -483,6 +483,67 @@ function doSearch() {
 
 }
 
+//PINTAR TABLA DE EGRESOS MENORES DE EDAD
+
+let LCStableEgresoBodyME = document.getElementById('LCStableEgresoBodyME');
+let LCStableEgresoBodyTemplateME = document.getElementById('LCStableEgresoBodyTemplateME').content;
+
+$('#nav-menorE-tab').on('click', () => {
+    let LCSbuscarME = $('#LCSbuscarME').val();
+    buscarEgresoME(LCSbuscarME);
+})
+
+$('#LCSbuscarME').on("keyup", function () {
+    $('.spinner-border-egreso').show();
+    let LCSbuscarME = $('#LCSbuscarME').val();
+    buscarEgresoME(LCSbuscarME);
+})
+
+$('#LCSlimpiarME').on('click', function () {
+    $('#LCSbuscarME').val('');
+    let LCSbuscarME = $('#LCSbuscarME').val();
+    buscarEgresoME(LCSbuscarME);
+})
+function buscarEgresoME(buscar) {
+    const data = {
+        buscar
+    }
+
+    ejecutarajax("CSPacienteBB.aspx/BuscarEgresoGet", data, pintaEgredoME)
+}
+
+function pintaEgredoME(res) {
+    res = res.d;
+    console.log(res);
+
+    if (res.length < 1) {
+        LCStableEgresoBodyME.innerHTML = "";
+        $('.spinner-border-egreso').hide();
+        return $("#LCStableEgresoBodyME").html(" <tr> <td colspan = '6'> <h5> UPss!! No hay resultados</h5> </td > </tr> ");
+
+    }
+
+    LCStableEgresoBodyME.innerHTML = "";
+    $('.spinner-border-egreso').hide();
+
+    res.forEach((item) => {
+
+        LCStableEgresoBodyTemplateME.querySelectorAll('td')[0].textContent = item.OID;
+        LCStableEgresoBodyTemplateME.querySelectorAll('td')[1].textContent = item.ORDENSALIDA;
+        LCStableEgresoBodyTemplateME.querySelectorAll('td')[2].textContent = item.DOCPACIENTE;
+        LCStableEgresoBodyTemplateME.querySelectorAll('td')[3].textContent = item.NOMPACIENTE;
+        LCStableEgresoBodyTemplateME.querySelectorAll('td')[4].textContent = item.NOMRESPONSABLE;
+        LCStableEgresoBodyTemplateME.querySelectorAll('td')[5].textContent = moment(item.FECHASC).format("DD/MM/YYYY HH:mm");
+
+        const clone = LCStableEgresoBodyTemplateME.cloneNode(true);
+        fragment.appendChild(clone);
+
+    });
+
+    LCStableEgresoBodyME.appendChild(fragment);
+    DataTable("#LCStableEgresoME", 10);
+}
+
 //--------------------------------------------  CONTROL  ENTRADA-SALIDA DE VISITANTES  -------------------------------------------------//
 
 let CSVtableCensoBody = document.getElementById('CSVtableCensoBody');
