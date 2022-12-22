@@ -127,11 +127,82 @@
     </style>
 </head>
 
+
 <body class="login">
     <form id="form1" runat="server">
        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="mdChPass">
+       
+        
+        <div>
+            <a class="hiddenanchor" id="signup"></a>
+            <a class="hiddenanchor" id="signin"></a>
+            <div class="login_wrapper">
+                <div class="animate form login_form">
+                    <div class="col-md-12 col-sm-12 " id="requerido" runat="server">
+                        <div class="alert alert-danger" role="alert">
+                            <h4 class="alert-heading">Warning!</h4>
+                            <asp:Label ID="Label4" runat="server" Text="Label" Style="font-size: 20px; font-weight: bold;"></asp:Label>
+                            <hr/>
+                        </div>
+                    </div>
+                    <asp:UpdatePanel runat="server" ID="PanelLogin">
+                        <ContentTemplate>
+                            <section class="login_content">
+                              
+                                    <%--<h1><i class="fa fa-hospital-o mr-2"></i>Clinica Crecer</h1>--%>
+                                    <img src="../Images/LogoVitraya21.png" height="200" width="200" />
+                                    <div>
+                                        <div class="form-control search-p d-flex justify-content-between">
+                                            <i class="fa fa-user"></i>
+                                            <asp:TextBox ID="TextBox1"  runat="server" placeholder="Username"></asp:TextBox>
+                                        </div>
+                                       
+                                    </div>
+                                    <br />
+                                    <div class="input-group">
+                                        <div class="form-control search-p d-flex justify-content-between">
+                                            <i class="fa fa-eye" id="show_password"></i>
+                                            <asp:TextBox ID="TextBox2" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div>
+                                        <asp:Button ID="Button1" runat="server" Text="Iniciar sesión" CssClass="btn btn-info" OnClick="Button1_Click" />
+                                        <div class="mt-3"></div>
+                                        <a  href="javascript:(function(){$('#mdChPass').modal(); $('#txtValUsu').val($('#TextBox1').val())})()" class="mt-3">¿Olvidó su contraseña?</a>
+                                    </div>
+                                    <div>
+                                        <asp:Label ID="Label1" runat="server" Text="Label" Font-Bold="true" Style="font-size: 15px;" Visible="false"></asp:Label>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="separator">
+                                        <div>
+                                            
+                                        </div>
+                                    </div>
+                                     
+                                    <div id="PiePagina" style="margin-top:390px">
+                                        <p><b>Copyright © 2022 CLINICA CRECER.</b></p> 
+                                    </div>
+                             
+                            </section>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:UpdateProgress runat="server" AssociatedUpdatePanelID="PanelLogin" DisplayAfter="0">
+                        <ProgressTemplate>
+                            <div class="overlay" />
+                            <div class="overlayContent">
+                                 
+                            </div>
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
+                </div>
+            </div>
+
+            <!--Modal Recuperar contraseña -->
+             <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="mdChPass">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -157,72 +228,6 @@
                 </div>
             </div>
         </div>
-        <div>
-            <a class="hiddenanchor" id="signup"></a>
-            <a class="hiddenanchor" id="signin"></a>
-            <div class="login_wrapper">
-                <div class="animate form login_form">
-                    <div class="col-md-12 col-sm-12 " id="requerido" runat="server">
-                        <div class="alert alert-danger" role="alert">
-                            <h4 class="alert-heading">Warning!</h4>
-                            <asp:Label ID="Label4" runat="server" Text="Label" Style="font-size: 20px; font-weight: bold;"></asp:Label>
-                            <hr/>
-                        </div>
-                    </div>
-                    <asp:UpdatePanel runat="server" ID="PanelLogin">
-                        <ContentTemplate>
-                            <section class="login_content">
-                                <form>
-                                    <%--<h1><i class="fa fa-hospital-o mr-2"></i>Clinica Crecer</h1>--%>
-                                    <img src="../Images/LogoVitraya21.png" height="200" width="200" />
-                                    <div>
-                                        <div class="form-control search-p d-flex justify-content-between">
-                                            <i class="fa fa-user"></i>
-                                            <asp:TextBox ID="TextBox1"  runat="server" placeholder="Username"></asp:TextBox>
-                                        </div>
-                                       
-                                    </div>
-                                    <br />
-                                    <div class="input-group">
-                                        <div class="form-control search-p d-flex justify-content-between">
-                                            <i class="fa fa-eye" id="show_password"></i>
-                                            <asp:TextBox ID="TextBox2" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div>
-                                        <asp:Button ID="Button1" runat="server" Text="Iniciar sesión" CssClass="btn btn-info submit" OnClick="Button1_Click" />
-                                        <div class="mt-3"></div>
-                                        <a  href="javascript:(function(){$('#mdChPass').modal(); $('#txtValUsu').val($('#TextBox1').val())})()" class="mt-3">¿Olvidó su contraseña?</a>
-                                    </div>
-                                    <div>
-                                        <asp:Label ID="Label1" runat="server" Text="Label" Font-Bold="true" Style="font-size: 15px;" Visible="false"></asp:Label>
-                                    </div>
-                                    <div class="clearfix"></div>
-
-                                    <div class="separator">
-                                        <div>
-                                            
-                                        </div>
-                                    </div>
-
-                                    <div id="PiePagina" style="margin-top:390px">
-                                        <p><b>Copyright © 2022 CLINICA CRECER.</b></p>
-                                    </div>
-                                </form>
-                            </section>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                    <asp:UpdateProgress runat="server" AssociatedUpdatePanelID="PanelLogin" DisplayAfter="0">
-                        <ProgressTemplate>
-                            <div class="overlay" />
-                            <div class="overlayContent">
-                                 
-                            </div>
-                        </ProgressTemplate>
-                    </asp:UpdateProgress>
-                </div>
-            </div>
 
             <%-- </ContentTemplate>
 </asp:UpdatePanel>--%>
@@ -378,6 +383,9 @@
             <asp:Label ID="Label6" runat="server" Text="Label" Style="color: transparent"></asp:Label>
         </div>
     </form>
+
+
+
 </body>
 </html>
 

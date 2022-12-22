@@ -299,18 +299,18 @@ namespace Generales_1._0.Log_in
                 //MessageBox.Show("", "Clinica Crecer", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
                 //Page.ClientScript.RegisterStartupScript(this.GetType(), "ErrorAlert", "alert('Complete los campos requeridos');", true);
                 //ClientScript.RegisterStartupScript(GetType(), "vermensaje", "error2();", true);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Completar", "error2()", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Completar", "error('Notificación','Username o Password vacío')", true);
             }
             else
             {
                 try
                 {
                     SqlCommand consulta;
-                    consulta = new SqlCommand("select GNCodUsu,GNConUsu,GnEtUsu from Usuario where GNCodUsu = @usuario and GNConUsu = @contraseña", con.OpenConnection())
+                    consulta = new SqlCommand("select GNCodUsu,GNConUsu,GnEtUsu,codigoR from Usuario where GNCodUsu = @usuario and GNConUsu = @contraseña", con.OpenConnection())
                     {
                         CommandType = CommandType.Text
                     };
-                    consulta.Parameters.AddWithValue("@usuario", Convert.ToInt32(usuario));
+                    consulta.Parameters.AddWithValue("@usuario", Convert.ToInt64(usuario));
                     consulta.Parameters.AddWithValue("@contraseña", contraseña);
                     consulta.ExecuteNonQuery();
 
@@ -329,29 +329,38 @@ namespace Generales_1._0.Log_in
                             //}
 
                             Session["admin"] = TextBox1.Text;
+                            Session["codigoR"] = dr["codigoR"].ToString();
                             Response.Redirect("../index.aspx");
                             estaConexion = true;
                         }
-                        else
-                        {
+                        else {
+                            
                             if ((usuario) == dr["GNCodUsu"].ToString() & contraseña == dr["GNConUsu"].ToString() & dr["GnEtUsu"].ToString() == "Inactivo")
                             {
                                 /* Session["admin"] = dr["Gncod"].ToString();
-                                 //Response.Redirect("perfil/index.aspx?parametro=" + TextBox1.Text);
-                                 Response.Redirect("../Home/Admin/Index/_Index.aspx");
-                                 estaConexion = true;*/
+                                    //Response.Redirect("perfil/index.aspx?parametro=" + TextBox1.Text);
+                                    Response.Redirect("../Home/Admin/Index/_Index.aspx");
+                                    estaConexion = true;*/
                                 //MessageBox.Show("", "Clinica Crecer", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
                                 requerido.Visible = true;
-                                Label4.Text = "este usuario se encuentra inactivo, por motivos de seguridad comuniquese con su jefe para configurar su estado";
+                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Completar", "error('Notificación','Este usuario se encuentra inactivo, por motivos de seguridad comuniquese con su jefe para configurar su estado')", true);
                                 TextBox1.Text = "";
                                 TextBox2.Text = "";
                             }
+                            else
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Completar", "error('Notificación','Username o (Password) incorrecto')", true);
+
+                            }
+
+
                         }
+                        
 
                     }
                     catch (Exception ex)
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Completar", "error()", true);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Completar", "error('Notificación','Username o (Password) incorrecto')", true);
                     }
                     finally
                     {
@@ -368,8 +377,9 @@ namespace Generales_1._0.Log_in
                     TextBox1.Enabled = true;
                     TextBox2.Enabled = true;*/
                     //MessageBox.Show(ex.Message + "abajo");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Completar", $"error('Notificación',' {ex.Message} ')", true);
+                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Completar", $"error('Notificación',' (Username) o (Password) incorrecto ')", true);
                     //ClientScript.RegisterStartupScript(GetType(), "vermensaje", "error();", true);
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Completar", "error()", true);
                     //MessageBox.Show(ex.Message);
                 }
                 finally
@@ -384,9 +394,6 @@ namespace Generales_1._0.Log_in
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-
-
-
             LoginSesion(TextBox1.Text, TextBox2.Text);
 
         }
@@ -420,10 +427,12 @@ namespace Generales_1._0.Log_in
 
         protected void btnEnviarPeticion_Click(object sender, EventArgs e)
         {
+
+          
             try
             {
                 Usuario usuario = DAOUsuario.getInstance().GetUsuario(Convert.ToInt32(txtChangePass.Text));
-                if(usuario != null)
+                if (usuario != null)
                 {
                     var uuid = DAOGNCtrlCambioPass.SetCtrlCambioPass(new GNCtrlCambioPass
                     {
@@ -442,7 +451,7 @@ namespace Generales_1._0.Log_in
                     string correoPart1 = usuario.GNCrusu1.Split('@')[0];
                     string correoPart2 = usuario.GNCrusu1.Split('@')[1];
 
-                    for(int i = 2, j = correoPart1.Length -2; i < j; i++)
+                    for (int i = 2, j = correoPart1.Length - 2; i < j; i++)
                     {
                         correoPart1 = correoPart1.Remove(i, 1);
                         correoPart1 = correoPart1.Insert(i, "*");
@@ -452,7 +461,7 @@ namespace Generales_1._0.Log_in
                            <p style=""text-align:center"">Ingrese al siguiente enlace para cambiar su contraseña: <a href=""{protocolo}://{Request.Url.Host + puerto}/ResetPassword/ChangePassword.aspx?k={uuidEncripted}"">aquí</a> </p>
                     ";
 
-                    Comunes.Email.SendMail(new List<string> {usuario.GNCrusu1}, mensaje, "Solicitud de coambio de contraseña Vitraya");
+                    Comunes.Email.SendMail(new List<string> { usuario.GNCrusu1 }, mensaje, "Solicitud de coambio de contraseña Vitraya");
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "msg2",
                       $@"
@@ -464,12 +473,12 @@ namespace Generales_1._0.Log_in
                 }
                 else
                 {
-                   ScriptManager.RegisterStartupScript(this, this.GetType(), "msg3",
-                       $@"
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "msg3",
+                        $@"
                            error(""Usuario incorrecto"",""Por favor ingrese un usuario valido"");
                        ",
-                       true
-                   );
+                        true
+                    );
                 }
             }
             catch (Exception)
@@ -482,6 +491,8 @@ namespace Generales_1._0.Log_in
                     true
                 );
             }
+
+
         }
     }
 }

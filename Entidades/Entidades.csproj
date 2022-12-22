@@ -117,6 +117,7 @@
     <Compile Include="Generales\GNRoles.cs" />
     <Compile Include="Generales\OpcionesBloqueadas.cs" />
     <Compile Include="GestionDocumental\intOidCPCapacitacion.cs" />
+    <Compile Include="InventarioFarmacia\ControlDespModel.cs" />
     <Compile Include="Power BI\EAdministrarReportes.cs" />
     <Compile Include="Power BI\ELIstaReportes.cs" />
     <Compile Include="Servicios\ECertificadoLaboral.cs" />

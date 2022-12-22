@@ -64,7 +64,7 @@ $('#CScodigoR').on("keypress", function () {
         if (string == "" || string == null) {
             return true
         }
-}
+    }
 
 //ESCANER MANILLA
 $('#CSmanilla').on("keypress", function () {

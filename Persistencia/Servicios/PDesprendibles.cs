@@ -158,16 +158,26 @@ namespace Persistencia.Servicios
         }
 
         public static void SetActivacion()
+        
         {
             SqlCommand command;
             Conexion conexion = new Conexion();
-
+           
             try
             {
-                command = new SqlCommand("update GNPermisos set Eliminar = 0, Crear = 0, Confirmar = 1, Modificar = 0 where OidGNOpcion = 4046 AND (OidRol <> 1 AND OidRol <> 4037);" +
-                                         "update ConfiguracionesGenerales set EstadoValor = '1' where Oid_Config = 1;", conexion.OpenConnection());
-
+                command = new SqlCommand("update GNPermisos set Eliminar = 0, Crear = 0, Confirmar = 1, Modificar = 0 where OidGNOpcion = 4046 AND (OidRol <> 1 AND OidRol <> 4037); " +
+                                         "update ConfiguracionesGenerales set EstadoValor = '1' where Oid_Config = 1  ", conexion.OpenConnection());
                 command.ExecuteNonQuery();
+                DAOGNHistorico.SetHistorico(new GNHistorico
+                {
+                    dtmFecha = DateTime.Now,
+                    intGNCodUsu = Convert.ToInt32(HttpContext.Current.Session["Admin"]),
+                    intInstancia = 4046,
+                    strAccion = "Modificar",
+                    strDetalle = $"Se ha activado el desprendible de nómina ",
+                    strEntidad = "GNPermisos-ConfiguracionesGenerales"
+                });
+
 
             }
             catch (Exception e)
@@ -192,6 +202,15 @@ namespace Persistencia.Servicios
                                          "update ConfiguracionesGenerales set EstadoValor = '0' where Oid_Config = 1;", conexion.OpenConnection());
 
                 command.ExecuteNonQuery();
+                DAOGNHistorico.SetHistorico(new GNHistorico
+                {
+                    dtmFecha = DateTime.Now,
+                    intGNCodUsu = Convert.ToInt32(HttpContext.Current.Session["Admin"]),
+                    intInstancia = 4046,
+                    strAccion = "Modificar",
+                    strDetalle = $"Se ha inactivado el desprendible de nómina ",
+                    strEntidad = "GNPermisos-ConfiguracionesGenerales"
+                });
 
             }
             catch (Exception e)

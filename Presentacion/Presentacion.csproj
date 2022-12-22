@@ -648,6 +648,8 @@
     <Content Include="Images\seo.svg" />
     <Content Include="Images\user.png" />
     <Content Include="index.aspx" />
+    <Content Include="InventarioFarmacia\ControlDespacho.aspx" />
+    <Content Include="InventarioFarmacia\css\Style.css" />
     <Content Include="LinksExternos\Almuerzos.aspx" />
     <Content Include="page_403.aspx" />
     <Content Include="page_404.aspx" />
@@ -4975,6 +4977,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InventarioFarmacia\ControlDespacho.aspx.cs">
+      <DependentUpon>ControlDespacho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InventarioFarmacia\ControlDespacho.aspx.designer.cs">
+      <DependentUpon>ControlDespacho.aspx</DependentUpon>
     </Compile>
     <Compile Include="LinksExternos\Almuerzos.aspx.cs">
       <DependentUpon>Almuerzos.aspx</DependentUpon>

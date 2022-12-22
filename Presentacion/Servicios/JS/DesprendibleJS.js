@@ -3,25 +3,33 @@
 
 $(document).on("click", ".btnBuscarDesprendible", function (e) {
 
-    let fechaFinalF;
-    let fechaInicial = $("#txtFecha1").val() + "-01";
-    let fechaFinal = $("#txtFecha2").val();
-    let mes = parseInt(moment(fechaFinal).format("M")) + 1;
-    if (mes == 13) {
-        mes = "01";
-        fechaFinalF = (parseInt(moment(fechaFinal).format("YYYY")) + 1) + "-" + mes + "-01";
-    } else {
-        fechaFinalF = moment(fechaFinal).format("YYYY") + "-" + mes + "-01";
-    }
-    
-    
-    datos = {
-        "fechaI": fechaInicial,
-        "fechaF": fechaFinalF
-    }
-
-    ejecutarajax("Desprendible.aspx/ObtenerListaDesprendibles", datos, CargarListaDesprendibles);
    
+    let fechaInicial1 = $("#txtFecha1").val();
+    let fechaFinal = $("#txtFecha2").val();
+   
+    if (isEmpy(fechaInicial1) || isEmpy(fechaFinal) ) {
+        error("Notificacion", "Verifique que los campos con (*) estén diligenciados");
+    } else {
+        console.log('este metodo exitoso');
+        let fechaInicial = fechaInicial1 + "-01";
+        let fechaFinalF;
+        let mes = parseInt(moment(fechaFinal).format("M")) + 1;
+        if (mes == 13) {
+            mes = "01";
+            fechaFinalF = (parseInt(moment(fechaFinal).format("YYYY")) + 1) + "-" + mes + "-01";
+        } else {
+            fechaFinalF = moment(fechaFinal).format("YYYY") + "-" + mes + "-01";
+        }
+    
+    
+        datos = {
+            "fechaI": fechaInicial,
+            "fechaF": fechaFinalF
+        }
+
+        ejecutarajax("Desprendible.aspx/ObtenerListaDesprendibles", datos, CargarListaDesprendibles);
+   
+    }
 })
 
 function CargarListaDesprendibles(msg) {
@@ -289,6 +297,12 @@ function ValidarPermisos(msg) {
 
     }
 
+}
+
+function isEmpy(string) {
+    if (string == "" || string == null) {
+        return true
+    }
 }
 
 $(document).ready(function () {

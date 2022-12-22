@@ -19,13 +19,13 @@
 
                         <div class="col col-12 col-sm-3">
                             <div class="form-group">
-                                <label>Fecha Inicial</label>
+                                <label>* Fecha Inicial</label>
                                 <input type="month" class="form-control" id="txtFecha1" />
                             </div>
                         </div>
                         <div class="col col-sm-3 col-12">
                             <div class="form-group">
-                                <label>Fecha Final</label>
+                                <label>* Fecha Final</label>
                                 <input type="month" class="form-control" id="txtFecha2" />
                             </div>
                         </div>
@@ -36,13 +36,15 @@
                             </div>
                         </div>
 
-                        <div class="divcontrolOpcion col col-sm-3 col-3">
+                        
+                       <%--ACTIVAR O DESACTIVAR NOMINA 
+                         <div class="divcontrolOpcion col col-sm-3 col-3">
                             <div class="form-group">
                                 <h5 class="d-sm-block d-sm" id="textoVisibilidad"></h5>
                                 <button type="button" class="btnActivar btn btn-success">Habilitar</button>
                                 <button type="button" class="btnInactivar btn btn-danger">Inhabilitar</button>
                             </div>
-                        </div>
+                        </div>--%>
 
                     </div>
                 </div>
