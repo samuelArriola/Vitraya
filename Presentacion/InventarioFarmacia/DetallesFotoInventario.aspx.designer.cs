@@ -11,7 +11,7 @@ namespace Presentacion.InventarioFarmacia
 {
 
 
-    public partial class ControlDespacho
+    public partial class DetallesFotoInventario
     {
 
         /// <summary>
